@@ -414,6 +414,33 @@ For each task, follow this protocol:
    - Note any trade-offs made
 ```
 
+### Lightweight Mode for Simple Tasks
+
+For small, low-risk requests (for example: "add a button", "change label text", "adjust spacing", "swap icon"), use a minimal-change workflow.
+
+**Trigger Lightweight Mode when ALL are true**:
+
+- Change touches 1-2 files
+- No API contract, auth, database, or routing changes
+- No architecture or state-management redesign
+- Request is clear and implementation is straightforward
+
+**Lightweight Mode protocol**:
+
+1. Read the target file(s) and existing local pattern
+2. Implement the smallest correct change
+3. Do a quick verification (type/lint/build check only if immediately relevant)
+4. Return concise result with changed file path(s)
+
+**In Lightweight Mode, skip by default**:
+
+- Full multi-step planning narrative
+- Broad skill-loading announcements
+- Extended documentation updates
+- Extra refactors unrelated to the request
+
+**Guardrail**: if hidden complexity appears (cross-file impact, uncertain behavior, failing checks), immediately switch back to the full Task Approach Pattern.
+
 ### Code Quality Standards
 
 **ALWAYS** adhere to these non-negotiable standards:
