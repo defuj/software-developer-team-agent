@@ -9,6 +9,7 @@ Repo ini berisi konfigurasi OpenCode untuk agent frontend khusus Nuxt/Vue:
 - Agent config: `.opencode/config.json`
 - Agent prompt: `.opencode/agents/frontend-developer.md`
 - Dokumentasi internal: `.opencode/agent-docs/`
+- Folder pendukung tim: `commands/`, `rules/`, `hooks/`, `contexts/`
 
 Agent didesain untuk:
 
@@ -22,24 +23,36 @@ Agent didesain untuk:
 - Akses ke repository ini
 - Node.js + npm/pnpm/yarn/bun sesuai kebutuhan proyek
 
-## Skill yang Perlu Diinstall
+## Skill yang Digunakan Agent
 
-Agar agent berjalan dengan sempurna, install skill berikut.
+Repo ini sudah menyertakan folder `skills/` (hasil sinkron dari environment lokal), jadi developer lain tidak perlu mencari skill satu per satu.
 
-### Wajib (core)
+### Skill minimal yang wajib tersedia
 
 1. `coding-standards`
 2. `frontend-patterns`
 3. `frontend-design`
 4. `web-design-guidelines`
+5. `nuxt-ui`
+6. `security-review`
+7. `tdd-workflow`
 
-### Wajib (contextual, untuk kelengkapan workflow)
+### Skill tambahan (opsional, tapi direkomendasikan)
 
-1. `nuxt-ui`
-2. `vercel-composition-patterns`
-3. `building-components`
-4. `security-review`
-5. `tdd-workflow`
+1. `building-components` (untuk pembuatan komponen reusable skala besar)
+2. `vercel-composition-patterns` (untuk refactor komponen kompleks)
+
+### Skill yang tidak perlu untuk operasional agent ini
+
+Untuk proyek Nuxt frontend ini, skill backend/lintas bahasa di bawah tidak diperlukan agar agent berjalan optimal:
+
+- `springboot-*`, `java-*`, `jpa-patterns`
+- `django-*`
+- `golang-*`
+- `python-*`
+- `clickhouse-io`, `postgres-patterns`, `backend-patterns`
+
+Catatan: skill tersebut boleh tetap disimpan jika tim memang butuh multi-stack, tapi tidak wajib untuk agent frontend ini.
 
 ## Lokasi Skill
 
@@ -55,7 +68,29 @@ ls ~/.opencode/skills
 ls ~/.agents/skills
 ```
 
-Pastikan semua skill di daftar di atas tersedia.
+Pastikan semua skill wajib tersedia.
+
+## Cara Install Skill dari Folder `skills/` Repo
+
+Jika skill belum ada di mesin developer, copy dari repo ini ke direktori skill lokal:
+
+```bash
+mkdir -p ~/.opencode/skills
+cp -R ./skills/coding-standards ~/.opencode/skills/
+cp -R ./skills/frontend-patterns ~/.opencode/skills/
+cp -R ./skills/frontend-design ~/.opencode/skills/
+cp -R ./skills/web-design-guidelines ~/.opencode/skills/
+cp -R ./skills/nuxt-ui ~/.opencode/skills/
+cp -R ./skills/security-review ~/.opencode/skills/
+cp -R ./skills/tdd-workflow ~/.opencode/skills/
+```
+
+Opsional:
+
+```bash
+cp -R ./skills/building-components ~/.opencode/skills/
+cp -R ./skills/vercel-composition-patterns ~/.opencode/skills/
+```
 
 ## MCP yang Digunakan Agent
 
@@ -71,6 +106,58 @@ Jika ingin pakai Figma MCP, set env var:
 ```bash
 export FIGMA_ACCESS_TOKEN="your-token"
 ```
+
+## Cara Menggunakan Folder Pendukung Tim
+
+Penting: folder `commands/`, `rules/`, `hooks/`, `contexts/` di repo ini adalah **template bootstrap** (salinan dari `~/.opencode`) untuk mempermudah onboarding developer baru.
+
+Folder-folder ini **bukan** otomatis aktif hanya karena ada di repo. Developer perlu copy/sinkron ke environment lokal masing-masing.
+
+### `commands/`
+
+- Berisi command/prompt siap pakai (biasanya slash command internal tim).
+- Pakai sebagai koleksi command tim untuk task berulang agar hasil konsisten.
+- Jika menambah command baru, ikuti format file yang sudah ada.
+- Instal ke lokal jika diperlukan:
+
+```bash
+mkdir -p ~/.opencode/commands
+cp -R ./commands/* ~/.opencode/commands/
+```
+
+### `rules/`
+
+- Berisi aturan operasional/coding yang harus dipatuhi agent dan developer.
+- Jadikan ini sebagai source of truth saat review code.
+- Jika ada konflik antara preferensi pribadi dan `rules/`, ikuti `rules/`.
+- Instal ke lokal sesuai README di `rules/README.md` (copy per direktori, jangan di-flatten).
+
+### `hooks/`
+
+- Berisi automasi lifecycle (pre-task/post-task, validasi ringan, dsb).
+- Opsional: aktifkan hanya jika environment lokal mendukung hook dependencies-nya.
+- File `hooks/hooks.json` memanggil script via `CLAUDE_PLUGIN_ROOT`; jika path/plugin tidak tersedia, nonaktifkan hook terkait.
+
+### `contexts/`
+
+- Berisi konteks reusable proyek (domain terms, batasan bisnis, pattern lokal).
+- Rujuk konteks ini saat membuat prompt supaya agent tidak keluar jalur.
+- Update saat ada perubahan requirement produk/arsitektur.
+- Instal ke lokal jika ingin reuse context lintas repo:
+
+```bash
+mkdir -p ~/.opencode/contexts
+cp -R ./contexts/* ~/.opencode/contexts/
+```
+
+### Praktik Tim yang Disarankan
+
+- Gunakan `commands/` untuk pekerjaan rutin.
+- Gunakan `rules/` sebagai standar wajib saat implementasi dan review.
+- Gunakan `contexts/` untuk prompt yang lebih presisi.
+- Perlakukan `hooks/` sebagai konfigurasi bersama tim (perubahan perlu sinkronisasi).
+
+Jika tim tidak ingin maintain template global ini di repo proyek, folder-folder tersebut boleh dihapus tanpa mempengaruhi agent inti (`.opencode/`).
 
 ## Cara Pakai
 
