@@ -24,7 +24,7 @@ Because GitHub agents do not have native dynamic skill loading, each skill is re
 1. Start with core pseudo-skills.
 2. Add contextual pseudo-skills only when relevant.
 3. Prefer repository-local files in `.github/skills/` over external references.
-4. Keep this folder portable so `.github/agents/*` works without `.opencode/`.
+4. Keep this folder portable so `.github/agents/*` can work without external skill folders.
 
 ## Maintenance
 

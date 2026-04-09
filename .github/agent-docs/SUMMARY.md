@@ -11,15 +11,16 @@ Selamat! Anda telah berhasil menginstall **Frontend Developer Agent** yang lengk
 ### Struktur Directory
 
 ```
-.opencode/
-├── config.json                    # OpenCode agent configuration (779B)
-└── agents/
-    ├── frontend-developer.md      # Agent definition - 773 lines (18K)
-    ├── README.md                  # User guide - 505 lines (12K)
-    ├── WORKFLOWS.md               # 8 workflows - 758 lines (15K)
-    ├── CHEATSHEET.md             # Quick reference - 621 lines (11K)
-    ├── QUICK_START.md            # Quick start - 544 lines (11K)
-    └── SUMMARY.md                # This file
+.github/
+├── agents/
+│   └── Frontend Developer.agent.md  # Agent definition
+├── agent-docs/
+│   ├── README.md                    # User guide
+│   ├── WORKFLOWS.md                 # Workflows
+│   ├── CHEATSHEET.md                # Quick reference
+│   ├── QUICK_START.md               # Quick start
+│   └── SUMMARY.md                   # This file
+└── skills/                           # Skill playbooks
 ```
 
 ### Total Statistics
@@ -33,7 +34,7 @@ Selamat! Anda telah berhasil menginstall **Frontend Developer Agent** yang lengk
 
 ## 🎯 File Overview
 
-### 1. **frontend-developer.md** (18KB - Core Agent)
+### 1. **Frontend Developer.agent.md** (Core Agent)
 
 **Isi:**
 - Core identity & responsibilities
@@ -136,7 +137,7 @@ Selamat! Anda telah berhasil menginstall **Frontend Developer Agent** yang lengk
 
 ---
 
-### 6. **config.json** (779B - Configuration)
+### 6. **Frontend Developer.agent.md** (Agent Definition)
 
 **Isi:**
 ```json
@@ -255,7 +256,7 @@ Supports:
 3. ✅ Customize agent untuk project needs
 
 ### Week 2: Mastery
-1. ✅ Read frontend-developer.md untuk understand internals
+1. ✅ Read Frontend Developer.agent.md untuk understand internals
 2. ✅ Create custom workflows
 3. ✅ Share dengan team
 
@@ -295,7 +296,7 @@ Supports:
 
 ### Change Agent Mode
 
-Edit `.opencode/config.json`:
+Update your runtime agent configuration so it references `.github/agents/Frontend Developer.agent.md`:
 
 ```json
 {
@@ -345,7 +346,7 @@ Edit `.opencode/config.json`:
 
 ### Update Agent
 
-1. Edit `.opencode/agents/frontend-developer.md`
+1. Edit `.github/agents/Frontend Developer.agent.md`
 2. Modify sections as needed
 3. Save file
 4. Changes active on next session
@@ -354,7 +355,7 @@ Edit `.opencode/config.json`:
 
 ```bash
 # Track changes
-git add .opencode/
+git add .github/
 git commit -m "feat: add frontend developer agent"
 git push
 
@@ -380,7 +381,7 @@ opencode
 - **Full Guide:** README.md
 - **Workflows:** WORKFLOWS.md
 - **Reference:** CHEATSHEET.md
-- **Internals:** frontend-developer.md
+- **Internals:** Frontend Developer.agent.md
 
 ### Ask Agent
 ```bash
@@ -400,10 +401,10 @@ opencode
 
 Pastikan semuanya berfungsi:
 
-- [ ] Agent file exists: `.opencode/agents/frontend-developer.md`
-- [ ] Config exists: `.opencode/config.json`
+- [ ] Agent file exists: `.github/agents/Frontend Developer.agent.md`
+- [ ] Agent definition exists: `.github/agents/Frontend Developer.agent.md`
 - [ ] Can invoke agent: `@frontend-developer test`
-- [ ] Skills accessible: `~/.opencode/skills/`
+- [ ] Skills accessible: `.github/skills/`
 - [ ] Documentation readable
 - [ ] Examples work
 

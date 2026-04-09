@@ -20,8 +20,8 @@ Sebelum mulai testing, pastikan:
 ### 1. Configuration Files
 
 ```bash
-# Check agent configuration
-cat .opencode/config.json
+# Check agent definition
+cat ".github/agents/Frontend Developer.agent.md"
 
 # Verify MCP servers configured
 # Expected: nuxt, nuxt-ui, playwright enabled
@@ -30,11 +30,12 @@ cat .opencode/config.json
 ### 2. Documentation Files
 
 ```bash
-# List agent documentation
-ls -la .opencode/agents/
+# List agent and docs directories
+ls -la .github/agents/
+ls -la .github/agent-docs/
 
 # Expected files:
-# - frontend-developer.md (agent definition)
+# - Frontend Developer.agent.md (agent definition)
 # - README.md (user guide)
 # - WORKFLOWS.md (workflow examples)
 # - CHEATSHEET.md (quick reference)
@@ -60,7 +61,7 @@ ls -la shared/
 
 ```bash
 # Global skills
-ls ~/.opencode/skills/
+ls .github/skills/
 
 # Additional skills
 ls ~/.agents/skills/ 2>/dev/null || echo "No additional skills"
@@ -641,11 +642,11 @@ Load relevant skills dan MCP servers as needed.
 **Debug Steps:**
 
 ```bash
-# 1. Check agent configuration
-cat .opencode/config.json | grep -A 20 '"frontend"'
+# 1. Check agent definition
+grep -n "## MCP" ".github/agents/Frontend Developer.agent.md"
 
 # 2. Verify agent definition file exists
-ls -la .opencode/agents/frontend-developer.md
+ls -la .github/agents/Frontend Developer.agent.md
 
 # 3. Check OpenCode logs (if available)
 # Look for errors related to agent initialization
@@ -664,8 +665,8 @@ ls -la .opencode/agents/frontend-developer.md
 **Debug Steps:**
 
 ```bash
-# Check MCP configuration
-cat .opencode/config.json | grep -A 5 '"mcp"'
+# Check MCP guidance section
+grep -n "MCP" ".github/agents/Frontend Developer.agent.md"
 
 # Verify internet connection (for remote MCP)
 curl -I https://nuxt.com/mcp
@@ -689,11 +690,11 @@ npx @modelcontextprotocol/server-playwright --version
 
 ```bash
 # Check skills directories
-ls ~/.opencode/skills/
+ls .github/skills/
 ls ~/.agents/skills/
 
 # Verify skill files exist
-ls ~/.opencode/skills/coding-standards/SKILL.md
+ls .github/skills/coding-standards/SKILL.md
 ```
 
 **Solutions:**

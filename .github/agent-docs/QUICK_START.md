@@ -9,14 +9,15 @@ Panduan cepat untuk mulai menggunakan Frontend Developer Agent.
 Agent Frontend Developer telah diinstall dengan lengkap:
 
 ```
-.opencode/
+.github/
 ├── agents/
-│   ├── frontend-developer.md     # Agent definition (773 lines)
-│   ├── README.md                  # User guide lengkap (505 lines)
-│   ├── WORKFLOWS.md               # 8 workflow examples (758 lines)
-│   ├── CHEATSHEET.md             # Quick reference (621 lines)
-│   └── QUICK_START.md            # File ini
-└── config.json                    # OpenCode configuration
+│   └── Frontend Developer.agent.md  # Agent definition
+├── agent-docs/
+│   ├── README.md                    # User guide lengkap
+│   ├── WORKFLOWS.md                 # 8 workflow examples
+│   ├── CHEATSHEET.md                # Quick reference
+│   └── QUICK_START.md               # File ini
+└── skills/                           # Skill playbooks
 ```
 
 **Total: 2,687 lines** dokumentasi dan konfigurasi profesional!
@@ -103,7 +104,7 @@ Agent otomatis akan load skills yang dibutuhkan:
 
 **Baca ini:** Keep this open saat coding!
 
-### 4. **frontend-developer.md** - Agent Definition
+### 4. **Frontend Developer.agent.md** - Agent Definition
 
 - Core identity & responsibilities
 - Technical skills integration
@@ -200,7 +201,7 @@ Agent punya akses ke 10+ skills dari repository Anda:
 
 ## 🔧 Konfigurasi
 
-Agent sudah dikonfigurasi di `.opencode/config.json`:
+Definisi agent tersedia di `.github/agents/Frontend Developer.agent.md`:
 
 ```json
 {
@@ -344,7 +345,7 @@ Agent akan ensure:
 2. **Next:** README.md (comprehensive guide)
 3. **Then:** CHEATSHEET.md (bookmark this!)
 4. **When needed:** WORKFLOWS.md (specific scenarios)
-5. **Advanced:** frontend-developer.md (agent internals)
+5. **Advanced:** Frontend Developer.agent.md (agent internals)
 
 ### External Resources
 
@@ -395,10 +396,10 @@ Agent akan explain dan provide code examples.
 
 Untuk update agent configuration:
 
-1. Edit `.opencode/agents/frontend-developer.md`
+1. Edit `.github/agents/Frontend Developer.agent.md`
 2. Modify sections as needed
 3. Save file
-4. Reload OpenCode atau start new session
+4. Reload session atau start new session
 
 Changes akan langsung aktif di session berikutnya.
 
@@ -421,7 +422,7 @@ Changes akan langsung aktif di session berikutnya.
 - **Documentation Issues?** Check README.md
 - **Workflow Questions?** Check WORKFLOWS.md
 - **Quick Reference?** Check CHEATSHEET.md
-- **Agent Behavior?** Check frontend-developer.md
+- **Agent Behavior?** Check Frontend Developer.agent.md
 
 Atau tanya langsung:
 
@@ -435,12 +436,12 @@ Atau tanya langsung:
 
 ### Files Created
 
-- ✅ **frontend-developer.md** - Full agent definition (773 lines)
+- ✅ **Frontend Developer.agent.md** - Full agent definition
 - ✅ **README.md** - Complete user guide (505 lines)
 - ✅ **WORKFLOWS.md** - 8 detailed workflows (758 lines)
 - ✅ **CHEATSHEET.md** - Quick reference (621 lines)
 - ✅ **QUICK_START.md** - This guide
-- ✅ **config.json** - OpenCode configuration
+- ✅ **agent-docs/** - Documentation set
 
 ### Skills Integrated
 

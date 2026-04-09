@@ -35,13 +35,13 @@ Dalam OpenCode, Anda bisa langsung memanggil agent dengan `@` mention:
 
 ### Metode 2: Mengaktifkan sebagai Primary Agent
 
-Edit `opencode.json` untuk menjadikan ini primary agent:
+Edit `.github/agents/Frontend Developer.agent.md` untuk menjadikan ini primary agent:
 
 ```json
 {
   "agent": {
     "frontend": {
-      "prompt": "{file:.opencode/agents/frontend-developer.md}",
+      "prompt": "{file:.github/agents/Frontend Developer.agent.md}",
       "mode": "primary"
     }
   }
@@ -346,7 +346,7 @@ Update approach kamu.
 
 Anda bisa create custom workflow file:
 
-**.opencode/workflows/create-component.md**
+**.github/agent-docs/WORKFLOWS.md**
 
 ```markdown
 # Component Creation Workflow
@@ -363,7 +363,7 @@ Anda bisa create custom workflow file:
 Kemudian:
 
 ```
-@frontend-developer Follow workflow di .opencode/workflows/create-component.md untuk buat SearchBar component
+@frontend-developer Follow workflow di .github/agent-docs/WORKFLOWS.md untuk buat SearchBar component
 ```
 
 ### Team Collaboration
@@ -372,7 +372,7 @@ Share agent config dengan team (tanpa auto-commit oleh agent):
 
 ```bash
 # Commit hanya saat Anda memang meminta commit
-git add .opencode/agents/frontend-developer.md
+git add .github/agents/Frontend Developer.agent.md
 git commit -m "Add frontend developer agent config"
 git push
 
@@ -417,7 +417,7 @@ Ketika ada skill baru:
 1. Check skill availability:
 
 ```bash
-ls ~/.opencode/skills
+ls .github/skills
 ls ~/.agents/skills
 ```
 
@@ -435,10 +435,10 @@ Track perubahan agent config:
 
 ```bash
 # See changes
-git diff .opencode/agents/frontend-developer.md
+git diff .github/agents/Frontend Developer.agent.md
 
 # Update
-git add .opencode/agents/frontend-developer.md
+git add .github/agents/Frontend Developer.agent.md
 git commit -m "Update frontend agent: add new skill integration"
 ```
 
@@ -448,9 +448,9 @@ git commit -m "Update frontend agent: add new skill integration"
 
 ### Related Files
 
-- Agent definition: `.opencode/agents/frontend-developer.md`
+- Agent definition: `.github/agents/Frontend Developer.agent.md`
 - Project guidelines: `CLAUDE.md`
-- Skills directory: `~/.opencode/skills/`, `~/.agents/skills/`
+- Skills directory: `.github/skills/`
 
 ### Documentation
 

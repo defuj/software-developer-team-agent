@@ -911,12 +911,12 @@ Agent akan:
 
 **Solusi:**
 - Explicitly mention skill: `@frontend Gunakan skill web-design-guidelines untuk review ini`
-- Check skill available: List skills di `.opencode/skills/` dan `~/.opencode/skills/`
+- Check skill available: List skills di `.github/skills/`
 
 ### MCP server tidak respond
 
 **Solusi:**
-- Check `.opencode/config.json` - pastikan `enabled: true`
+- Check `.github/agents/Frontend Developer.agent.md` - pastikan bagian MCP server tersedia
 - Restart OpenCode session
 - Verify internet connection (untuk remote MCP)
 
@@ -931,7 +931,7 @@ Agent akan:
 **Solusi:**
 1. Get token dari https://www.figma.com/developers/api#access-tokens
 2. Set `FIGMA_ACCESS_TOKEN` di `.env`
-3. Enable di `.opencode/config.json`: `"enabled": true`
+3. Pastikan MCP server aktif di runtime/CLI configuration Anda
 4. Restart session
 
 ---
@@ -940,7 +940,7 @@ Agent akan:
 
 Setelah familiar dengan examples di atas:
 
-1. **Explore Skills**: Check `~/.opencode/skills/` untuk available skills
+1. **Explore Skills**: Check `.github/skills/` untuk available skills
 2. **Read Workflows**: Baca `WORKFLOWS.md` untuk detailed workflows
 3. **Check MCP Guide**: Read `MCP_GUIDE.md` untuk advanced MCP usage
 4. **Practice**: Start dengan simple components, gradually increase complexity
@@ -951,6 +951,6 @@ Setelah familiar dengan examples di atas:
 **Happy Coding! 🚀**
 
 Untuk pertanyaan atau feedback:
-- Check dokumentasi lengkap di `.opencode/agents/`
+- Check dokumentasi lengkap di `.github/agent-docs/`
 - Atau mention `@frontend` dengan pertanyaan Anda
 ```

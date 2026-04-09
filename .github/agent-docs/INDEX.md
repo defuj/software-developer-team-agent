@@ -22,7 +22,7 @@ Navigasi lengkap untuk semua dokumentasi Frontend Developer Agent.
 ## 📖 Documentation Structure
 
 ```
-.opencode/
+.github/
 ├── agents/
 │   └── Frontend Developer.agent.md  # Agent definition
 └── agent-docs/                # Supporting documentation (this directory)

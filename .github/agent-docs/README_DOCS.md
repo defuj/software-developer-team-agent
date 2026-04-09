@@ -35,16 +35,17 @@ Read [INDEX.md](./INDEX.md) for full navigation
 
 ## 📖 About
 
-These documentation files support the **Frontend Developer Agent** (`../frontend-developer.md`).
+These documentation files support the **Frontend Developer Agent** (`../agents/Frontend Developer.agent.md`).
 
-The agent is configured in `../../config.json` and uses these docs as reference material.
+The agent definition lives in `../agents/Frontend Developer.agent.md` and uses these docs as reference material.
 
 ## 🎯 Structure
 
 ```
-.opencode/agents/
-├── frontend-developer.md    # Agent definition (ONLY agent file)
-└── docs/                    # All documentation files
+.github/
+├── agents/
+│   └── Frontend Developer.agent.md  # Agent definition
+└── agent-docs/                     # All documentation files
     ├── INDEX.md             # Navigation hub
     ├── README.md            # This file
     ├── QUICK_START.md       # Getting started
@@ -58,7 +59,7 @@ The agent is configured in `../../config.json` and uses these docs as reference 
     └── COMPLETION_REPORT.md # Project completion
 ```
 
-This structure ensures OpenCode only shows **"Frontend Developer"** in the agent list, keeping it clean and focused.
+This structure keeps agent definition and docs separated for easier maintenance and navigation.
 
 ---
 

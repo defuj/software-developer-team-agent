@@ -15,7 +15,7 @@
 
 | File                      | Size       | Lines     | Purpose                       |
 | ------------------------- | ---------- | --------- | ----------------------------- |
-| **frontend-developer.md** | 29KB       | 989       | Agent definition & core logic |
+| **Frontend Developer.agent.md** | 29KB       | 989       | Agent definition & core logic |
 | **INDEX.md**              | 12KB       | 450       | Documentation navigation hub  |
 | **README.md**             | 12KB       | 505       | Complete user guide           |
 | **EXAMPLES.md**           | 17KB       | 900       | 50+ practical examples        |
@@ -31,7 +31,7 @@
 
 | File                      | Purpose                                  |
 | ------------------------- | ---------------------------------------- |
-| **.opencode/config.json** | Agent & MCP configuration                |
+| **.github/agents/Frontend Developer.agent.md** | Agent definition & MCP guidance          |
 | **.env.example**          | Environment variables template (updated) |
 
 ---
@@ -139,7 +139,7 @@
 
 ### For Advanced Users
 
-1. **frontend-developer.md** - Agent internals
+1. **Frontend Developer.agent.md** - Agent internals
 2. **TESTING_GUIDE.md** - Quality assurance suite
 3. **INDEX.md** - Master navigation
 
@@ -190,17 +190,20 @@
 ### Documentation Structure
 
 ```
-.opencode/agents/
-├── INDEX.md                  ← Start here for navigation
-├── QUICK_START.md           ← Beginners start here
-├── EXAMPLES.md              ← Practical code examples
-├── WORKFLOWS.md             ← Step-by-step workflows
-├── CHEATSHEET.md           ← Quick reference
-├── MCP_GUIDE.md            ← MCP deep dive
-├── TESTING_GUIDE.md        ← Quality assurance
-├── README.md               ← Complete overview
-├── SUMMARY.md              ← Installation recap
-└── frontend-developer.md   ← Agent definition
+.github/
+├── agents/
+│   └── Frontend Developer.agent.md  ← Agent definition
+├── agent-docs/
+│   ├── INDEX.md                     ← Start here for navigation
+│   ├── QUICK_START.md               ← Beginners start here
+│   ├── EXAMPLES.md                  ← Practical code examples
+│   ├── WORKFLOWS.md                 ← Step-by-step workflows
+│   ├── CHEATSHEET.md                ← Quick reference
+│   ├── MCP_GUIDE.md                 ← MCP deep dive
+│   ├── TESTING_GUIDE.md             ← Quality assurance
+│   ├── README.md                    ← Complete overview
+│   └── SUMMARY.md                   ← Installation recap
+└── skills/
 ```
 
 ### Learning Paths
@@ -230,8 +233,8 @@
 
 ### Pre-Flight Checks
 
-- ✅ Configuration valid (.opencode/config.json)
-- ✅ Agent definition complete (frontend-developer.md)
+- ✅ Agent definition valid (.github/agents/Frontend Developer.agent.md)
+- ✅ Agent definition complete (Frontend Developer.agent.md)
 - ✅ All documentation files present
 - ✅ MCP servers configured
 - ✅ Skills paths verified
@@ -428,7 +431,7 @@
 
 ```bash
 # Send team to quick start
-.opencode/agents/QUICK_START.md
+.github/agent-docs/QUICK_START.md
 ```
 
 **Step 2: Demo Session**

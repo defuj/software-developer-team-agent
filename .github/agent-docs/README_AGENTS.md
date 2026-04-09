@@ -48,7 +48,7 @@ Complete documentation in this `agent-docs/` folder:
 
 ## 🔧 Configuration
 
-Agent configured in `../.opencode/config.json`:
+Agent definition lives in `../agents/Frontend Developer.agent.md`:
 
 - **Model:** Claude Sonnet 4
 - **Temperature:** 0.4
@@ -58,10 +58,10 @@ Agent configured in `../.opencode/config.json`:
 ## 📁 Structure
 
 ```
-.opencode/agents/
-├── README.md                  # This file
-├── frontend-developer.md      # Agent definition (main file)
-└── docs/                      # All documentation
+.github/
+├── agents/
+│   └── Frontend Developer.agent.md  # Agent definition (main file)
+└── agent-docs/
     ├── INDEX.md               # Navigation hub
     ├── QUICK_START.md         # Getting started
     ├── EXAMPLES.md            # Code examples
@@ -71,9 +71,9 @@ Agent configured in `../.opencode/config.json`:
 
 **Why this structure?**
 
-- OpenCode shows ONLY `frontend-developer.md` in agent list
-- All documentation in `docs/` folder (clean agent switcher)
-- Easy to share/distribute as single package
+- GitHub uses `Frontend Developer.agent.md` as the agent definition
+- All supporting docs live in `agent-docs/`
+- Easy to share/distribute as a single package
 
 ## ✨ Features
 
@@ -118,18 +118,18 @@ Gunakan Nuxt UI components.
 
 ## 📖 Learn More
 
-- **Quick Start:** `docs/QUICK_START.md` (5 minutes)
-- **Full Guide:** `docs/INDEX.md` (complete navigation)
-- **API Patterns:** `docs/API_PATTERNS.md` (useApi guide)
-- **Examples:** `docs/EXAMPLES.md` (50+ examples)
+- **Quick Start:** `agent-docs/QUICK_START.md` (5 minutes)
+- **Full Guide:** `agent-docs/INDEX.md` (complete navigation)
+- **API Patterns:** `agent-docs/API_PATTERNS.md` (useApi guide)
+- **Examples:** `agent-docs/EXAMPLES.md` (50+ examples)
 
 ## 🤝 Sharing
 
 To share this agent with others:
 
-1. Copy entire `agents/` folder
-2. Copy `../.opencode/config.json` (agent config section)
-3. Share documentation: Point to `docs/QUICK_START.md`
+1. Copy `.github/agents/Frontend Developer.agent.md`
+2. Copy `.github/agent-docs/`
+3. Share onboarding doc: `.github/agent-docs/QUICK_START.md`
 
 Recipients will see only "Frontend Developer" in their agent list!
 
