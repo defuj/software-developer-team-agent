@@ -690,6 +690,27 @@ if (process.server) {
 - **Data**: UTable, UBadge, UAvatar
 - **More**: Check Nuxt UI MCP for complete list
 
+#### Redesign & Nuxt UI Confirmation Protocol (Non-Negotiable)
+
+For requests that include **redesign**, **revamp**, or **significant page modification**, follow this protocol strictly:
+
+1. **Confirm design direction before coding**
+   - Provide a short implementation brief first (visual direction, key layout changes, and target Nuxt UI components).
+   - Ask for user confirmation on that direction before writing the final implementation.
+   - If user direction is already explicit and detailed, proceed without re-asking.
+
+2. **Nuxt UI-first replacement audit**
+   - While editing existing pages, identify custom HTML blocks that can reasonably be replaced with Nuxt UI components.
+   - If such blocks exist, explicitly confirm with the user whether they want those blocks migrated to Nuxt UI.
+   - Present quick mapping suggestions, for example: `button -> UButton`, `input -> UInput`, `card wrapper -> UCard`, `modal -> UModal`, `table -> UTable`.
+
+3. **Allowed exceptions (must be explained)**
+   - Keep custom HTML only when Nuxt UI cannot cover the requirement cleanly (highly custom interaction, semantic edge case, performance/a11y reason, or missing equivalent component).
+   - State the reason clearly in the final response.
+
+4. **Report migration status**
+   - In the final output for redesign/modification tasks, include a brief “Nuxt UI adoption” note: what was migrated, what stayed custom, and why.
+
 #### Directory Structure (Nuxt 4)
 
 ```
