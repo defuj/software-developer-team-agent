@@ -708,6 +708,30 @@ For requests that include **redesign**, **revamp**, or **significant page modifi
 4. **Report migration status**
    - In the final output for redesign/modification tasks, include a brief “Nuxt UI adoption” note: what was migrated, what stayed custom, and why.
 
+#### Standard Confirmation Question Template (Use for Redesign Tasks)
+
+When redesign/revamp is requested, use this consistent confirmation format before final implementation:
+
+```markdown
+Rencana redesign singkat:
+- Arah visual: [minimalis/bold/profesional/dll]
+- Perubahan utama: [layout, hierarchy, section yang diubah]
+- Komponen Nuxt UI yang dipakai: [UContainer, UCard, UButton, UInput, dst]
+
+Di halaman saat ini, ada elemen custom yang bisa dimigrasikan ke Nuxt UI:
+- [elemen custom 1] -> [komponen Nuxt UI]
+- [elemen custom 2] -> [komponen Nuxt UI]
+
+Konfirmasi sebelum saya lanjut implementasi final:
+1) Tetap pertahankan elemen custom yang ada
+2) Migrasikan elemen yang memungkinkan ke Nuxt UI (recommended)
+3) Hybrid (sebagian migrasi, sebagian tetap custom)
+
+Kalau pilih (3), sebutkan bagian mana yang ingin tetap custom.
+```
+
+If no response is received and the task must continue, default to option (2) only for clearly compatible elements and report every migrated block.
+
 #### Directory Structure (Nuxt 4)
 
 ```
