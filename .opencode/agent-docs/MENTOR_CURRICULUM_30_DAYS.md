@@ -1,194 +1,201 @@
-# Mentor Curriculum 30 Days (Nuxt Frontend Beginner)
+# Mentor Curriculum 30 Days (Nuxt Ecosystem Track)
 
-Dokumen ini adalah roadmap belajar frontend 1 bulan untuk developer pemula dengan fokus **Nuxt 4 + Vue 3 + TypeScript + Nuxt UI**.
+Roadmap 1 bulan ini dirancang untuk developer yang **sudah bisa coding web dasar**, lalu ingin menguatkan fundamental yang relevan langsung ke stack:
 
-## Format Program
+- **Node.js**
+- **Vue.js 3**
+- **Nuxt.js 4**
+- **Nuxt UI**
+- **Tailwind CSS**
+
+## Program Format
 
 - Durasi: **4 minggu**
 - Hari aktif: **5 hari kerja per minggu (Senin-Jumat)**
-- Total hari belajar: **20 hari**
-- Waktu per hari: **60-120 menit**
-- Komposisi: **30% teori + 70% praktik**
+- Total sesi: **20 hari**
+- Waktu harian: **90-150 menit**
+- Komposisi: **25% konsep + 75% praktik**
 
-## Learning Outcomes
+## Target Outcome
 
-Setelah menyelesaikan program ini, peserta diharapkan mampu:
+Setelah 30 hari, peserta mampu:
 
-1. Memahami fondasi web: browser, HTML, CSS, JavaScript
-2. Membangun UI responsive dan semantic
-3. Memahami konsep reactive UI di Vue dan struktur aplikasi Nuxt
-4. Mengintegrasikan API dengan pola error/loading state yang baik
-5. Menulis kode yang lebih aman, terstruktur, dan mudah dikembangkan
-
----
-
-## Minggu 1 - Fondasi Web
-
-**Tujuan minggu:** memahami cara kerja web dan membuat halaman statis yang rapi serta responsive dasar.
-
-### Hari 1 (Senin): Internet & Browser Basics
-- Materi: request/response, DNS, HTTP/HTTPS, render pipeline browser
-- Praktik: inspeksi tab Network di DevTools
-- Output: catatan alur dari URL sampai halaman tampil
-
-### Hari 2 (Selasa): HTML Semantik
-- Materi: struktur dokumen, semantic tags, hierarchy heading
-- Praktik: buat landing page sederhana dengan semantic HTML
-- Output: 1 halaman HTML semantik
-
-### Hari 3 (Rabu): Form & Accessibility Dasar
-- Materi: form element, label-input relation, validasi native dasar
-- Praktik: buat form pendaftaran
-- Output: form valid dengan label dan pesan error dasar
-
-### Hari 4 (Kamis): CSS Basics & Box Model
-- Materi: selector, specificity dasar, box model, spacing
-- Praktik: styling halaman hari 2-3
-- Output: layout lebih rapi dengan sistem spacing sederhana
-
-### Hari 5 (Jumat): Flexbox & Responsive Dasar
-- Materi: flex container/item, breakpoint dasar
-- Praktik: ubah layout agar mobile-friendly
-- Output: 1 halaman responsive (mobile + desktop)
+1. Memahami runtime context Node.js untuk Nuxt development
+2. Membangun feature Nuxt berbasis Vue Composition API
+3. Menggunakan Nuxt UI secara konsisten untuk sistem antarmuka
+4. Styling cepat dan maintainable dengan Tailwind CSS
+5. Mengimplementasikan flow production dasar: data fetching, validation, error handling, testing mindset
 
 ---
 
-## Minggu 2 - JavaScript Dasar ke Menengah
+## Minggu 1 - Node.js + Nuxt Runtime Fundamentals
 
-**Tujuan minggu:** memahami data manipulation, event, dan async flow di browser.
+**Tujuan minggu:** memahami pondasi runtime agar implementasi Nuxt tidak sekadar "jalan", tapi benar konteks server/client.
 
-### Hari 6 (Senin): Variabel, Function, Scope
-- Materi: `let`, `const`, function, scope
-- Praktik: buat utility functions sederhana
-- Output: 5 fungsi utility dasar
+### Hari 1 (Senin): Node.js Runtime untuk Frontend Engineer
+- Materi: event loop mental model, process lifecycle, env vars, npm scripts
+- Praktik: bedah `package.json` scripts (`dev`, `build`, `preview`)
+- Output: catatan alur eksekusi project dari `npm run dev` sampai app running
 
-### Hari 7 (Selasa): Array & Object Operations
-- Materi: `map`, `filter`, `find`, destructuring
-- Praktik: olah data dummy menjadi data siap tampil
-- Output: data transformation script
+### Hari 2 (Selasa): Nuxt Execution Context (Server vs Client)
+- Materi: SSR context, hydration concept, kapan kode jalan di server/client
+- Praktik: buat contoh aman untuk akses browser API (`localStorage` guard)
+- Output: 1 halaman demo server/client-safe behavior
 
-### Hari 8 (Rabu): DOM & Event
-- Materi: query DOM, event listener, UI update
-- Praktik: mini to-do app vanilla JS
-- Output: to-do tambah/hapus item
+### Hari 3 (Rabu): Nuxt Project Structure Deep Dive
+- Materi: `app/`, `pages/`, `layouts/`, `components/`, `composables/`, `server/api/`
+- Praktik: susun mini structure feature (list + detail)
+- Output: struktur folder feature yang rapi
 
-### Hari 9 (Kamis): Async JavaScript
-- Materi: Promise, async/await, try/catch
-- Praktik: fetch data dari API publik
-- Output: list data + error handling dasar
+### Hari 4 (Kamis): Nuxt Routing + Layout + Middleware Basic
+- Materi: file-based routing, nested route, route middleware basics
+- Praktik: tambah auth-like middleware sederhana (dummy check)
+- Output: flow navigasi + guard route dasar
 
-### Hari 10 (Jumat): Mini Project JavaScript
-- Materi: penguatan konsep minggu 2
-- Praktik: gabungkan DOM + fetch + state sederhana
-- Output: mini dashboard tanpa framework
-
----
-
-## Minggu 3 - Vue 3 & Nuxt 4 Fundamentals
-
-**Tujuan minggu:** memahami reactive component architecture dan struktur Nuxt.
-
-### Hari 11 (Senin): Vue Reactivity
-- Materi: `ref`, `reactive`, `computed`, `watch`
-- Praktik: counter + filtered list
-- Output: komponen reactive sederhana
-
-### Hari 12 (Selasa): Component Basics
-- Materi: props, emits, parent-child communication
-- Praktik: pecah UI ke beberapa komponen
-- Output: komponen reusable dasar
-
-### Hari 13 (Rabu): Nuxt Structure & Routing
-- Materi: `pages/`, `components/`, `layouts/`, auto-import
-- Praktik: buat 3 halaman dengan navigasi
-- Output: app Nuxt multi-page dasar
-
-### Hari 14 (Kamis): Nuxt Data Fetching
-- Materi: `useFetch`, `useAsyncData`, SSR vs CSR
-- Praktik: tampilkan data API di halaman Nuxt
-- Output: halaman data dengan loading/error state
-
-### Hari 15 (Jumat): Nuxt UI Integration
-- Materi: `UCard`, `UButton`, `UInput`, `UForm`
-- Praktik: bangun form + card list memakai Nuxt UI
-- Output: mini feature page konsisten dengan Nuxt UI
+### Hari 5 (Jumat): Nuxt Data Flow Fundamentals
+- Materi: `useFetch` vs `useAsyncData` vs `$fetch`, kapan pakai masing-masing
+- Praktik: implement 2 halaman data dengan strategi fetching berbeda
+- Output: perbandingan singkat plus keputusan teknik
 
 ---
 
-## Minggu 4 - Engineering Essentials & Project
+## Minggu 2 - Vue 3 + TypeScript Applied Fundamentals
 
-**Tujuan minggu:** menyelesaikan mini app dengan praktik engineering dasar.
+**Tujuan minggu:** menguasai pola Vue modern dan type safety yang dipakai harian di Nuxt app.
 
-### Hari 16 (Senin): TypeScript Frontend Basics
-- Materi: interface/type, union, typing API response
-- Praktik: tipekan data model dan props
-- Output: komponen Nuxt typed dengan baik
+### Hari 6 (Senin): Reactivity Architecture
+- Materi: `ref`, `reactive`, `computed`, `watch`, efek ke re-render
+- Praktik: filter/sort list berbasis computed
+- Output: komponen list reactive dengan derived state bersih
 
-### Hari 17 (Selasa): Form Validation & Error Handling
-- Materi: validasi input, feedback error UX
-- Praktik: create/edit form dengan validasi
-- Output: form dengan validasi dan pesan error jelas
+### Hari 7 (Selasa): Component Contracts
+- Materi: props, emits, slots, one-way data flow
+- Praktik: buat komponen card reusable + slot action
+- Output: 2-3 komponen reusable dengan contract jelas
 
-### Hari 18 (Rabu): Accessibility & Performance Basics
-- Materi: semantic structure, keyboard, contrast, lazy loading dasar
-- Praktik: audit ringan halaman sendiri
-- Output: checklist a11y + daftar perbaikan
+### Hari 8 (Rabu): Composable Design
+- Materi: extract logic dari komponen ke composable
+- Praktik: `useProducts` atau `useMarkets` composable
+- Output: composable dengan loading/error state dan typed return
 
-### Hari 19 (Kamis): Testing Mindset
-- Materi: unit/integration/E2E overview
-- Praktik: susun skenario test untuk mini app
-- Output: 5-10 test cases tertulis
+### Hari 9 (Kamis): TypeScript for Nuxt/Vue
+- Materi: typing props, emits, API response, union + narrowing
+- Praktik: tambah tipe pada flow data fetch + form state
+- Output: modul feature typed end-to-end dasar
 
-### Hari 20 (Jumat): Final Review Day
-- Materi: recap, refactor ringan, quality checklist
-- Praktik: demo mini app + jelaskan keputusan teknis
-- Output: mini app siap demo + next iteration list
+### Hari 10 (Jumat): Weekly Mini Build
+- Materi: integrasi konsep minggu 2
+- Praktik: build fitur "catalog/list + detail + action" kecil
+- Output: mini feature dengan architecture Vue yang rapi
+
+---
+
+## Minggu 3 - Nuxt UI + Tailwind CSS Systematic Styling
+
+**Tujuan minggu:** membangun UI yang konsisten, cepat, dan maintainable dengan Nuxt UI + Tailwind.
+
+### Hari 11 (Senin): Nuxt UI Component-First Workflow
+- Materi: mapping kebutuhan UI ke komponen Nuxt UI
+- Praktik: refactor elemen custom ke `UCard`, `UButton`, `UInput`, `UBadge`
+- Output: 1 halaman UI dengan adopsi Nuxt UI dominan
+
+### Hari 12 (Selasa): Form Patterns with Nuxt UI
+- Materi: `UForm`, validasi input, error presentation
+- Praktik: form create/edit dengan state submit dan error
+- Output: form flow lengkap (validasi + feedback)
+
+### Hari 13 (Rabu): Tailwind Fundamentals for Nuxt
+- Materi: utility-first workflow, spacing scale, responsive modifiers, state modifiers
+- Praktik: styling halaman dengan utility classes konsisten
+- Output: style guide mini (spacing + typography + color usage)
+
+### Hari 14 (Kamis): Tailwind Maintainability Patterns
+- Materi: class composition strategy, reusable class pattern, avoiding class chaos
+- Praktik: rapikan class di beberapa komponen nyata
+- Output: komponen lebih bersih dan mudah maintain
+
+### Hari 15 (Jumat): UI Consistency Review Day
+- Materi: visual consistency, accessibility quick audit
+- Praktik: audit 1 flow halaman (list -> detail -> submit)
+- Output: daftar perbaikan UI/UX prioritas tinggi
+
+---
+
+## Minggu 4 - Production Fundamentals (Nuxt App Delivery)
+
+**Tujuan minggu:** menggabungkan semua skill menjadi mini app siap demo dengan standar engineering dasar.
+
+### Hari 16 (Senin): API Integration Strategy
+- Materi: project API pattern (`useApi`/fetch wrapper), error normalization
+- Praktik: integrasi 2 endpoint (list + mutation)
+- Output: feature data dengan success/error handling konsisten
+
+### Hari 17 (Selasa): State Management Strategy
+- Materi: local state vs shared state, kapan pakai Pinia/useState/composable
+- Praktik: implement shared state untuk satu flow utama
+- Output: state architecture ringkas + alasan pemilihan
+
+### Hari 18 (Rabu): Performance + Accessibility Baseline
+- Materi: lazy components, payload awareness, semantic/keyboard basics
+- Praktik: optimasi 1 halaman berat + a11y cleanup
+- Output: sebelum/sesudah (catatan improvement)
+
+### Hari 19 (Kamis): Testing Mindset for Nuxt App
+- Materi: apa yang dites di unit/integration/E2E
+- Praktik: tulis test plan untuk flow kritikal
+- Output: 8-12 test case prioritas (dengan level test)
+
+### Hari 20 (Jumat): Final Demo & Review
+- Materi: technical storytelling, trade-off explanation
+- Praktik: demo mini app + jelaskan keputusan arsitektur
+- Output: mini app + review checklist + backlog improvement
 
 ---
 
 ## Weekly Evaluation Rubric (Skor 1-5)
 
-Nilai tiap akhir minggu pada aspek berikut:
+Nilai di akhir tiap minggu:
 
-1. Pemahaman konsep
-2. Kualitas implementasi
-3. Konsistensi latihan
-4. Kemandirian debugging
-5. Kesiapan naik level
+1. Pemahaman runtime dan framework
+2. Kualitas struktur komponen/composable
+3. Konsistensi Nuxt UI + Tailwind usage
+4. Kualitas error handling dan state flow
+5. Readiness ke praktik production
 
 Wajib tulis:
-- 2 hal yang sudah bagus
-- 2 hal yang perlu diperbaiki
-- 1 fokus utama minggu berikutnya
+
+- 2 kekuatan utama minggu ini
+- 2 gap paling penting untuk ditutup
+- 1 fokus wajib minggu depan
 
 ## Daily Session Template
 
-Gunakan template ini setiap hari:
+Gunakan format ini tiap hari:
 
 ```markdown
 Hari ke-[x]
 
-1) Teori (15-30 menit)
-- [konsep inti]
+1) Concept refresh (20-30 menit)
+- [konsep yang ditargetkan]
 
-2) Praktik (40-80 menit)
-- [task coding kecil]
+2) Applied coding (60-100 menit)
+- [task implementasi nyata]
 
-3) Refleksi (5-10 menit)
-- Apa yang saya pahami hari ini?
-- Apa yang masih membingungkan?
-- Apa target besok?
+3) Review & reflection (10-20 menit)
+- What worked?
+- What broke?
+- What to improve tomorrow?
 ```
 
-## Rekomendasi Progression Setelah 30 Hari
+## Setelah 30 Hari (Next Track)
 
-Lanjutkan ke salah satu jalur:
+Pilih satu jalur lanjutan:
 
-1. Build 2-3 mini projects Nuxt tambahan
-2. Mulai testing implementation nyata (Vitest + Playwright)
-3. Dalami state management dan architecture patterns
-4. Pelajari deployment dan observability dasar
+1. Bangun 2 mini apps Nuxt dengan scope berbeda (dashboard + form-heavy app)
+2. Implement testing nyata (Vitest + Playwright) untuk 1 flow end-to-end
+3. Dalami Nuxt server/api patterns + auth flow basics
+4. Dalami performance profiling dan deployment readiness checklist
 
 ---
 
-_Dokumen ini dipakai oleh agent mentor untuk membimbing belajar frontend secara bertahap, praktis, dan konsisten._
+_Roadmap ini dipakai oleh mentor agent untuk pembelajaran fundamental yang lebih tepat sasaran ke ekosistem Nuxt, bukan kelas pemrograman web dari nol._
