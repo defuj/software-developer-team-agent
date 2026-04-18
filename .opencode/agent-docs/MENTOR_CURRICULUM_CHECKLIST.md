@@ -1,6 +1,6 @@
-# Mentor Curriculum Checklist (30 Days)
+# Checklist Kurikulum Mentor (30 Hari)
 
-Checklist harian untuk menjalankan roadmap 30 hari Nuxt ecosystem track.
+Checklist harian untuk menjalankan roadmap 30 hari jalur ekosistem Nuxt.
 
 Gunakan status:
 
@@ -8,129 +8,132 @@ Gunakan status:
 - `[~]` sedang dikerjakan
 - `[x]` selesai
 
-## Week 1 - Node.js + Nuxt Runtime Fundamentals
+## Minggu 1 - Node.js + Fundamental Runtime Nuxt
 
-### Day 1 - Node.js Runtime
+### Hari 1 - Runtime Node.js
 - [ ] Pahami event loop mental model
-- [ ] Review `package.json` scripts (`dev/build/preview`)
+- [ ] Tinjau `package.json` scripts (`dev/build/preview`)
 - [ ] Jalankan app dan dokumentasikan lifecycle eksekusi
 - [ ] Tulis 3 insight teknis
 
-### Day 2 - Nuxt Server vs Client Context
+### Hari 2 - Konteks Server vs Client di Nuxt
 - [ ] Jelaskan perbedaan kode yang jalan di server vs client
 - [ ] Implement guard browser API (`localStorage/window`)
 - [ ] Verifikasi tidak ada runtime error di SSR context
 - [ ] Catat 2 potensi hydration issue
+- [ ] Jelaskan ulang konsep CSR, SSR, dan hydration dengan contoh Nuxt sederhana
 
-### Day 3 - Nuxt Structure
+### Hari 3 - Struktur Nuxt
 - [ ] Audit struktur `app/`, `pages/`, `components/`, `composables/`, `server/api/`
 - [ ] Buat struktur folder feature kecil
 - [ ] Pisahkan logic UI dan logic data
-- [ ] Review naming consistency
+- [ ] Tinjau konsistensi penamaan
 
-### Day 4 - Routing, Layout, Middleware
+### Hari 4 - Routing, Layout, Middleware
 - [ ] Buat minimal 2 route + 1 nested route
 - [ ] Gunakan layout yang sesuai
 - [ ] Implement middleware check sederhana
-- [ ] Verifikasi redirect/guard flow
+- [ ] Verifikasi alur redirect/guard
 
-### Day 5 - Data Fetching Strategy
+### Hari 5 - Strategi Data Fetching
 - [ ] Implement use case `useFetch`
 - [ ] Implement use case `useAsyncData`
 - [ ] Tulis kapan pakai masing-masing
 - [ ] Dokumentasikan trade-off singkat
+- [ ] Dokumentasikan langkah pencegahan hydration mismatch pada fetch API
 
-## Week 2 - Vue 3 + TypeScript Applied
+## Minggu 2 - Vue 3 + TypeScript Terapan
 
-### Day 6 - Reactivity
+### Hari 6 - Reactivity
 - [ ] Gunakan `ref` dan `computed` untuk derived state
 - [ ] Hindari logic berat di template
 - [ ] Verifikasi perubahan state memicu UI sesuai ekspektasi
 - [ ] Catat 2 anti-pattern yang dihindari
 
-### Day 7 - Component Contracts
+### Hari 7 - Kontrak Komponen
 - [ ] Definisikan props yang jelas
 - [ ] Implement emits untuk interaction
 - [ ] Gunakan slot untuk fleksibilitas
 - [ ] Verifikasi komponen reusable di 2 konteks
 
-### Day 8 - Composable Design
+### Hari 8 - Desain Composable
 - [ ] Ekstrak logic dari component ke composable
 - [ ] Kembalikan state `data/loading/error`
 - [ ] Tambahkan typing return composable
 - [ ] Uji composable pada minimal 1 halaman
 
-### Day 9 - TypeScript in Nuxt/Vue
+### Hari 9 - TypeScript di Nuxt/Vue
 - [ ] Type props, emits, dan API response
-- [ ] Gunakan union type atau narrowing di error flow
+- [ ] Gunakan union type atau narrowing pada alur error
 - [ ] Hindari `any` di code baru
 - [ ] Catat 3 error TS yang berhasil diselesaikan
 
-### Day 10 - Weekly Mini Build
-- [ ] Build mini feature end-to-end
+### Hari 10 - Mini Build Mingguan
+- [ ] Bangun mini fitur end-to-end
 - [ ] Terapkan composable + typed flow
-- [ ] Handle loading/error/empty states
+- [ ] Tangani state loading/error/empty
 - [ ] Demo singkat hasil minggu 2
 
-## Week 3 - Nuxt UI + Tailwind Styling
+## Minggu 3 - Nuxt UI + Styling Tailwind
 
-### Day 11 - Nuxt UI Component-First
+### Hari 11 - Nuxt UI Component-First
 - [ ] Mapping Figma/custom blocks ke komponen Nuxt UI
 - [ ] Gunakan `UCard/UButton/UInput/UBadge` sesuai kebutuhan
 - [ ] Hindari custom HTML jika sudah ada padanan Nuxt UI
 - [ ] Tulis daftar komponen yang dimigrasikan
 
-### Day 12 - Nuxt UI Form Patterns
+### Hari 12 - Pola Form Nuxt UI
 - [ ] Implement form dengan feedback error
 - [ ] Handle submit/pending state
-- [ ] Verifikasi UX state (default/error/success)
-- [ ] Review konsistensi label dan hint
+- [ ] Verifikasi state UX (default/error/success)
+- [ ] Tinjau konsistensi label dan hint
 
-### Day 13 - Tailwind Fundamentals
+### Hari 13 - Fundamental Tailwind
 - [ ] Terapkan spacing/typography scale konsisten
 - [ ] Gunakan responsive modifiers
-- [ ] Gunakan state modifiers (`hover/focus/disabled`)
+- [ ] Gunakan state modifier (`hover/focus/disabled`)
 - [ ] Buat token mapping mini dari design ke class
 
-### Day 14 - Tailwind Maintainability
+### Hari 14 - Maintainability Tailwind
 - [ ] Rapikan class yang terlalu panjang/duplikat
 - [ ] Kelompokkan class secara konsisten
-- [ ] Review readability komponen
-- [ ] Catat 3 improvement maintainability
+- [ ] Tinjau keterbacaan komponen
+- [ ] Catat 3 improvement pada maintainability
 
-### Day 15 - UI Consistency Review
+### Hari 15 - Review Konsistensi UI
 - [ ] Audit visual consistency lintas halaman
 - [ ] Cek state UI utama (default/hover/focus/disabled/loading)
 - [ ] Cek aksesibilitas dasar (kontras + keyboard)
 - [ ] Susun backlog perbaikan prioritas
 
-## Week 4 - Production Fundamentals
+## Minggu 4 - Fundamental Produksi
 
-### Day 16 - API Integration Strategy
+### Hari 16 - Strategi Integrasi API
 - [ ] Implement list endpoint + mutation endpoint
 - [ ] Normalisasi error message
 - [ ] Verifikasi success/error states konsisten
 - [ ] Catat retry/fallback strategy sederhana
 
-### Day 17 - State Management Strategy
+### Hari 17 - Strategi Manajemen State
 - [ ] Tentukan local vs shared state boundary
 - [ ] Gunakan `useState`, Pinia, atau composable sesuai kasus
 - [ ] Dokumentasikan alasan pemilihan
 - [ ] Verifikasi tidak ada state duplication yang tidak perlu
 
-### Day 18 - Performance + A11y Baseline
+### Hari 18 - Baseline Performa + A11y
 - [ ] Terapkan lazy-loading atau split komponen berat
 - [ ] Audit semantic structure
 - [ ] Audit keyboard interactions dasar
-- [ ] Dokumentasikan before/after improvement
+- [ ] Dokumentasikan improvement sebelum/sesudah
 
-### Day 19 - Testing Mindset
+### Hari 19 - Mindset Testing
 - [ ] Tulis test plan unit/integration/E2E
-- [ ] Prioritaskan flow kritikal
+- [ ] Prioritaskan alur kritikal
 - [ ] Definisikan expected behavior per test case
-- [ ] Review risk area yang belum ter-cover
+- [ ] Tinjau area risiko yang belum ter-cover
+- [ ] Tambahkan cek: tidak ada warning hydration mismatch pada flow utama
 
-### Day 20 - Final Demo
+### Hari 20 - Demo Final
 - [ ] Demo mini app end-to-end
 - [ ] Jelaskan keputusan arsitektur inti
 - [ ] Presentasikan trade-off dan backlog
@@ -138,15 +141,15 @@ Gunakan status:
 
 ---
 
-## Checklist Tambahan per Track
+## Checklist Tambahan per Jalur
 
-### Track Desainer (Figma -> Code)
+### Jalur Desainer (Figma -> Code)
 - [ ] Buat component mapping table (Figma -> Nuxt UI)
 - [ ] Buat token mapping table (Figma -> Tailwind/theme)
 - [ ] Lakukan visual QA state-based
 - [ ] Catat kompromi fidelity vs engineering constraints
 
-### Track Profesional (Karyawan Umum)
+### Jalur Profesional (Karyawan Umum)
 - [ ] Kumpulkan weekly summary 1 halaman
 - [ ] Lakukan presentasi teknis mingguan (5 menit)
 - [ ] Dokumentasikan bug dan cara debug
