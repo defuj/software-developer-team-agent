@@ -4,18 +4,25 @@ Panduan ini menjelaskan cara menggunakan agent di repo ini, termasuk skill yang 
 
 ## Gambaran Singkat
 
-Repo ini berisi konfigurasi OpenCode untuk agent frontend khusus Nuxt/Vue:
+Repo ini berisi konfigurasi OpenCode untuk agent frontend & backend khusus Nuxt/Vue dan Node.js:
 
 - Agent config: `.opencode/config.json`
-- Agent prompt: `.opencode/agents/frontend-developer.md`
-- Dokumentasi internal: `.opencode/agent-docs/frontend/nuxt/frontend/nuxt/`
-- Folder pendukung tim: `commands/`, `rules/`, `hooks/`, `contexts/`
+- Agent prompts:
+  - `.opencode/agents/nuxt-frontend-developer.md` — Nuxt frontend developer
+  - `.opencode/agents/node-backend-developer.md` — Node.js backend developer
+  - `.opencode/agents/nuxt-frontend-developer-mentor.md` — Nuxt mentor untuk junior/intermediate
+- Dokumentasi internal: `.opencode/agent-docs/`
+  - Frontend Nuxt: `.opencode/agent-docs/frontend/nuxt/`
+  - Backend Node: `.opencode/agent-docs/backend/node/`
+- Skill lokal: `.opencode/skills/` (33 skill tersinkron)
+- Contexts: `.opencode/contexts/` (dev, research, review)
 
 Agent didesain untuk:
 
-- Nuxt 4 + Nuxt UI
-- Pola Vue Composition API
+- Nuxt 4 + Nuxt UI + Vue 3 Composition API + TypeScript
+- Node.js + Express 5 + Prisma + PostgreSQL (backend agent)
 - Workflow operasional tim (scope-safe, verification status, commit/PR policy)
+- Mentoring terstruktur 30 hari untuk transisi ke stack Nuxt modern
 
 ## Prasyarat
 
@@ -23,9 +30,21 @@ Agent didesain untuk:
 - Akses ke repository ini
 - Node.js + npm/pnpm/yarn/bun sesuai kebutuhan proyek
 
+## Agent yang Tersedia
+
+Repo ini menyediakan 3 agent:
+
+| Agent | File | Tujuan |
+|-------|------|--------|
+| Nuxt Frontend Developer | `nuxt-frontend-developer.md` | Implementasi fitur, komponen, optimasi |
+| Node Backend Developer | `node-backend-developer.md` | API, database, auth, backend logic |
+| Nuxt Frontend Mentor | `nuxt-frontend-developer-mentor.md` | Mentoring fundamental Nuxt stack |
+
+Config di `.opencode/config.json` mendaftarkan agent `frontend` yang merujuk ke prompt `nuxt-frontend-developer.md`.
+
 ## Skill yang Digunakan Agent
 
-Repo ini sudah menyertakan folder `skills/` (hasil sinkron dari environment lokal), jadi developer lain tidak perlu mencari skill satu per satu.
+Skill tersimpan di `.opencode/skills/` (lokal dalam repo), jadi developer lain tidak perlu mencari skill satu per satu.
 
 ### Skill minimal yang wajib tersedia
 
@@ -42,64 +61,84 @@ Repo ini sudah menyertakan folder `skills/` (hasil sinkron dari environment loka
 1. `building-components` (untuk pembuatan komponen reusable skala besar)
 2. `vercel-composition-patterns` (untuk refactor komponen kompleks)
 
-### Skill yang tidak perlu untuk operasional agent ini
+### Skill backend (untuk node-backend-developer agent)
 
-Untuk proyek Nuxt frontend ini, skill backend/lintas bahasa di bawah tidak diperlukan agar agent berjalan optimal:
+1. `backend-patterns`
+2. `postgres-patterns`
+
+### Skill yang tidak perlu untuk operasional agent frontend ini
+
+Untuk proyek Nuxt frontend ini, skill backend/lintas bahasa di bawah tidak diperlukan agar agent frontend berjalan optimal:
 
 - `springboot-*`, `java-*`, `jpa-patterns`
 - `django-*`
 - `golang-*`
 - `python-*`
-- `clickhouse-io`, `postgres-patterns`, `backend-patterns`
+- `clickhouse-io`
 
 Catatan: skill tersebut boleh tetap disimpan jika tim memang butuh multi-stack, tapi tidak wajib untuk agent frontend ini.
 
+### Skill lain yang tersedia di repo
+
+- `configure-ecc` — installer untuk Everything Claude Code
+- `continuous-learning` / `continuous-learning-v2` — pattern learning dari session
+- `eval-harness` — formal evaluation framework
+- `iterative-retrieval` — context retrieval pattern
+- `strategic-compact` — manual context compaction
+- `verification-loop` — verification cycle untuk agent
+- `nutrient-document-processing` — document processing API
+- `project-guidelines-example` — contoh panduan proyek
+
 ## Lokasi Skill
 
-OpenCode biasanya membaca skill dari:
+OpenCode membaca skill dari:
 
 - `~/.opencode/skills/`
 - `~/.agents/skills/`
+- `.opencode/skills/` (lokal di repo ini)
 
 Verifikasi cepat:
 
 ```bash
 ls ~/.opencode/skills
 ls ~/.agents/skills
+ls .opencode/skills
 ```
 
 Pastikan semua skill wajib tersedia.
 
-## Cara Install Skill dari Folder `skills/` Repo
+## Cara Install Skill dari Folder `.opencode/skills/` Repo
 
 Jika skill belum ada di mesin developer, copy dari repo ini ke direktori skill lokal:
 
 ```bash
 mkdir -p ~/.opencode/skills
-cp -R ./skills/coding-standards ~/.opencode/skills/
-cp -R ./skills/frontend-patterns ~/.opencode/skills/
-cp -R ./skills/frontend-design ~/.opencode/skills/
-cp -R ./skills/web-design-guidelines ~/.opencode/skills/
-cp -R ./skills/nuxt-ui ~/.opencode/skills/
-cp -R ./skills/security-review ~/.opencode/skills/
-cp -R ./skills/tdd-workflow ~/.opencode/skills/
+cp -R ./.opencode/skills/coding-standards ~/.opencode/skills/
+cp -R ./.opencode/skills/frontend-patterns ~/.opencode/skills/
+cp -R ./.opencode/skills/frontend-design ~/.opencode/skills/
+cp -R ./.opencode/skills/web-design-guidelines ~/.opencode/skills/
+cp -R ./.opencode/skills/nuxt-ui ~/.opencode/skills/
+cp -R ./.opencode/skills/security-review ~/.opencode/skills/
+cp -R ./.opencode/skills/tdd-workflow ~/.opencode/skills/
 ```
 
 Opsional:
 
 ```bash
-cp -R ./skills/building-components ~/.opencode/skills/
-cp -R ./skills/vercel-composition-patterns ~/.opencode/skills/
+cp -R ./.opencode/skills/building-components ~/.opencode/skills/
+cp -R ./.opencode/skills/vercel-composition-patterns ~/.opencode/skills/
 ```
 
 ## MCP yang Digunakan Agent
 
 Dari `.opencode/config.json`, agent memakai MCP berikut:
 
-- `nuxt` (enabled)
-- `nuxt-ui` (enabled)
-- `playwright` (enabled)
-- `figma` (disabled by default, opsional)
+| MCP | Type | Status | Deskripsi |
+|-----|------|--------|-----------|
+| `nuxt` | remote | enabled | Dokumentasi Nuxt, blog, deployment guide |
+| `nuxt-ui` | remote | enabled | Dokumentasi & contoh komponen Nuxt UI |
+| `playwright` | stdio | enabled | Browser automation & E2E testing |
+| `figma` | stdio | disabled | Akses Figma design file (opsional) |
 
 Jika ingin pakai Figma MCP, set env var:
 
@@ -107,48 +146,45 @@ Jika ingin pakai Figma MCP, set env var:
 export FIGMA_ACCESS_TOKEN="your-token"
 ```
 
-## Cara Menggunakan Folder Pendukung Tim
+## Cara Menggunakan Folder Pendukung
 
-Penting: folder `commands/`, `rules/`, `hooks/`, `contexts/` di repo ini adalah **template bootstrap** (salinan dari `~/.opencode`) untuk mempermudah onboarding developer baru.
+### `.opencode/contexts/`
 
-Folder-folder ini **bukan** otomatis aktif hanya karena ada di repo. Developer perlu copy/sinkron ke environment lokal masing-masing.
+Berisi konteks reusable proyek:
 
-### `commands/`
+- `dev.md` — konteks development
+- `research.md` — konteks riset
+- `review.md` — konteks code review
 
-- Berisi command/prompt siap pakai (biasanya slash command internal tim).
-- Pakai sebagai koleksi command tim untuk task berulang agar hasil konsisten.
-- Jika menambah command baru, ikuti format file yang sudah ada.
-- Instal ke lokal jika diperlukan:
+Rujuk konteks ini saat membuat prompt supaya agent tidak keluar jalur. Update saat ada perubahan requirement produk/arsitektur.
 
-```bash
-mkdir -p ~/.opencode/commands
-cp -R ./commands/* ~/.opencode/commands/
-```
-
-### `rules/`
-
-- Berisi aturan operasional/coding yang harus dipatuhi agent dan developer.
-- Jadikan ini sebagai source of truth saat review code.
-- Jika ada konflik antara preferensi pribadi dan `rules/`, ikuti `rules/`.
-- Instal ke lokal sesuai README di `rules/README.md` (copy per direktori, jangan di-flatten).
-
-### `hooks/`
-
-- Berisi automasi lifecycle (pre-task/post-task, validasi ringan, dsb).
-- Opsional: aktifkan hanya jika environment lokal mendukung hook dependencies-nya.
-- File `hooks/hooks.json` memanggil script via `CLAUDE_PLUGIN_ROOT`; jika path/plugin tidak tersedia, nonaktifkan hook terkait.
-
-### `contexts/`
-
-- Berisi konteks reusable proyek (domain terms, batasan bisnis, pattern lokal).
-- Rujuk konteks ini saat membuat prompt supaya agent tidak keluar jalur.
-- Update saat ada perubahan requirement produk/arsitektur.
-- Instal ke lokal jika ingin reuse context lintas repo:
+Instal ke lokal jika ingin reuse context lintas repo:
 
 ```bash
 mkdir -p ~/.opencode/contexts
-cp -R ./contexts/* ~/.opencode/contexts/
+cp -R ./.opencode/contexts/* ~/.opencode/contexts/
 ```
+
+### `.opencode/commands/`, `.opencode/rules/`, `.opencode/hooks/`
+
+Folder-folder ini ada di dalam `.opencode/` dan berisi:
+
+- **`commands/`** — Command/prompt siap pakai (slash command internal tim)
+- **`rules/`** — Aturan operasional/coding yang harus dipatuhi
+- **`hooks/`** — Automasi lifecycle (pre-task/post-task, validasi)
+
+Folder-folder ini **bukan** otomatis aktif. Developer perlu copy/sinkron ke environment lokal masing-masing jika diperlukan.
+
+Instal commands:
+
+```bash
+mkdir -p ~/.opencode/commands
+cp -R ./.opencode/commands/* ~/.opencode/commands/
+```
+
+Instal rules (ikuti README di `rules/` — copy per direktori, jangan di-flatten).
+
+Hooks: aktifkan hanya jika environment lokal mendukung hook dependencies-nya. File `hooks/hooks.json` memanggil script via `CLAUDE_PLUGIN_ROOT`.
 
 ### Praktik Tim yang Disarankan
 
@@ -157,22 +193,32 @@ cp -R ./contexts/* ~/.opencode/contexts/
 - Gunakan `contexts/` untuk prompt yang lebih presisi.
 - Perlakukan `hooks/` sebagai konfigurasi bersama tim (perubahan perlu sinkronisasi).
 
-Jika tim tidak ingin maintain template global ini di repo proyek, folder-folder tersebut boleh dihapus tanpa mempengaruhi agent inti (`.opencode/`).
-
 ## Cara Pakai
 
 Gunakan agent melalui mention di OpenCode:
 
 ```text
-@frontend-developer Tambahkan UButton "Simpan" di app/components/profile/ProfileHeader.vue.
+@frontend Tambahkan UButton "Simpan" di app/components/profile/ProfileHeader.vue.
 Task tiny, minimal diff, jangan ubah file lain.
 ```
 
 Atau untuk task normal:
 
 ```text
-@frontend-developer Implementasikan filter status di halaman markets.
+@frontend Implementasikan filter status di halaman markets.
 Gunakan pola useApi yang sudah ada dan laporkan verification status.
+```
+
+Untuk backend:
+
+```text
+@backend Add endpoint POST /api/markets dengan DTO validation.
+```
+
+Untuk mentoring:
+
+```text
+@mentor Jelaskan perbedaan SSR dan CSR di Nuxt 4.
 ```
 
 ## Standar Output Agent
@@ -191,13 +237,54 @@ Agent ini dikonfigurasi untuk selalu melaporkan:
 - Tidak push kecuali diminta user
 - Tidak menyentuh file di luar scope request
 
-Detail SOP tim ada di: `.opencode/agent-docs/frontend/nuxt/frontend/nuxt/TEAM_OPERATING_GUIDE.md`
+Detail SOP tim ada di: `.opencode/agent-docs/frontend/nuxt/TEAM_OPERATING_GUIDE.md`
+
+## Dokumentasi Lengkap
+
+Dokumentasi agent tersedia di `.opencode/agent-docs/frontend/nuxt/`:
+
+| Dokumen | Isi |
+|---------|-----|
+| `INDEX.md` | Navigasi lengkap semua dokumentasi |
+| `README.md` | User guide lengkap |
+| `QUICK_START.md` | Mulai dalam 5 menit |
+| `EXAMPLES.md` | 50+ contoh praktis |
+| `API_PATTERNS.md` | Panduan useApi composable |
+| `WORKFLOWS.md` | 8 workflow detail |
+| `CHEATSHEET.md` | Quick reference |
+| `MCP_GUIDE.md` | Panduan integrasi MCP |
+| `TESTING_GUIDE.md` | Testing & validasi |
+| `TEAM_OPERATING_GUIDE.md` | SOP tim |
+| `SUMMARY.md` | Ringkasan instalasi |
+| `COMPLETION_REPORT.md` | Laporan penyelesaian |
+| `README_AGENTS.md` | Overview agent |
+| `README_DOCS.md` | Overview dokumentasi |
+
+### Dokumentasi Mentor
+
+| Dokumen | Isi |
+|---------|-----|
+| `MENTOR_CURRICULUM_30_DAYS.md` | Roadmap belajar 30 hari |
+| `MENTOR_CURRICULUM_CHECKLIST.md` | Checklist harian |
+| `MENTOR_WEEKLY_ASSIGNMENTS.md` | Tugas mingguan + rubrik |
+
+### Dokumentasi Backend
+
+| Dokumen | Isi |
+|---------|-----|
+| `backend/README.md` | Overview backend |
+| `backend/node/BACKEND_QUICK_START.md` | Quick start backend |
+| `backend/node/BACKEND_PATTERNS.md` | Pola backend |
 
 ## Referensi Cepat
 
-- Quick start: `.opencode/agent-docs/frontend/nuxt/frontend/nuxt/QUICK_START.md`
-- Dokumentasi utama: `.opencode/agent-docs/frontend/nuxt/frontend/nuxt/README.md`
-- Prompt agent: `.opencode/agents/frontend-developer.md`
+- Config: `.opencode/config.json`
+- Prompt agent frontend: `.opencode/agents/nuxt-frontend-developer.md`
+- Prompt agent backend: `.opencode/agents/node-backend-developer.md`
+- Prompt agent mentor: `.opencode/agents/nuxt-frontend-developer-mentor.md`
+- Dokumentasi utama: `.opencode/agent-docs/frontend/nuxt/README.md`
+- Quick start: `.opencode/agent-docs/frontend/nuxt/QUICK_START.md`
+- Index dokumentasi: `.opencode/agent-docs/frontend/nuxt/INDEX.md`
 
 ## Troubleshooting Instalasi Skill
 
@@ -213,11 +300,12 @@ Detail SOP tim ada di: `.opencode/agent-docs/frontend/nuxt/frontend/nuxt/TEAM_OP
 echo $HOME
 ```
 
-2. Cek dua direktori skill:
+2. Cek direktori skill:
 
 ```bash
 ls ~/.opencode/skills
 ls ~/.agents/skills
+ls .opencode/skills
 ```
 
 3. Jika belum ada, install/copy skill ke salah satu direktori tersebut.
@@ -231,7 +319,7 @@ ls ~/.agents/skills
 1. Panggil skill secara eksplisit di prompt:
 
 ```text
-@frontend-developer Load skill `nuxt-ui` lalu implementasikan form ini.
+@frontend Load skill `nuxt-ui` lalu implementasikan form ini.
 ```
 
 2. Mulai session baru OpenCode setelah update skill/konfigurasi.
