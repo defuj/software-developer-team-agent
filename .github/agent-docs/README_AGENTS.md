@@ -15,10 +15,10 @@ Expert frontend developer agent for Nuxt.js + Nuxt UI projects with MCP integrat
 
 ## 📚 Documentation
 
-Complete documentation in this `agent-docs/` folder:
+Complete documentation in this `agent-docs/frontend/nuxt/` folder:
 
-| Document                                    | Description                      |
-| ------------------------------------------- | -------------------------------- |
+| Document                               | Description                      |
+| -------------------------------------- | -------------------------------- |
 | [QUICK_START.md](./QUICK_START.md)     | Get started in 5 minutes         |
 | [EXAMPLES.md](./EXAMPLES.md)           | 50+ practical code examples      |
 | [API_PATTERNS.md](./API_PATTERNS.md)   | useApi composable guide          |
@@ -43,8 +43,8 @@ Complete documentation in this `agent-docs/` folder:
    ```
 
 3. **Read documentation:**
-   - Start: `agent-docs/QUICK_START.md`
-   - Examples: `agent-docs/EXAMPLES.md`
+   - Start: `agent-docs/frontend/nuxt/QUICK_START.md`
+   - Examples: `agent-docs/frontend/nuxt/EXAMPLES.md`
 
 ## 🔧 Configuration
 
@@ -61,7 +61,7 @@ Agent definition lives in `../agents/Frontend Developer.agent.md`:
 .github/
 ├── agents/
 │   └── Frontend Developer.agent.md  # Agent definition (main file)
-└── agent-docs/
+└── agent-docs/frontend/nuxt/
     ├── INDEX.md               # Navigation hub
     ├── QUICK_START.md         # Getting started
     ├── EXAMPLES.md            # Code examples
@@ -72,7 +72,7 @@ Agent definition lives in `../agents/Frontend Developer.agent.md`:
 **Why this structure?**
 
 - GitHub uses `Frontend Developer.agent.md` as the agent definition
-- All supporting docs live in `agent-docs/`
+- All supporting docs live in `agent-docs/frontend/nuxt/`
 - Easy to share/distribute as a single package
 
 ## ✨ Features
@@ -118,18 +118,18 @@ Gunakan Nuxt UI components.
 
 ## 📖 Learn More
 
-- **Quick Start:** `agent-docs/QUICK_START.md` (5 minutes)
-- **Full Guide:** `agent-docs/INDEX.md` (complete navigation)
-- **API Patterns:** `agent-docs/API_PATTERNS.md` (useApi guide)
-- **Examples:** `agent-docs/EXAMPLES.md` (50+ examples)
+- **Quick Start:** `agent-docs/frontend/nuxt/QUICK_START.md` (5 minutes)
+- **Full Guide:** `agent-docs/frontend/nuxt/INDEX.md` (complete navigation)
+- **API Patterns:** `agent-docs/frontend/nuxt/API_PATTERNS.md` (useApi guide)
+- **Examples:** `agent-docs/frontend/nuxt/EXAMPLES.md` (50+ examples)
 
 ## 🤝 Sharing
 
 To share this agent with others:
 
 1. Copy `.github/agents/Frontend Developer.agent.md`
-2. Copy `.github/agent-docs/`
-3. Share onboarding doc: `.github/agent-docs/QUICK_START.md`
+2. Copy `.github/agent-docs/frontend/nuxt/frontend/nuxt/`
+3. Share onboarding doc: `.github/agent-docs/frontend/nuxt/frontend/nuxt/QUICK_START.md`
 
 Recipients will see only "Frontend Developer" in their agent list!
 

@@ -166,13 +166,16 @@ Jika level user belum jelas, mulai dari **Level A**.
 ## Mode Operasi
 
 ### `fast`
+
 - jawaban singkat untuk pertanyaan spesifik
 - tetap beri contoh Nuxt stack minimal
 
 ### `balanced` (default)
+
 - penjelasan konsep + contoh implementasi + latihan mini
 
 ### `thorough`
+
 - deep dive arsitektur, trade-off, checklist produksi, dan evaluasi learning
 
 ---
@@ -252,7 +255,7 @@ Untuk tugas coding, akhiri jawaban dengan:
 
 ## Roadmap Belajar 1 Bulan (4 Minggu x 5 Hari Kerja)
 
-**Sumber roadmap resmi (wajib dirujuk):** `.opencode/agent-docs/MENTOR_CURRICULUM_30_DAYS.md`
+**Sumber roadmap resmi (wajib dirujuk):** `.opencode/agent-docs/frontend/nuxt/frontend/nuxt/MENTOR_CURRICULUM_30_DAYS.md`
 
 Jika ada perbedaan detail antara file ini dan roadmap, prioritaskan isi `MENTOR_CURRICULUM_30_DAYS.md` sebagai acuan utama.
 
@@ -262,8 +265,8 @@ Format: 25% konsep + 75% praktik
 
 Dokumen pendamping roadmap:
 
-- Checklist harian: `.opencode/agent-docs/MENTOR_CURRICULUM_CHECKLIST.md`
-- Tugas mingguan + rubrik: `.opencode/agent-docs/MENTOR_WEEKLY_ASSIGNMENTS.md`
+- Checklist harian: `.opencode/agent-docs/frontend/nuxt/frontend/nuxt/MENTOR_CURRICULUM_CHECKLIST.md`
+- Tugas mingguan + rubrik: `.opencode/agent-docs/frontend/nuxt/frontend/nuxt/MENTOR_WEEKLY_ASSIGNMENTS.md`
 
 ---
 

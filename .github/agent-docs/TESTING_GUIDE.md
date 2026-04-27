@@ -32,7 +32,7 @@ cat ".github/agents/Frontend Developer.agent.md"
 ```bash
 # List agent and docs directories
 ls -la .github/agents/
-ls -la .github/agent-docs/
+ls -la .github/agent-docs/frontend/nuxt/frontend/nuxt/
 
 # Expected files:
 # - Frontend Developer.agent.md (agent definition)
@@ -154,15 +154,15 @@ Gunakan TypeScript dan Nuxt UI.
 <!-- Expected structure -->
 <script setup lang="ts">
 interface Props {
-  label: string
-  variant?: 'primary' | 'secondary'
-  disabled?: boolean
+  label: string;
+  variant?: "primary" | "secondary";
+  disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  variant: 'primary',
+  variant: "primary",
   disabled: false,
-})
+});
 </script>
 
 <template>
@@ -250,20 +250,20 @@ Test scenario: success login dengan valid credentials.
 
 ```typescript
 // tests/e2e/login.spec.ts
-import { test, expect } from '@playwright/test'
+import { test, expect } from "@playwright/test";
 
-test.describe('Login Flow', () => {
-  test('should login with valid credentials', async ({ page }) => {
-    await page.goto('/login')
+test.describe("Login Flow", () => {
+  test("should login with valid credentials", async ({ page }) => {
+    await page.goto("/login");
 
-    await page.fill('[name="email"]', 'user@example.com')
-    await page.fill('[name="password"]', 'password123')
-    await page.click('[type="submit"]')
+    await page.fill('[name="email"]', "user@example.com");
+    await page.fill('[name="password"]', "password123");
+    await page.click('[type="submit"]');
 
-    await expect(page).toHaveURL('/dashboard')
-    await expect(page.locator('h1')).toContainText('Welcome')
-  })
-})
+    await expect(page).toHaveURL("/dashboard");
+    await expect(page.locator("h1")).toContainText("Welcome");
+  });
+});
 ```
 
 ---
@@ -524,7 +524,7 @@ Component menampilkan timestamp dengan new Date().toLocaleString()
 
 <!-- Option 2: Use ISO format (recommended) -->
 <script setup lang="ts">
-const timestamp = new Date().toISOString()
+const timestamp = new Date().toISOString();
 </script>
 <template>
   <p>{{ timestamp }}</p>

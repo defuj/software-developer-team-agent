@@ -13,26 +13,26 @@
 
 ### Documentation Files Created
 
-| File                      | Size       | Lines     | Purpose                       |
-| ------------------------- | ---------- | --------- | ----------------------------- |
+| File                            | Size       | Lines     | Purpose                       |
+| ------------------------------- | ---------- | --------- | ----------------------------- |
 | **Frontend Developer.agent.md** | 29KB       | 989       | Agent definition & core logic |
-| **INDEX.md**              | 12KB       | 450       | Documentation navigation hub  |
-| **README.md**             | 12KB       | 505       | Complete user guide           |
-| **EXAMPLES.md**           | 17KB       | 900       | 50+ practical examples        |
-| **TESTING_GUIDE.md**      | 18KB       | 850       | Testing & validation suite    |
-| **MCP_GUIDE.md**          | 22KB       | 1000      | MCP integration guide         |
-| **WORKFLOWS.md**          | 15KB       | 758       | 8 detailed workflows          |
-| **CHEATSHEET.md**         | 11KB       | 621       | Quick reference               |
-| **QUICK_START.md**        | 11KB       | 544       | 5-minute getting started      |
-| **SUMMARY.md**            | 9.7KB      | 435       | Installation summary          |
-| **TOTAL**                 | **~127KB** | **7,252** | Complete documentation        |
+| **INDEX.md**                    | 12KB       | 450       | Documentation navigation hub  |
+| **README.md**                   | 12KB       | 505       | Complete user guide           |
+| **EXAMPLES.md**                 | 17KB       | 900       | 50+ practical examples        |
+| **TESTING_GUIDE.md**            | 18KB       | 850       | Testing & validation suite    |
+| **MCP_GUIDE.md**                | 22KB       | 1000      | MCP integration guide         |
+| **WORKFLOWS.md**                | 15KB       | 758       | 8 detailed workflows          |
+| **CHEATSHEET.md**               | 11KB       | 621       | Quick reference               |
+| **QUICK_START.md**              | 11KB       | 544       | 5-minute getting started      |
+| **SUMMARY.md**                  | 9.7KB      | 435       | Installation summary          |
+| **TOTAL**                       | **~127KB** | **7,252** | Complete documentation        |
 
 ### Configuration Files
 
-| File                      | Purpose                                  |
-| ------------------------- | ---------------------------------------- |
+| File                                           | Purpose                                  |
+| ---------------------------------------------- | ---------------------------------------- |
 | **.github/agents/Frontend Developer.agent.md** | Agent definition & MCP guidance          |
-| **.env.example**          | Environment variables template (updated) |
+| **.env.example**                               | Environment variables template (updated) |
 
 ---
 
@@ -193,7 +193,7 @@
 .github/
 ├── agents/
 │   └── Frontend Developer.agent.md  ← Agent definition
-├── agent-docs/
+├── agent-docs/frontend/nuxt/
 │   ├── INDEX.md                     ← Start here for navigation
 │   ├── QUICK_START.md               ← Beginners start here
 │   ├── EXAMPLES.md                  ← Practical code examples
@@ -431,7 +431,7 @@
 
 ```bash
 # Send team to quick start
-.github/agent-docs/QUICK_START.md
+.github/agent-docs/frontend/nuxt/frontend/nuxt/QUICK_START.md
 ```
 
 **Step 2: Demo Session**

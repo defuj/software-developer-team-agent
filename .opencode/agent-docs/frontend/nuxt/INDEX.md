@@ -4,21 +4,21 @@ Navigasi lengkap untuk semua dokumentasi Frontend Developer Agent.
 
 ## 🚀 Quick Links
 
-| Kebutuhan             | Dokumen                                |
-| --------------------- | -------------------------------------- |
-| Baru mulai?           | [QUICK_START.md](./QUICK_START.md)     |
-| Butuh contoh?         | [EXAMPLES.md](./EXAMPLES.md)           |
-| API patterns?         | [API_PATTERNS.md](./API_PATTERNS.md)   |
-| Roadmap mentor 30 hari? | [MENTOR_CURRICULUM_30_DAYS.md](./MENTOR_CURRICULUM_30_DAYS.md) |
-| Checklist harian mentor? | [MENTOR_CURRICULUM_CHECKLIST.md](./MENTOR_CURRICULUM_CHECKLIST.md) |
-| Assignment mingguan mentor? | [MENTOR_WEEKLY_ASSIGNMENTS.md](./MENTOR_WEEKLY_ASSIGNMENTS.md) |
-| Cari command cepat?   | [CHEATSHEET.md](./CHEATSHEET.md)       |
-| Workflow lengkap?     | [WORKFLOWS.md](./WORKFLOWS.md)         |
-| MCP integration?      | [MCP_GUIDE.md](./MCP_GUIDE.md)         |
-| Testing agent?        | [TESTING_GUIDE.md](./TESTING_GUIDE.md) |
-| SOP tim?              | [TEAM_OPERATING_GUIDE.md](./TEAM_OPERATING_GUIDE.md) |
-| Overview lengkap?     | [README.md](./README.md)               |
-| Installation summary? | [SUMMARY.md](./SUMMARY.md)             |
+| Kebutuhan                   | Dokumen                                                            |
+| --------------------------- | ------------------------------------------------------------------ |
+| Baru mulai?                 | [QUICK_START.md](./QUICK_START.md)                                 |
+| Butuh contoh?               | [EXAMPLES.md](./EXAMPLES.md)                                       |
+| API patterns?               | [API_PATTERNS.md](./API_PATTERNS.md)                               |
+| Roadmap mentor 30 hari?     | [MENTOR_CURRICULUM_30_DAYS.md](./MENTOR_CURRICULUM_30_DAYS.md)     |
+| Checklist harian mentor?    | [MENTOR_CURRICULUM_CHECKLIST.md](./MENTOR_CURRICULUM_CHECKLIST.md) |
+| Assignment mingguan mentor? | [MENTOR_WEEKLY_ASSIGNMENTS.md](./MENTOR_WEEKLY_ASSIGNMENTS.md)     |
+| Cari command cepat?         | [CHEATSHEET.md](./CHEATSHEET.md)                                   |
+| Workflow lengkap?           | [WORKFLOWS.md](./WORKFLOWS.md)                                     |
+| MCP integration?            | [MCP_GUIDE.md](./MCP_GUIDE.md)                                     |
+| Testing agent?              | [TESTING_GUIDE.md](./TESTING_GUIDE.md)                             |
+| SOP tim?                    | [TEAM_OPERATING_GUIDE.md](./TEAM_OPERATING_GUIDE.md)               |
+| Overview lengkap?           | [README.md](./README.md)                                           |
+| Installation summary?       | [SUMMARY.md](./SUMMARY.md)                                         |
 
 ---
 
@@ -28,7 +28,7 @@ Navigasi lengkap untuk semua dokumentasi Frontend Developer Agent.
 .opencode/
 ├── agents/
 │   └── frontend-developer.md  # Agent definition
-└── agent-docs/                # Supporting documentation (this directory)
+└── agent-docs/frontend/nuxt/                # Supporting documentation (this directory)
     ├── INDEX.md               # This file - navigation hub
     ├── README.md              # Complete user guide
     ├── QUICK_START.md         # Get started in 5 minutes

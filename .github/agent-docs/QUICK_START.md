@@ -12,7 +12,7 @@ Agent Frontend Developer telah diinstall dengan lengkap:
 .github/
 ├── agents/
 │   └── Frontend Developer.agent.md  # Agent definition
-├── agent-docs/
+├── agent-docs/frontend/nuxt/
 │   ├── README.md                    # User guide lengkap
 │   ├── WORKFLOWS.md                 # 8 workflow examples
 │   ├── CHEATSHEET.md                # Quick reference
@@ -441,7 +441,7 @@ Atau tanya langsung:
 - ✅ **WORKFLOWS.md** - 8 detailed workflows (758 lines)
 - ✅ **CHEATSHEET.md** - Quick reference (621 lines)
 - ✅ **QUICK_START.md** - This guide
-- ✅ **agent-docs/** - Documentation set
+- ✅ **agent-docs/frontend/nuxt/** - Documentation set
 
 ### Skills Integrated
 

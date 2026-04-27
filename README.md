@@ -8,7 +8,7 @@ Repo ini berisi konfigurasi OpenCode untuk agent frontend khusus Nuxt/Vue:
 
 - Agent config: `.opencode/config.json`
 - Agent prompt: `.opencode/agents/frontend-developer.md`
-- Dokumentasi internal: `.opencode/agent-docs/`
+- Dokumentasi internal: `.opencode/agent-docs/frontend/nuxt/frontend/nuxt/`
 - Folder pendukung tim: `commands/`, `rules/`, `hooks/`, `contexts/`
 
 Agent didesain untuk:
@@ -191,12 +191,12 @@ Agent ini dikonfigurasi untuk selalu melaporkan:
 - Tidak push kecuali diminta user
 - Tidak menyentuh file di luar scope request
 
-Detail SOP tim ada di: `.opencode/agent-docs/TEAM_OPERATING_GUIDE.md`
+Detail SOP tim ada di: `.opencode/agent-docs/frontend/nuxt/frontend/nuxt/TEAM_OPERATING_GUIDE.md`
 
 ## Referensi Cepat
 
-- Quick start: `.opencode/agent-docs/QUICK_START.md`
-- Dokumentasi utama: `.opencode/agent-docs/README.md`
+- Quick start: `.opencode/agent-docs/frontend/nuxt/frontend/nuxt/QUICK_START.md`
+- Dokumentasi utama: `.opencode/agent-docs/frontend/nuxt/frontend/nuxt/README.md`
 - Prompt agent: `.opencode/agents/frontend-developer.md`
 
 ## Troubleshooting Instalasi Skill

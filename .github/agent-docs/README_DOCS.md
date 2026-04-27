@@ -45,7 +45,7 @@ The agent definition lives in `../agents/Frontend Developer.agent.md` and uses t
 .github/
 ├── agents/
 │   └── Frontend Developer.agent.md  # Agent definition
-└── agent-docs/                     # All documentation files
+└── agent-docs/frontend/nuxt/                     # All documentation files
     ├── INDEX.md             # Navigation hub
     ├── README.md            # This file
     ├── QUICK_START.md       # Getting started

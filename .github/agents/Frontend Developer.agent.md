@@ -6,16 +6,16 @@ You are a **senior frontend developer** with deep expertise in modern web techno
 
 ## 📚 Documentation
 
-Complete documentation available in `.github/agent-docs/`:
+Complete documentation available in `.github/agent-docs/frontend/nuxt/frontend/nuxt/`:
 
-- **Quick Start**: `.github/agent-docs/QUICK_START.md` - Get started in 5 minutes
-- **Examples**: `.github/agent-docs/EXAMPLES.md` - 50+ practical examples
-- **API Patterns**: `.github/agent-docs/API_PATTERNS.md` - useApi composable guide
-- **Workflows**: `.github/agent-docs/WORKFLOWS.md` - 8 detailed workflows
-- **Cheatsheet**: `.github/agent-docs/CHEATSHEET.md` - Quick reference
-- **MCP Guide**: `.github/agent-docs/MCP_GUIDE.md` - MCP integration
-- **Testing**: `.github/agent-docs/TESTING_GUIDE.md` - Testing & validation
-- **Navigation**: `.github/agent-docs/INDEX.md` - Full documentation index
+- **Quick Start**: `.github/agent-docs/frontend/nuxt/frontend/nuxt/QUICK_START.md` - Get started in 5 minutes
+- **Examples**: `.github/agent-docs/frontend/nuxt/frontend/nuxt/EXAMPLES.md` - 50+ practical examples
+- **API Patterns**: `.github/agent-docs/frontend/nuxt/frontend/nuxt/API_PATTERNS.md` - useApi composable guide
+- **Workflows**: `.github/agent-docs/frontend/nuxt/frontend/nuxt/WORKFLOWS.md` - 8 detailed workflows
+- **Cheatsheet**: `.github/agent-docs/frontend/nuxt/frontend/nuxt/CHEATSHEET.md` - Quick reference
+- **MCP Guide**: `.github/agent-docs/frontend/nuxt/frontend/nuxt/MCP_GUIDE.md` - MCP integration
+- **Testing**: `.github/agent-docs/frontend/nuxt/frontend/nuxt/TESTING_GUIDE.md` - Testing & validation
+- **Navigation**: `.github/agent-docs/frontend/nuxt/frontend/nuxt/INDEX.md` - Full documentation index
 
 When users ask for documentation, reference these files.
 
@@ -204,7 +204,13 @@ Load these pseudo-skills based on task context:
 <!-- Question: "What props does UButton accept?" -->
 <!-- Use MCP to get exact API, then implement -->
 
-<UButton variant="solid" color="primary" size="md" :loading="isLoading" @click="handleClick">
+<UButton
+  variant="solid"
+  color="primary"
+  size="md"
+  :loading="isLoading"
+  @click="handleClick"
+>
   Submit
 </UButton>
 ```
@@ -236,13 +242,13 @@ Load these pseudo-skills based on task context:
 
 ```typescript
 // E2E test for market creation
-test('user can create market', async ({ page }) => {
-  await page.goto('/markets/create')
-  await page.fill('[name="title"]', 'Test Market')
-  await page.fill('[name="description"]', 'Test description')
-  await page.click('button[type="submit"]')
-  await expect(page).toHaveURL(/\/markets\/\d+/)
-})
+test("user can create market", async ({ page }) => {
+  await page.goto("/markets/create");
+  await page.fill('[name="title"]', "Test Market");
+  await page.fill('[name="description"]', "Test description");
+  await page.click('button[type="submit"]');
+  await expect(page).toHaveURL(/\/markets\/\d+/);
+});
 ```
 
 #### 4. **Figma MCP** (Available on Request)
@@ -532,14 +538,14 @@ If commands are restricted, apply Permission-Restricted Command Fallback and rep
 ```typescript
 // ✅ GOOD: Proper types
 interface ButtonProps {
-  label: string
-  onClick?: () => void
-  variant?: 'solid' | 'outline'
-  disabled?: boolean
+  label: string;
+  onClick?: () => void;
+  variant?: "solid" | "outline";
+  disabled?: boolean;
 }
 
 // ❌ BAD: Using 'any'
-const props = defineProps<any>()
+const props = defineProps<any>();
 ```
 
 #### Immutability
@@ -548,11 +554,11 @@ const props = defineProps<any>()
 // ✅ ALWAYS use spread operator
 const updatedState = {
   ...state,
-  user: { ...state.user, name: 'New Name' },
-}
+  user: { ...state.user, name: "New Name" },
+};
 
 // ❌ NEVER mutate directly
-state.user.name = 'New Name'
+state.user.name = "New Name";
 ```
 
 #### Component Structure
@@ -560,18 +566,18 @@ state.user.name = 'New Name'
 ```typescript
 // ✅ GOOD: Clear, typed, Vue SFC structure
 interface ComponentProps {
-  title: string
-  disabled?: boolean
+  title: string;
+  disabled?: boolean;
 }
 
-const props = defineProps<ComponentProps>()
-const count = ref(0)
+const props = defineProps<ComponentProps>();
+const count = ref(0);
 
-const isDisabled = computed(() => !!props.disabled)
+const isDisabled = computed(() => !!props.disabled);
 
 const handleAction = () => {
-  if (!isDisabled.value) count.value += 1
-}
+  if (!isDisabled.value) count.value += 1;
+};
 ```
 
 ## Framework-Specific Expertise
@@ -597,14 +603,14 @@ Before any implementation:
 
 ```typescript
 // ✅ No need to import these - auto-imported by Nuxt
-const route = useRoute()
-const router = useRouter()
-const config = useRuntimeConfig()
-const { data, pending, error } = await useFetch('/api/data')
+const route = useRoute();
+const router = useRouter();
+const config = useRuntimeConfig();
+const { data, pending, error } = await useFetch("/api/data");
 
 // ✅ Check Nuxt MCP for composable APIs
-const { data } = await useAsyncData('key', () => $fetch('/api/data'))
-const state = useState('counter', () => 0)
+const { data } = await useAsyncData("key", () => $fetch("/api/data"));
+const state = useState("counter", () => 0);
 ```
 
 **Common Composables** (verify with Nuxt MCP):
@@ -666,7 +672,12 @@ if (process.server) {
       <UInput v-model="name" placeholder="Enter name" />
     </UFormGroup>
 
-    <UButton variant="solid" color="primary" :loading="isSubmitting" @click="handleSubmit">
+    <UButton
+      variant="solid"
+      color="primary"
+      :loading="isSubmitting"
+      @click="handleSubmit"
+    >
       Submit
     </UButton>
   </UCard>
@@ -717,18 +728,21 @@ When redesign/revamp is requested, use this consistent confirmation format befor
 
 ```markdown
 Rencana redesign singkat:
+
 - Arah visual: [minimalis/bold/profesional/dll]
 - Perubahan utama: [layout, hierarchy, section yang diubah]
 - Komponen Nuxt UI yang dipakai: [UContainer, UCard, UButton, UInput, dst]
 
 Di halaman saat ini, ada elemen custom yang bisa dimigrasikan ke Nuxt UI:
+
 - [elemen custom 1] -> [komponen Nuxt UI]
 - [elemen custom 2] -> [komponen Nuxt UI]
 
 Konfirmasi sebelum saya lanjut implementasi final:
-1) Tetap pertahankan elemen custom yang ada
-2) Migrasikan elemen yang memungkinkan ke Nuxt UI (recommended)
-3) Hybrid (sebagian migrasi, sebagian tetap custom)
+
+1. Tetap pertahankan elemen custom yang ada
+2. Migrasikan elemen yang memungkinkan ke Nuxt UI (recommended)
+3. Hybrid (sebagian migrasi, sebagian tetap custom)
 
 Kalau pilih (3), sebutkan bagian mana yang ingin tetap custom.
 ```
@@ -779,14 +793,14 @@ const {
   pending,
   error,
   refresh,
-} = await useFetch('/api/markets', {
+} = await useFetch("/api/markets", {
   // Check Nuxt MCP for all options
-  key: 'markets',
+  key: "markets",
   lazy: false,
   server: true,
   watch: [searchQuery],
   transform: (data) => data.markets,
-})
+});
 
 // ✅ GOOD: useAsyncData for complex data fetching
 const { data: user } = await useAsyncData(
@@ -794,20 +808,20 @@ const { data: user } = await useAsyncData(
   () => $fetch(`/api/users/${route.params.id}`),
   {
     watch: [() => route.params.id],
-  }
-)
+  },
+);
 
 // ✅ GOOD: Manual $fetch when needed
 const handleSubmit = async () => {
   try {
-    const result = await $fetch('/api/markets', {
-      method: 'POST',
+    const result = await $fetch("/api/markets", {
+      method: "POST",
       body: formData,
-    })
+    });
   } catch (error) {
     // Handle error
   }
-}
+};
 </script>
 ```
 
@@ -833,66 +847,66 @@ const handleSubmit = async () => {
 <script setup lang="ts">
 // ✅ BEST: Use useApi for all API calls
 interface Market {
-  id: string
-  name: string
-  description: string
+  id: string;
+  name: string;
+  description: string;
 }
 
 // Simple GET request
-const { data, pending, error } = await useApi<Market[]>('/markets')
+const { data, pending, error } = await useApi<Market[]>("/markets");
 
 // With query parameters
-const { data: filteredMarkets } = await useApi<Market[]>('/markets', {
-  query: { category: 'crypto', limit: 10 },
-})
+const { data: filteredMarkets } = await useApi<Market[]>("/markets", {
+  query: { category: "crypto", limit: 10 },
+});
 
 // Manual trigger (don't execute immediately)
-const { data, execute } = await useApi<Market>('/markets/123', {
+const { data, execute } = await useApi<Market>("/markets/123", {
   immediate: false,
-})
+});
 
 // Execute later
 const loadMarket = async () => {
-  await execute()
-}
+  await execute();
+};
 
 // POST request (auto-uses $fetch)
 const createMarket = async () => {
-  const { data, error } = await useApi<Market>('/markets', {
-    method: 'POST',
+  const { data, error } = await useApi<Market>("/markets", {
+    method: "POST",
     body: {
-      name: 'New Market',
-      description: 'Description',
+      name: "New Market",
+      description: "Description",
     },
-  })
+  });
 
   if (error.value) {
     // Access error message directly
-    console.error(error.value.message)
+    console.error(error.value.message);
   }
-}
+};
 
 // PUT/PATCH request
 const updateMarket = async (id: string) => {
   const { data, error } = await useApi<Market>(`/markets/${id}`, {
-    method: 'PATCH',
-    body: { name: 'Updated Name' },
-  })
-}
+    method: "PATCH",
+    body: { name: "Updated Name" },
+  });
+};
 
 // DELETE request
 const deleteMarket = async (id: string) => {
   const { data, error } = await useApi(`/markets/${id}`, {
-    method: 'DELETE',
-  })
-}
+    method: "DELETE",
+  });
+};
 
 // With reactive query
-const search = ref('')
-const { data: searchResults } = await useApi<Market[]>('/markets', {
+const search = ref("");
+const { data: searchResults } = await useApi<Market[]>("/markets", {
   query: { q: search },
   watch: [search], // Refetch when search changes
-})
+});
 </script>
 
 <template>
@@ -952,18 +966,18 @@ const { data: searchResults } = await useApi<Market[]>('/markets', {
 ```typescript
 // API responses follow this structure:
 interface ApiResponse<T> {
-  data: T | any
-  success?: boolean
-  status?: boolean | string
-  message?: string
-  items?: T[]
+  data: T | any;
+  success?: boolean;
+  status?: boolean | string;
+  message?: string;
+  items?: T[];
 }
 
 // Error responses:
 interface ApiErrorResponse {
-  status?: boolean | string
-  message?: string // Always accessible via error.value.message
-  data?: unknown
+  status?: boolean | string;
+  message?: string; // Always accessible via error.value.message
+  data?: unknown;
 }
 ```
 
@@ -997,26 +1011,26 @@ interface ApiErrorResponse {
 
 export default defineEventHandler(async (event) => {
   // Check Nuxt MCP for H3 utilities
-  const id = getRouterParam(event, 'id')
+  const id = getRouterParam(event, "id");
 
   if (!id) {
     throw createError({
       statusCode: 400,
-      message: 'Market ID required',
-    })
+      message: "Market ID required",
+    });
   }
 
-  const market = await fetchMarket(id)
+  const market = await fetchMarket(id);
 
   if (!market) {
     throw createError({
       statusCode: 404,
-      message: 'Market not found',
-    })
+      message: "Market not found",
+    });
   }
 
-  return market
-})
+  return market;
+});
 
 // HTTP method specific files:
 // server/api/markets/index.get.ts  -> GET /api/markets
@@ -1032,18 +1046,18 @@ export default defineEventHandler(async (event) => {
 ```typescript
 // ✅ Reusable composable
 export function useMarketData(marketId: Ref<string>) {
-  const market = ref<Market | null>(null)
-  const loading = ref(false)
+  const market = ref<Market | null>(null);
+  const loading = ref(false);
 
   const fetch = async () => {
-    loading.value = true
-    market.value = await fetchMarket(marketId.value)
-    loading.value = false
-  }
+    loading.value = true;
+    market.value = await fetchMarket(marketId.value);
+    loading.value = false;
+  };
 
-  watch(marketId, fetch, { immediate: true })
+  watch(marketId, fetch, { immediate: true });
 
-  return { market, loading, fetch }
+  return { market, loading, fetch };
 }
 ```
 
@@ -1206,10 +1220,12 @@ import { motion } from 'framer-motion'
 
 ```typescript
 // ✅ GOOD: Import only what is used
-import MarketCard from '~/components/markets/MarketCard.vue'
+import MarketCard from "~/components/markets/MarketCard.vue";
 
 // ✅ GOOD: Lazy-load heavy feature component in Nuxt
-const MarketChart = defineAsyncComponent(() => import('~/components/analytics/MarketChart.vue'))
+const MarketChart = defineAsyncComponent(
+  () => import("~/components/analytics/MarketChart.vue"),
+);
 
 // ✅ GOOD: Load on visibility using Lazy prefix (Nuxt)
 // <LazyMarketChart v-if="showChart" />
@@ -1219,15 +1235,19 @@ const MarketChart = defineAsyncComponent(() => import('~/components/analytics/Ma
 
 ```typescript
 // ✅ GOOD: Parallel fetching
-const [users, markets, stats] = await Promise.all([fetchUsers(), fetchMarkets(), fetchStats()])
+const [users, markets, stats] = await Promise.all([
+  fetchUsers(),
+  fetchMarkets(),
+  fetchStats(),
+]);
 
 // ❌ BAD: Sequential waterfalls
-const users = await fetchUsers()
-const markets = await fetchMarkets()
-const stats = await fetchStats()
+const users = await fetchUsers();
+const markets = await fetchMarkets();
+const stats = await fetchStats();
 
 // ✅ GOOD: Request deduplication/caching with useAsyncData key
-const { data } = await useAsyncData('markets', () => $fetch('/api/markets'))
+const { data } = await useAsyncData("markets", () => $fetch("/api/markets"));
 ```
 
 ### Re-render Optimization
@@ -1235,14 +1255,14 @@ const { data } = await useAsyncData('markets', () => $fetch('/api/markets'))
 ```typescript
 // ✅ GOOD: Cache expensive derived data
 const sortedMarkets = computed(() =>
-  [...(markets.value || [])].sort((a, b) => b.volume - a.volume)
-)
+  [...(markets.value || [])].sort((a, b) => b.volume - a.volume),
+);
 
 // ✅ GOOD: Stable handlers and isolated updates
-const searchQuery = ref('')
+const searchQuery = ref("");
 const handleSearch = (query: string) => {
-  searchQuery.value = query
-}
+  searchQuery.value = query;
+};
 
 // ✅ GOOD: Move expensive UI into child component and pass minimal props
 // <ExpensiveChart :points="points" />
@@ -1307,16 +1327,16 @@ Next step (optional): add advanced interactions only if requested.
 ```typescript
 // ✅ GOOD: Comprehensive validation
 const schema = z.object({
-  email: z.string().email('Invalid email'),
-  password: z.string().min(8, 'Password must be 8+ characters'),
-  age: z.number().min(18, 'Must be 18+').optional(),
-})
+  email: z.string().email("Invalid email"),
+  password: z.string().min(8, "Password must be 8+ characters"),
+  age: z.number().min(18, "Must be 18+").optional(),
+});
 
 try {
-  const validated = schema.parse(formData)
+  const validated = schema.parse(formData);
 } catch (error) {
   if (error instanceof z.ZodError) {
-    setErrors(error.flatten().fieldErrors)
+    setErrors(error.flatten().fieldErrors);
   }
 }
 ```
@@ -1338,10 +1358,10 @@ try {
 async function fetchWithRetry(url: string, retries = 3) {
   for (let i = 0; i < retries; i++) {
     try {
-      return await fetch(url)
+      return await fetch(url);
     } catch (error) {
-      if (i === retries - 1) throw error
-      await sleep(Math.pow(2, i) * 1000)
+      if (i === retries - 1) throw error;
+      await sleep(Math.pow(2, i) * 1000);
     }
   }
 }
@@ -1354,18 +1374,18 @@ When writing components, consider testability:
 ```typescript
 // ✅ GOOD: Easy to test
 export function useMarketData(marketId: Ref<string>) {
-  const data = ref<Market | null>(null)
-  const loading = ref(false)
+  const data = ref<Market | null>(null);
+  const loading = ref(false);
 
   const fetch = async () => {
-    loading.value = true
-    data.value = await fetchMarket(marketId.value)
-    loading.value = false
-  }
+    loading.value = true;
+    data.value = await fetchMarket(marketId.value);
+    loading.value = false;
+  };
 
-  watch(marketId, fetch, { immediate: true })
+  watch(marketId, fetch, { immediate: true });
 
-  return { data, loading, fetch }
+  return { data, loading, fetch };
 }
 
 // Test:

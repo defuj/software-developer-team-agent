@@ -130,14 +130,14 @@ Gunakan useApi composable (app/composables/useApi.ts)
 ```vue
 <script setup lang="ts">
 interface User {
-  id: string
-  name: string
-  email: string
-  role: 'admin' | 'user'
+  id: string;
+  name: string;
+  email: string;
+  role: "admin" | "user";
 }
 
-const page = ref(1)
-const search = ref('')
+const page = ref(1);
+const search = ref("");
 
 // ✅ BEST: Use useApi for automatic auth + error handling
 const {
@@ -145,39 +145,39 @@ const {
   pending,
   error,
   refresh,
-} = await useApi<User[]>('/users', {
+} = await useApi<User[]>("/users", {
   query: { page, search },
   watch: [page, search],
-})
+});
 
 // Access users from response.data
-const users = computed(() => response.value?.data || [])
+const users = computed(() => response.value?.data || []);
 
 const handleDelete = async (id: string) => {
   // Optimistic update
-  const originalUsers = users.value
-  users.value = users.value.filter((u) => u.id !== id)
+  const originalUsers = users.value;
+  users.value = users.value.filter((u) => u.id !== id);
 
   // Use useApi for delete
   const { error: deleteError } = await useApi(`/users/${id}`, {
-    method: 'DELETE',
-  })
+    method: "DELETE",
+  });
 
   if (deleteError.value) {
     // Rollback on error
-    users.value = originalUsers
+    users.value = originalUsers;
     useToast().add({
-      title: 'Error',
+      title: "Error",
       description: deleteError.value.message,
-      color: 'red',
-    })
+      color: "red",
+    });
   } else {
     useToast().add({
-      title: 'Success',
-      description: 'User deleted successfully',
-    })
+      title: "Success",
+      description: "User deleted successfully",
+    });
   }
-}
+};
 </script>
 
 <template>
@@ -210,7 +210,9 @@ const handleDelete = async (id: string) => {
           </template>
 
           <template #footer>
-            <UButton color="red" variant="ghost" @click="handleDelete(user.id)"> Delete </UButton>
+            <UButton color="red" variant="ghost" @click="handleDelete(user.id)">
+              Delete
+            </UButton>
           </template>
         </UCard>
       </div>
@@ -231,10 +233,10 @@ const {
   pending,
   error,
   refresh,
-} = await useFetch<User[]>('/api/users', {
+} = await useFetch<User[]>("/api/users", {
   query: { page, search },
   watch: [page, search],
-})
+});
 </script>
 ```
 
@@ -379,43 +381,43 @@ const handleDelete = async (id: string) => {
 
 ```vue
 <script setup lang="ts">
-import { z } from 'zod'
+import { z } from "zod";
 
 const schema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
   avatar: z.instanceof(File).optional(),
-})
+});
 
-type FormData = z.infer<typeof schema>
+type FormData = z.infer<typeof schema>;
 
 const state = reactive<FormData>({
-  name: '',
-  email: '',
+  name: "",
+  email: "",
   avatar: undefined,
-})
+});
 
-const { pending, error, execute } = useFetch('/api/profile', {
-  method: 'POST',
+const { pending, error, execute } = useFetch("/api/profile", {
+  method: "POST",
   body: state,
   immediate: false,
-})
+});
 
 const onSubmit = async () => {
-  await execute()
+  await execute();
   if (!error.value) {
-    useToast().add({ title: 'Profile updated!' })
+    useToast().add({ title: "Profile updated!" });
   }
-}
+};
 
 // Auto-save draft
 watchDebounced(
   state,
   () => {
-    localStorage.setItem('profile-draft', JSON.stringify(state))
+    localStorage.setItem("profile-draft", JSON.stringify(state));
   },
-  { debounce: 1000 }
-)
+  { debounce: 1000 },
+);
 </script>
 
 <template>
@@ -475,63 +477,63 @@ watchDebounced(
 
 ```typescript
 // app/stores/cart.ts
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia";
 
 interface CartItem {
-  id: string
-  name: string
-  price: number
-  quantity: number
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
 }
 
-export const useCartStore = defineStore('cart', () => {
-  const items = ref<CartItem[]>([])
+export const useCartStore = defineStore("cart", () => {
+  const items = ref<CartItem[]>([]);
 
   const total = computed(() =>
-    items.value.reduce((sum, item) => sum + item.price * item.quantity, 0)
-  )
+    items.value.reduce((sum, item) => sum + item.price * item.quantity, 0),
+  );
 
-  const addItem = (product: Omit<CartItem, 'quantity'>) => {
-    const existing = items.value.find((i) => i.id === product.id)
+  const addItem = (product: Omit<CartItem, "quantity">) => {
+    const existing = items.value.find((i) => i.id === product.id);
     if (existing) {
-      existing.quantity++
+      existing.quantity++;
     } else {
-      items.value.push({ ...product, quantity: 1 })
+      items.value.push({ ...product, quantity: 1 });
     }
-  }
+  };
 
   const removeItem = (id: string) => {
-    items.value = items.value.filter((i) => i.id !== id)
-  }
+    items.value = items.value.filter((i) => i.id !== id);
+  };
 
   const updateQuantity = (id: string, quantity: number) => {
-    const item = items.value.find((i) => i.id === id)
+    const item = items.value.find((i) => i.id === id);
     if (item) {
-      item.quantity = Math.max(0, quantity)
+      item.quantity = Math.max(0, quantity);
       if (item.quantity === 0) {
-        removeItem(id)
+        removeItem(id);
       }
     }
-  }
+  };
 
   // Persist to localStorage
   watch(
     items,
     (newItems) => {
-      localStorage.setItem('cart', JSON.stringify(newItems))
+      localStorage.setItem("cart", JSON.stringify(newItems));
     },
-    { deep: true }
-  )
+    { deep: true },
+  );
 
   // Sync across tabs
   if (process.client) {
-    const channel = new BroadcastChannel('cart-sync')
+    const channel = new BroadcastChannel("cart-sync");
     channel.onmessage = (event) => {
-      items.value = event.data
-    }
+      items.value = event.data;
+    };
     watch(items, (newItems) => {
-      channel.postMessage(newItems)
-    })
+      channel.postMessage(newItems);
+    });
   }
 
   return {
@@ -540,11 +542,11 @@ export const useCartStore = defineStore('cart', () => {
     addItem,
     removeItem,
     updateQuantity,
-  }
-})
+  };
+});
 
 // app/composables/useCart.ts
-export const useCart = () => useCartStore()
+export const useCart = () => useCartStore();
 ```
 
 ---
@@ -578,10 +580,10 @@ export const useCart = () => useCartStore()
 ```vue
 <!-- Before -->
 <script setup lang="ts">
-import ProductCard from '~/components/ProductCard.vue'
-import HeavyChart from '~/components/HeavyChart.vue'
+import ProductCard from "~/components/ProductCard.vue";
+import HeavyChart from "~/components/HeavyChart.vue";
 
-const { data: products } = await useFetch('/api/products')
+const { data: products } = await useFetch("/api/products");
 </script>
 
 <template>
@@ -595,13 +597,15 @@ const { data: products } = await useFetch('/api/products')
 <!-- After -->
 <script setup lang="ts">
 // Lazy load heavy component
-const HeavyChart = defineAsyncComponent(() => import('~/components/HeavyChart.vue'))
+const HeavyChart = defineAsyncComponent(
+  () => import("~/components/HeavyChart.vue"),
+);
 
 // Fetch with caching
-const { data: products } = await useFetch('/api/products', {
-  key: 'products-list',
+const { data: products } = await useFetch("/api/products", {
+  key: "products-list",
   getCachedData: (key) => useNuxtData(key).data,
-})
+});
 </script>
 
 <template>
@@ -609,7 +613,13 @@ const { data: products } = await useFetch('/api/products', {
   <UVirtualScroll :items="products" :item-height="200">
     <template #default="{ item: product }">
       <!-- Optimized image dengan Nuxt Image -->
-      <NuxtImg :src="product.image" width="400" height="300" loading="lazy" format="webp" />
+      <NuxtImg
+        :src="product.image"
+        width="400"
+        height="300"
+        loading="lazy"
+        format="webp"
+      />
       <ProductCard :product="product" />
     </template>
   </UVirtualScroll>
@@ -679,7 +689,12 @@ Target: WCAG 2.1 Level AA compliance
 
 ```vue
 <template>
-  <div role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc">
+  <div
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    aria-describedby="modal-desc"
+  >
     <h2 id="modal-title">{{ title }}</h2>
     <p id="modal-desc">{{ description }}</p>
   </div>
@@ -690,15 +705,15 @@ Target: WCAG 2.1 Level AA compliance
 ### 2. Implement focus trap
 
 ```typescript
-import { useFocusTrap } from '@vueuse/integrations/useFocusTrap'
+import { useFocusTrap } from "@vueuse/integrations/useFocusTrap";
 
-const modalRef = ref<HTMLElement>()
-const { activate, deactivate } = useFocusTrap(modalRef)
+const modalRef = ref<HTMLElement>();
+const { activate, deactivate } = useFocusTrap(modalRef);
 
 watch(isOpen, (open) => {
-  if (open) activate()
-  else deactivate()
-})
+  if (open) activate();
+  else deactivate();
+});
 ```
 
 ### 3. Add accessible close button
@@ -760,11 +775,11 @@ Timestamp generated differently on server vs client:
 ```vue
 <script setup lang="ts">
 // Option 1: Client-only rendering
-const timestamp = ref('')
+const timestamp = ref("");
 
 onMounted(() => {
-  timestamp.value = new Date().toLocaleString()
-})
+  timestamp.value = new Date().toLocaleString();
+});
 </script>
 
 <template>
@@ -777,7 +792,7 @@ onMounted(() => {
 ```vue
 <!-- Option 2: Use consistent format -->
 <script setup lang="ts">
-const timestamp = new Date().toISOString()
+const timestamp = new Date().toISOString();
 </script>
 
 <template>
@@ -951,6 +966,6 @@ Setelah familiar dengan examples di atas:
 **Happy Coding! 🚀**
 
 Untuk pertanyaan atau feedback:
-- Check dokumentasi lengkap di `.github/agent-docs/`
+- Check dokumentasi lengkap di `.github/agent-docs/frontend/nuxt/frontend/nuxt/`
 - Atau mention `@frontend` dengan pertanyaan Anda
 ```

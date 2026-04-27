@@ -4,18 +4,18 @@ Navigasi lengkap untuk semua dokumentasi Frontend Developer Agent.
 
 ## 🚀 Quick Links
 
-| Kebutuhan             | Dokumen                                |
-| --------------------- | -------------------------------------- |
-| Baru mulai?           | [QUICK_START.md](./QUICK_START.md)     |
-| Butuh contoh?         | [EXAMPLES.md](./EXAMPLES.md)           |
-| API patterns?         | [API_PATTERNS.md](./API_PATTERNS.md)   |
-| Cari command cepat?   | [CHEATSHEET.md](./CHEATSHEET.md)       |
-| Workflow lengkap?     | [WORKFLOWS.md](./WORKFLOWS.md)         |
-| MCP integration?      | [MCP_GUIDE.md](./MCP_GUIDE.md)         |
-| Testing agent?        | [TESTING_GUIDE.md](./TESTING_GUIDE.md) |
+| Kebutuhan             | Dokumen                                              |
+| --------------------- | ---------------------------------------------------- |
+| Baru mulai?           | [QUICK_START.md](./QUICK_START.md)                   |
+| Butuh contoh?         | [EXAMPLES.md](./EXAMPLES.md)                         |
+| API patterns?         | [API_PATTERNS.md](./API_PATTERNS.md)                 |
+| Cari command cepat?   | [CHEATSHEET.md](./CHEATSHEET.md)                     |
+| Workflow lengkap?     | [WORKFLOWS.md](./WORKFLOWS.md)                       |
+| MCP integration?      | [MCP_GUIDE.md](./MCP_GUIDE.md)                       |
+| Testing agent?        | [TESTING_GUIDE.md](./TESTING_GUIDE.md)               |
 | SOP tim?              | [TEAM_OPERATING_GUIDE.md](./TEAM_OPERATING_GUIDE.md) |
-| Overview lengkap?     | [README.md](./README.md)               |
-| Installation summary? | [SUMMARY.md](./SUMMARY.md)             |
+| Overview lengkap?     | [README.md](./README.md)                             |
+| Installation summary? | [SUMMARY.md](./SUMMARY.md)                           |
 
 ---
 
@@ -25,7 +25,7 @@ Navigasi lengkap untuk semua dokumentasi Frontend Developer Agent.
 .github/
 ├── agents/
 │   └── Frontend Developer.agent.md  # Agent definition
-└── agent-docs/                # Supporting documentation (this directory)
+└── agent-docs/frontend/nuxt/                # Supporting documentation (this directory)
     ├── INDEX.md               # This file - navigation hub
     ├── README.md              # Complete user guide
     ├── QUICK_START.md         # Get started in 5 minutes
@@ -40,7 +40,7 @@ Navigasi lengkap untuk semua dokumentasi Frontend Developer Agent.
     └── COMPLETION_REPORT.md   # Project completion
 ```
 
-**Important:** Only `Frontend Developer.agent.md` appears in GitHub agent list. All files in `agent-docs/` are supporting documentation.
+**Important:** Only `Frontend Developer.agent.md` appears in GitHub agent list. All files in `agent-docs/frontend/nuxt/` are supporting documentation.
 
 ---
 

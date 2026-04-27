@@ -14,7 +14,7 @@ Selamat! Anda telah berhasil menginstall **Frontend Developer Agent** yang lengk
 .github/
 ├── agents/
 │   └── Frontend Developer.agent.md  # Agent definition
-├── agent-docs/
+├── agent-docs/frontend/nuxt/
 │   ├── README.md                    # User guide
 │   ├── WORKFLOWS.md                 # Workflows
 │   ├── CHEATSHEET.md                # Quick reference
@@ -37,6 +37,7 @@ Selamat! Anda telah berhasil menginstall **Frontend Developer Agent** yang lengk
 ### 1. **Frontend Developer.agent.md** (Core Agent)
 
 **Isi:**
+
 - Core identity & responsibilities
 - Technical skills integration (10+ skills)
 - Memory management system
@@ -47,7 +48,8 @@ Selamat! Anda telah berhasil menginstall **Frontend Developer Agent** yang lengk
 - Performance optimization strategies
 - Quality checklist
 
-**Kapan Baca:** 
+**Kapan Baca:**
+
 - Untuk memahami bagaimana agent bekerja internally
 - Saat ingin customize agent behavior
 - Reference untuk advanced usage
@@ -57,6 +59,7 @@ Selamat! Anda telah berhasil menginstall **Frontend Developer Agent** yang lengk
 ### 2. **README.md** (12KB - Complete Guide)
 
 **Isi:**
+
 - Cara menggunakan agent (2 methods)
 - 10+ skills integration explanation
 - 5 detailed usage examples
@@ -67,6 +70,7 @@ Selamat! Anda telah berhasil menginstall **Frontend Developer Agent** yang lengk
 - Team collaboration guide
 
 **Kapan Baca:**
+
 - **FIRST TIME** - Baca ini terlebih dahulu!
 - Untuk memahami full capabilities
 - Saat butuh troubleshooting
@@ -78,6 +82,7 @@ Selamat! Anda telah berhasil menginstall **Frontend Developer Agent** yang lengk
 
 **Isi:**
 8 complete workflows dengan step-by-step:
+
 1. ✅ Membuat Component Library
 2. ✅ Performance Optimization
 3. ✅ Implementasi Design Figma
@@ -88,6 +93,7 @@ Selamat! Anda telah berhasil menginstall **Frontend Developer Agent** yang lengk
 8. ✅ Analytics Integration
 
 **Kapan Baca:**
+
 - Saat mulai task baru yang complex
 - Butuh guidance untuk specific scenario
 - Ingin learn best practices workflows
@@ -98,6 +104,7 @@ Selamat! Anda telah berhasil menginstall **Frontend Developer Agent** yang lengk
 ### 4. **CHEATSHEET.md** (11KB - Quick Reference)
 
 **Isi:**
+
 - Quick commands & patterns
 - Component creation templates
 - Styling & design shortcuts
@@ -109,6 +116,7 @@ Selamat! Anda telah berhasil menginstall **Frontend Developer Agent** yang lengk
 - Pro tips
 
 **Kapan Baca:**
+
 - **KEEP OPEN** saat coding!
 - Quick lookup untuk commands
 - Refresh memory on patterns
@@ -119,6 +127,7 @@ Selamat! Anda telah berhasil menginstall **Frontend Developer Agent** yang lengk
 ### 5. **QUICK_START.md** (11KB - Getting Started)
 
 **Isi:**
+
 - 3-step quick start
 - 5 example use cases
 - Skills reference
@@ -130,6 +139,7 @@ Selamat! Anda telah berhasil menginstall **Frontend Developer Agent** yang lengk
 - Next steps
 
 **Kapan Baca:**
+
 - **START HERE** jika baru pertama kali
 - Quick onboarding guide
 - Share dengan new team members
@@ -140,6 +150,7 @@ Selamat! Anda telah berhasil menginstall **Frontend Developer Agent** yang lengk
 ### 6. **Frontend Developer.agent.md** (Agent Definition)
 
 **Isi:**
+
 ```json
 {
   "agent": {
@@ -155,6 +166,7 @@ Selamat! Anda telah berhasil menginstall **Frontend Developer Agent** yang lengk
 ```
 
 **Customize:**
+
 - Change `mode` to `"primary"` untuk default agent
 - Adjust `temperature` untuk creativity level
 - Modify `permissions` untuk control access
@@ -195,12 +207,14 @@ Selamat! Anda telah berhasil menginstall **Frontend Developer Agent** yang lengk
 Agent terintegrasi dengan **10+ professional skills**:
 
 **Core Skills (Auto-loaded):**
+
 - ✅ coding-standards
 - ✅ frontend-patterns
 - ✅ frontend-design
 - ✅ web-design-guidelines
 
 **Contextual Skills (On-demand):**
+
 - ✅ nuxt-ui
 - ✅ vercel-composition-patterns
 - ✅ building-components
@@ -210,6 +224,7 @@ Agent terintegrasi dengan **10+ professional skills**:
 ### 🧠 Memory Management
 
 Agent menggunakan **progressive context building**:
+
 - Tracks session context
 - Remembers user preferences
 - Maintains project patterns
@@ -219,6 +234,7 @@ Agent menggunakan **progressive context building**:
 ### 🎯 Quality Standards
 
 Agent ensures:
+
 - ✅ TypeScript strict mode (no `any`)
 - ✅ Immutability (spread operators)
 - ✅ Accessibility (WCAG 2.1 AA)
@@ -231,6 +247,7 @@ Agent ensures:
 ### 🎨 Framework Expertise
 
 Supports:
+
 - **Nuxt 4** (primary - current project)
 - **Vue 3** Composition API
 - TypeScript strict mode
@@ -241,21 +258,25 @@ Supports:
 ## 📚 Recommended Learning Path
 
 ### Day 1: Getting Started
+
 1. ✅ Read QUICK_START.md (this takes 10 minutes)
 2. ✅ Test agent dengan simple request
 3. ✅ Try 2-3 examples dari QUICK_START
 
 ### Day 2: Deep Dive
+
 1. ✅ Read README.md completely
 2. ✅ Try workflow dari WORKFLOWS.md
 3. ✅ Bookmark CHEATSHEET.md
 
 ### Week 1: Integration
+
 1. ✅ Use agent untuk daily tasks
 2. ✅ Explore different workflows
 3. ✅ Customize agent untuk project needs
 
 ### Week 2: Mastery
+
 1. ✅ Read Frontend Developer.agent.md untuk understand internals
 2. ✅ Create custom workflows
 3. ✅ Share dengan team
@@ -265,27 +286,32 @@ Supports:
 ## 🎓 Example Use Cases
 
 ### 1. Build Component
+
 ```bash
 @frontend-developer Buat MarketCard component untuk display market data
 ```
 
 ### 2. Optimize Performance
+
 ```bash
 @frontend-developer Dashboard lambat dengan 500+ items, optimize please
 ```
 
 ### 3. Implement Design
+
 ```bash
 @frontend-developer Implement hero section dengan aesthetic futuristic
 [attach design screenshot]
 ```
 
 ### 4. Add Accessibility
+
 ```bash
 @frontend-developer Audit Modal.vue untuk accessibility issues
 ```
 
 ### 5. Review Code
+
 ```bash
 @frontend-developer Review CreateMarketForm.vue untuk best practices
 ```
@@ -302,7 +328,7 @@ Update your runtime agent configuration so it references `.github/agents/Fronten
 {
   "agent": {
     "frontend": {
-      "mode": "primary"  // Change to primary agent
+      "mode": "primary" // Change to primary agent
     }
   }
 }
@@ -329,10 +355,10 @@ Update your runtime agent configuration so it references `.github/agents/Fronten
   "agent": {
     "frontend": {
       "permission": {
-        "edit": "ask",        // Ask before editing
+        "edit": "ask", // Ask before editing
         "bash": {
-          "*": "deny",        // Deny all bash
-          "npm *": "allow"    // Allow npm only
+          "*": "deny", // Deny all bash
+          "npm *": "allow" // Allow npm only
         }
       }
     }
@@ -377,6 +403,7 @@ opencode
 ## 🆘 Get Help
 
 ### Documentation
+
 - **Quick Start:** QUICK_START.md
 - **Full Guide:** README.md
 - **Workflows:** WORKFLOWS.md
@@ -384,6 +411,7 @@ opencode
 - **Internals:** Frontend Developer.agent.md
 
 ### Ask Agent
+
 ```bash
 @frontend-developer How do I [question]?
 @frontend-developer Explain [concept]
@@ -391,6 +419,7 @@ opencode
 ```
 
 ### Community
+
 - OpenCode Discord: https://opencode.ai/discord
 - OpenCode Docs: https://opencode.ai/docs
 - GitHub: https://github.com/anomalyco/opencode
@@ -409,6 +438,7 @@ Pastikan semuanya berfungsi:
 - [ ] Examples work
 
 Test command:
+
 ```bash
 @frontend-developer Analyze this project dan suggest next steps
 ```
@@ -426,23 +456,26 @@ Anda sekarang memiliki:
 ✅ **Comprehensive guides** untuk quick reference  
 ✅ **Memory management** untuk smart assistance  
 ✅ **Quality standards** enforcement  
-✅ **Framework expertise** (Nuxt, Vue)  
+✅ **Framework expertise** (Nuxt, Vue)
 
 ---
 
 ## 🚀 Next Actions
 
 ### Immediate (Now)
+
 ```bash
 @frontend-developer Hello! Let's start building.
 ```
 
 ### Today
+
 - [ ] Read QUICK_START.md
 - [ ] Try 2-3 example commands
 - [ ] Bookmark CHEATSHEET.md
 
 ### This Week
+
 - [ ] Read README.md
 - [ ] Try a workflow dari WORKFLOWS.md
 - [ ] Integrate ke daily workflow
@@ -459,7 +492,7 @@ Your Frontend Developer Agent is ready to help you build:
 🎨 **Stunning** designs  
 ♿ **Accessible** interfaces  
 🔒 **Secure** code  
-🧪 **Well-tested** features  
+🧪 **Well-tested** features
 
 **Start building amazing things!** 🚀
 
@@ -470,6 +503,6 @@ Your Frontend Developer Agent is ready to help you build:
 ---
 
 **Frontend Developer Agent v1.0.0**  
-*Created with ❤️ for exceptional development experience*
+_Created with ❤️ for exceptional development experience_
 
-*April 2026*
+_April 2026_

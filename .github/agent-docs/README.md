@@ -288,9 +288,9 @@ Mulai dari Phase 1 dulu.
 
 ```yaml
 Session Context:
-  current_phase: 'Phase 1'
-  completed_components: ['MarketGrid']
-  next_steps: ['Add filtering']
+  current_phase: "Phase 1"
+  completed_components: ["MarketGrid"]
+  next_steps: ["Add filtering"]
 ```
 
 ---
@@ -346,7 +346,7 @@ Update approach kamu.
 
 Anda bisa create custom workflow file:
 
-**.github/agent-docs/WORKFLOWS.md**
+**.github/agent-docs/frontend/nuxt/frontend/nuxt/WORKFLOWS.md**
 
 ```markdown
 # Component Creation Workflow
@@ -363,7 +363,7 @@ Anda bisa create custom workflow file:
 Kemudian:
 
 ```
-@frontend-developer Follow workflow di .github/agent-docs/WORKFLOWS.md untuk buat SearchBar component
+@frontend-developer Follow workflow di .github/agent-docs/frontend/nuxt/frontend/nuxt/WORKFLOWS.md untuk buat SearchBar component
 ```
 
 ### Team Collaboration
