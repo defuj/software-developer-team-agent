@@ -32,10 +32,42 @@
     }
   },
   "agent": {
+    "leader": {
+      "description": "IT Leader & Technical Project Manager — analyzes requirements, designs architecture, decomposes tasks, delegates to subagents, and unifies outputs",
+      "mode": "primary",
+      "prompt": "{file:.opencode/agents/it-leader.md}",
+      "model": "anthropic/claude-sonnet-4-20250514",
+      "temperature": 0.4,
+      "color": "#8b5cf6",
+      "permission": {
+        "edit": "allow",
+        "bash": {
+          "*": "ask",
+          "npm *": "allow",
+          "pnpm *": "allow",
+          "bun *": "allow",
+          "yarn *": "allow",
+          "git status": "allow",
+          "git diff": "allow",
+          "git log*": "allow",
+          "npx playwright*": "allow"
+        },
+        "webfetch": "allow",
+        "skill": {
+          "*": "allow"
+        },
+        "mcp": {
+          "nuxt": "allow",
+          "nuxt-ui": "allow",
+          "figma": "ask",
+          "playwright": "allow"
+        }
+      }
+    },
     "frontend": {
-      "description": "Expert frontend developer for Nuxt.js, Vue, and modern web technologies with MCP integration",
+      "description": "Expert frontend developer for Nuxt.js, Vue, and modern web technologies with MCP integration (subagent of IT Leader)",
       "mode": "subagent",
-      "prompt": "{file:.opencode/agents/frontend-developer.md}",
+      "prompt": "{file:.opencode/agents/nuxt-frontend-developer.md}",
       "model": "anthropic/claude-sonnet-4-20250514",
       "temperature": 0.4,
       "color": "#3b82f6",
@@ -62,6 +94,32 @@
           "figma": "ask",
           "playwright": "allow"
         }
+      }
+    },
+    "backend": {
+      "description": "Expert backend developer for Node.js, Express, Prisma, and PostgreSQL (subagent of IT Leader)",
+      "mode": "subagent",
+      "prompt": "{file:.opencode/agents/node-backend-developer.md}",
+      "model": "anthropic/claude-sonnet-4-20250514",
+      "temperature": 0.4,
+      "color": "#10b981",
+      "permission": {
+        "edit": "allow",
+        "bash": {
+          "*": "ask",
+          "npm *": "allow",
+          "pnpm *": "allow",
+          "bun *": "allow",
+          "yarn *": "allow",
+          "git status": "allow",
+          "git diff": "allow",
+          "git log*": "allow"
+        },
+        "webfetch": "allow",
+        "skill": {
+          "*": "allow"
+        },
+        "mcp": {}
       }
     }
   }

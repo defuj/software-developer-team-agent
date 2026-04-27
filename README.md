@@ -32,15 +32,27 @@ Agent didesain untuk:
 
 ## Agent yang Tersedia
 
-Repo ini menyediakan 3 agent:
+Repo ini menyediakan 3 agent dengan arsitektur **Leader → Subagent**:
 
-| Agent | File | Tujuan |
-|-------|------|--------|
-| Nuxt Frontend Developer | `nuxt-frontend-developer.md` | Implementasi fitur, komponen, optimasi |
-| Node Backend Developer | `node-backend-developer.md` | API, database, auth, backend logic |
-| Nuxt Frontend Mentor | `nuxt-frontend-developer-mentor.md` | Mentoring fundamental Nuxt stack |
+| Agent | File | Mode | Tujuan |
+|-------|------|------|--------|
+| **IT Leader** | `it-leader.md` | **primary** | Analisis requirement, arsitektur, pembagian tugas, delegasi, integrasi |
+| Nuxt Frontend Developer | `nuxt-frontend-developer.md` | subagent | Implementasi frontend (komponen, halaman, composable, E2E) |
+| Node Backend Developer | `node-backend-developer.md` | subagent | Implementasi backend (API, DTO, controller, database, auth) |
 
-Config di `.opencode/config.json` mendaftarkan agent `frontend` yang merujuk ke prompt `nuxt-frontend-developer.md`.
+### Cara Kerja
+
+1. User memberikan requirement ke **IT Leader** (`@leader`)
+2. IT Leader menganalisis, merancang arsitektur, dan memecah menjadi task
+3. IT Leader mendelegasikan task ke subagent yang sesuai (`@frontend` atau `@backend`)
+4. IT Leader mengintegrasikan hasil dari subagent dan melaporkan ke user
+
+Untuk task kecil yang langsung tahu subagent-nya, bisa langsung mention subagent:
+
+```text
+@frontend Tambahkan UButton "Simpan" di ProfileHeader.vue.
+@backend Add endpoint POST /api/markets dengan DTO validation.
+```
 
 ## Skill yang Digunakan Agent
 
@@ -195,7 +207,24 @@ Hooks: aktifkan hanya jika environment lokal mendukung hook dependencies-nya. Fi
 
 ## Cara Pakai
 
-Gunakan agent melalui mention di OpenCode:
+### Workflow Utama (via IT Leader)
+
+IT Leader adalah **primary agent** — otomatis aktif saat session dimulai. Berikan requirement ke IT Leader:
+
+```text
+Buat fitur marketplace dengan halaman listing, detail, dan form create.
+Backend API untuk CRUD markets dengan pagination dan filter.
+```
+
+IT Leader akan:
+1. Analisis requirement dan definisikan scope
+2. Rancang arsitektur (data flow, API contract, component structure)
+3. Pecah menjadi task dan delegasikan ke `@frontend` / `@backend`
+4. Integrasikan hasil dan laporkan status
+
+### Direct Call ke Subagent (untuk task kecil)
+
+Untuk task kecil yang sudah jelas subagent-nya, bisa langsung mention:
 
 ```text
 @frontend Tambahkan UButton "Simpan" di app/components/profile/ProfileHeader.vue.
@@ -213,12 +242,6 @@ Untuk backend:
 
 ```text
 @backend Add endpoint POST /api/markets dengan DTO validation.
-```
-
-Untuk mentoring:
-
-```text
-@mentor Jelaskan perbedaan SSR dan CSR di Nuxt 4.
 ```
 
 ## Standar Output Agent
@@ -279,9 +302,9 @@ Dokumentasi agent tersedia di `.opencode/agent-docs/frontend/nuxt/`:
 ## Referensi Cepat
 
 - Config: `.opencode/config.json`
-- Prompt agent frontend: `.opencode/agents/nuxt-frontend-developer.md`
-- Prompt agent backend: `.opencode/agents/node-backend-developer.md`
-- Prompt agent mentor: `.opencode/agents/nuxt-frontend-developer-mentor.md`
+- Prompt IT Leader (primary): `.opencode/agents/it-leader.md`
+- Prompt frontend subagent: `.opencode/agents/nuxt-frontend-developer.md`
+- Prompt backend subagent: `.opencode/agents/node-backend-developer.md`
 - Dokumentasi utama: `.opencode/agent-docs/frontend/nuxt/README.md`
 - Quick start: `.opencode/agent-docs/frontend/nuxt/QUICK_START.md`
 - Index dokumentasi: `.opencode/agent-docs/frontend/nuxt/INDEX.md`
