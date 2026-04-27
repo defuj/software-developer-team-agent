@@ -6,6 +6,14 @@ Panduan ini menjelaskan cara menggunakan agent di repo ini, termasuk skill yang 
 
 Repo ini berisi konfigurasi OpenCode untuk tim IT lengkap dengan arsitektur **Leader → Subagent**:
 
+### Agent Config
+
+- **Active config**: `.opencode/config.json`
+- **Example config** (dengan model berbeda per agent): `.opencode/config.example.json`
+- **Agent prompts**: `.opencode/agents/`
+- **Instructions**: `.opencode/instructions/INSTRUCTIONS.md` (rules yang dipakai semua agent)
+- **Agent examples**: `.opencode/agents/`
+
 - Agent config: `.opencode/config.json`
 - Agent prompts: `.opencode/agents/`
   - `it-leader.md` — IT Leader & Technical Project Manager (primary)
@@ -35,6 +43,173 @@ Tim didesain untuk:
 - OpenCode CLI sudah terpasang
 - Akses ke repository ini
 - Node.js + npm/pnpm/yarn/bun sesuai kebutuhan proyek
+
+## Integrasi dengan OpenCode Built-in Agents
+
+OpenCode memiliki **built-in agents** yang sudah tersedia secara global. Project ini **tidak mendefinisikan ulang** agent yang sudah ada — melainkan fokus pada **specialized agents** untuk stack Nuxt/Node.js.
+
+### Built-in Agents (Global)
+
+| Built-in Agent | Model | Fungsi | Usage |
+|---------------|-------|--------|-------|
+| `planner` | opus-4.5 | Detailed planning, architectural decisions | `/plan` atau `@planner` |
+| `architect` | opus-4.5 | System design, scalability analysis | `@architect` |
+| `code-reviewer` | opus-4.5 | Quality, security, maintainability review | `/code-review` atau `@code-reviewer` |
+| `security-reviewer` | opus-4.5 | Vulnerability detection | `/security` atau `@security-reviewer` |
+| `tdd-guide` | opus-4.5 | TDD workflow, 80%+ coverage enforcement | `/tdd` atau `@tdd-guide` |
+| `build-error-resolver` | opus-4.5 | Fix TypeScript/build errors | `/build-fix` atau `@build-error-resolver` |
+| `e2e-runner` | opus-4.5 | Playwright E2E test generation & execution | `/e2e` atau `@e2e-runner` |
+| `refactor-cleaner` | opus-4.5 | Dead code removal, consolidation | `/refactor-clean` atau `@refactor-cleaner` |
+| `database-reviewer` | opus-4.5 | PostgreSQL query optimization, Supabase best practices | `@database-reviewer` |
+
+### Custom Agents (Project-specific)
+
+Dibawah adalah **specialized agents** yang TIDAK tersedia di built-in OpenCode:
+
+| Agent | File | Fungsi | Ketika Dipakai |
+|-------|------|--------|---------------|
+| **IT Leader** | `it-leader.md` | Orchestration, task decomposition, integration | Semua request besar |
+| **Frontend** | `nuxt-frontend-developer.md` | Nuxt/Vue implementation + MCP integration | Implementasi frontend |
+| **Backend** | `node-backend-developer.md` | Node/Express/Prisma implementation | Implementasi backend |
+| **Designer** | `ui-ux-designer.md` | Design system, Stitch, Figma, accessibility | Design tasks |
+| **DevOps** | `devops-specialist.md` | CI/CD, Docker, monitoring, infrastructure | Deployment tasks |
+| **SEO** | `seo-specialist.md` | Meta tags, structured data, Core Web Vitals | SEO optimization |
+
+### Integrasi Workflow
+
+```
+User Request
+    │
+    ▼
+┌─────────────────┐
+│   IT Leader     │ ← Custom (orchestration)
+│ (Primary)      │
+└────────┬────────┘
+         │
+    ┌────┴────┬────────┬────────┬────────┐
+    ▼         ▼        ▼        ▼        ▼
+┌────────┐ ┌──────┐ ┌──────┐ ┌───────┐ ┌──────┐
+│Frontend│ │Backend│ │Desigr │ │Devops │ │ SEO  │
+│Custom  │ │Custom │ │Custom │ │Custom │ │Custom│
+└────┬───┘ └───┬──┘ └───┬──┘ └───┬───┘ └───┬──┘
+     │         │        │        │         │
+     ▼         │        │        │         │
+┌─────────┐   │        │        │         │
+│Built-in │   │        │        │         │
+│e2e-runner│  │        │        │         │
+└─────────┘   │        │        │         │
+              │        │        │         │
+              ▼        │        │         │
+         ┌────────┐    │        │         │
+         │Built-in│    │        │         │
+         │code-reviewer│        │         │
+         └────────┘    │        │         │
+              │        │        │         │
+              ▼        ▼        ▼         ▼
+         ┌─────────────────────────────────┐
+         │        Integration Report        │
+         │     (IT Leader combines)       │
+         └─────────────────────────────────┘
+```
+
+### Built-in Commands Available
+
+Setelah copy `.opencode/` ke project, command berikut tersedia:
+
+```bash
+# Planning & Architecture
+/plan [feature description]          # Detailed implementation plan
+/orchestrate [complex task]         # Multi-agent orchestration
+
+# Review & Quality
+/code-review [files]                 # Code quality review
+/security [files]                     # Security audit
+/refactor-clean [scope]              # Dead code cleanup
+
+# Testing
+/tdd [feature]                       # TDD workflow
+/e2e [user flow]                     # Generate & run E2E tests
+/test-coverage [scope]               # Analyze coverage
+
+# Build & Errors
+/build-fix [error message]           # Fix TypeScript/build errors
+
+# Documentation
+/update-docs [files]                 # Update documentation
+/update-codemaps                     # Update code references
+
+# Database
+# (built-in database-reviewer bisa dipakai untuk query optimization)
+```
+
+## Cara Menggunakan Folder `.opencode`
+
+### Di Project Baru
+
+Copy seluruh folder `.opencode/` ke project yang sedang dikerjakan:
+
+```bash
+cp -R .opencode/ /path/to/your-project/
+```
+
+Atau jika ingin hanya config:
+
+```bash
+cp .opencode/config.json /path/to/your-project/.opencode/config.json
+```
+
+### Konfigurasi yang Di-copy
+
+| File/Folder | Apa yang Dicopy | Mandatory |
+|-------------|-----------------|-----------|
+| `config.json` | Agent definitions, MCP settings | Ya |
+| `agents/` | Custom agent prompts | Ya |
+| `instructions/INSTRUCTIONS.md` | Global rules untuk semua agent | Ya |
+| `skills/` | Domain-specific skills | Direkomendasikan |
+| `contexts/` | Project context | Opsional |
+| `commands/` | Custom slash commands | Opsional |
+| `rules/` | Coding rules | Opsional |
+| `hooks/` | Automation hooks | Opsional |
+
+### Priority Konfigurasi
+
+```
+User Session
+    │
+    ▼
+Project-level config (.opencode/config.json)
+    │
+    ▼
+Global config (~/.opencode/opencode.json)
+    │
+    ▼
+OpenCode defaults
+```
+
+- **Project-level** override global
+- **Global** override defaults
+- Instructions digabungkan dari semua level
+
+### Integrasi dengan Global OpenCode
+
+Project config ini **tidak perlu memodifikasi** konfigurasi global Anda. Cukup copy `.opencode/` ke project dan semua agent + commands akan tersedia.
+
+Jika ingin tetap menggunakan agent dari konfigurasi global (bukan yang di project), cukup rename file di project:
+
+```bash
+mv .opencode/agents/code-reviewer.md .opencode/agents/code-reviewer-custom.md
+```
+
+### Override Built-in Agents
+
+Jika ingin **customize** built-in agent untuk project ini, bisa dibuat agent dengan **nama yang sama** di `.opencode/agents/`. Priority: project-level agents override built-in.
+
+Contoh override `code-reviewer` untuk fokus Nuxt:
+
+```markdown
+# .opencode/agents/code-reviewer.md
+# Override built-in code-reviewer untuk Nuxt-specific review
+```
 
 ## Agent yang Tersedia
 

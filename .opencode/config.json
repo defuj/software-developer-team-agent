@@ -1,5 +1,10 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    ".opencode/instructions/INSTRUCTIONS.md",
+    ".opencode/skills/coding-standards/SKILL.md",
+    ".opencode/skills/security-review/SKILL.md"
+  ],
   "mcp": {
     "nuxt": {
       "type": "remote",
