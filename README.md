@@ -160,11 +160,19 @@ Dari `.opencode/config.json`, agent memakai MCP berikut:
 | `nuxt-ui` | remote | enabled | Dokumentasi & contoh komponen Nuxt UI |
 | `playwright` | stdio | enabled | Browser automation & E2E testing |
 | `figma` | stdio | disabled | Akses Figma design file (opsional) |
+| `stitch` | remote | disabled | Google Stitch AI design generation (opsional) |
 
-Jika ingin pakai Figma MCP, set env var:
+Jika ingin pakai Figma MCP:
 
 ```bash
 export FIGMA_ACCESS_TOKEN="your-token"
+```
+
+Jika ingin pakai Google Stitch MCP:
+
+```bash
+# Get API key from https://stitch.withgoogle.com/settings/api-keys
+export STITCH_API_KEY="your-api-key"
 ```
 
 ## Cara Menggunakan Folder Pendukung

@@ -29,6 +29,15 @@
       "args": ["-y", "@modelcontextprotocol/server-playwright"],
       "enabled": true,
       "description": "Browser automation and E2E testing with Playwright"
+    },
+    "stitch": {
+      "type": "remote",
+      "url": "https://stitch.googleapis.com/mcp",
+      "headers": {
+        "X-Goog-Api-Key": "${STITCH_API_KEY}"
+      },
+      "enabled": false,
+      "description": "Google Stitch AI design generation (requires STITCH_API_KEY)"
     }
   },
   "agent": {
@@ -123,7 +132,7 @@
       }
     },
     "designer": {
-      "description": "UI/UX Designer specializing in design systems, Figma, accessibility, and design-to-code handoff (subagent of IT Leader)",
+      "description": "UI/UX Designer specializing in design systems, Google Stitch, Figma, accessibility, and design-to-code handoff (subagent of IT Leader)",
       "mode": "subagent",
       "prompt": "{file:.opencode/agents/ui-ux-designer.md}",
       "model": "anthropic/claude-sonnet-4-20250514",
@@ -142,6 +151,7 @@
           "*": "allow"
         },
         "mcp": {
+          "stitch": "allow",
           "figma": "ask",
           "nuxt-ui": "allow"
         }
