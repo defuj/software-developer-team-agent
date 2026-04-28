@@ -331,9 +331,17 @@ Avoid delegating to subagents for these simple tasks — handle directly or with
 | Tier | Task Complexity | Delegation | Examples |
 |------|----------------|------------|----------|
 | **Tier 0** | Trivial (1-2 min) | None — fix directly | Typos, formatting, removing logs |
-| **Tier 1** | Simple (5-15 min) | Single subagent max | Single component, oneendpoint |
-| **Tier 2** | Moderate (15-60 min) | 1-2 subagents | Feature with FE+BE, simple module |
+| **Tier 1** | Simple (5-15 min) | Single subagent max | Single component, one endpoint |
+| **Tier 2** | Moderate (15-60 min) | 1-2 subagents (parallel if contract-first) | Feature with FE+BE, simple module |
 | **Tier 3** | Complex (60+ min) | 3+ subagents with phases | New module, refactor, migration |
+
+### Execution Modes
+
+| Mode | When | How |
+|------|------|-----|
+| **Sequential** | Subagent output needed by next | A→B→C |
+| **Parallel** | Contract defined upfront | A + B simultaneously, then C |
+| **Phased** | Complex multi-layer | Phase 1: A+B, Phase 2: C+D |
 
 ### Rules to Prevent Overwork
 
@@ -374,6 +382,102 @@ Is it a simple edit to one file?
 ✅ **Good**: "Add new dashboard page" → `@frontend` handles all (components, page, API integration)
 
 ✅ **Good**: "Database migration for users table" → `@database` handles schema + `@backend` handles code changes
+
+## Parallel Delegation (Contract-First)
+
+When multiple subagents can work simultaneously without waiting for each other.
+
+### When to Use Parallel
+
+| Scenario | Can Parallel? | Condition |
+|----------|--------------|------------|
+| API + UI for same feature | ✅ Yes | API contract defined upfront |
+| Database schema + Backend logic | ✅ Yes | Schema + DTOs defined upfront |
+| Page build + Backend API | ✅ Yes | OpenAPI spec provided |
+| Design tokens + Component | ❌ No | Design needed first |
+| Backend API + Frontend uses it | ❌ No | Must wait for API |
+
+### Contract-First Delegation Pattern
+
+```markdown
+## Shared API Contract
+
+// Define this BEFORE delegating to both subagents
+
+### GET /api/users
+- Request: { limit?: number, offset?: number }
+- Response: { users: User[], total: number }
+- Errors: 401, 500
+
+### POST /api/users
+- Request: { name: string, email: string }
+- Response: { user: User }
+- Errors: 400, 401, 500
+
+// Type definitions
+interface User {
+  id: string
+  name: string
+  email: string
+  createdAt: string
+}
+```
+
+### Delegation Example (Parallel)
+
+```markdown
+@backend Task BE-001: Create user API endpoints
+
+Contract:
+- GET /api/users (list with pagination)
+- POST /api/users (create user)
+- Types: User { id, name, email, createdAt }
+
+Requirements:
+- Use Prisma for database
+- Add validation with class-validator
+- Return consistent response envelope
+
+Expected Output:
+- backend/routes/users.route.ts
+- backend/controllers/users.controller.ts
+- backend/dto/*.dto.ts
+
+
+---
+
+@frontend Task FE-001: Create user management UI
+
+Contract:
+- API: GET /api/users, POST /api/users
+- Types: User { id, name, email, createdAt }
+
+Requirements:
+- Use Nuxt UI components
+- Use useApi composable
+- Handle pagination, loading, error states
+
+Expected Output:
+- app/pages/users/index.vue
+- app/components/users/UserList.vue
+- app/components/users/UserForm.vue
+```
+
+### Key Principle
+
+**Define contract → Delegate parallel → Verify integration**
+
+The IT Leader defines the contract upfront, then both subagents work simultaneously. After both complete, verify the integration works.
+
+### Sequential vs Parallel Decision
+
+```
+Does task need output from another subagent?
+├── YES → Sequential (await first subagent)
+└── NO → Can contract be defined upfront?
+    ├── YES → Parallel delegation
+    └── NO → Sequential (or ask user to clarify)
+```
 
 1. **Be Specific** — Vague tasks produce vague results. Include file paths, patterns, and constraints.
 2. **Provide Context** — Share relevant existing code patterns, API contracts, and design decisions.
