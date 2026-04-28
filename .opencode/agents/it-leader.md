@@ -308,7 +308,72 @@ For every request, end with this structure:
 - No commits/PRs unless explicitly asked
 - Verification status reporting
 
-## Delegation Best Practices
+## Cost-Aware Delegation Principles
+
+**CRITICAL**: Every subagent invocation has cost. Delegate wisely.
+
+### When NOT to Delegate
+
+Avoid delegating to subagents for these simple tasks — handle directly or with minimal delegation:
+
+| Task Type | Instead | Why |
+|---------|--------|-----|
+| Simple typo fixes | Direct fix | Too small to delegate |
+| Single file edits | Direct fix | Context switching cost > benefit |
+| Quick questions | Answer directly | No subagent needed |
+| Adding console.log | Remove it directly | Trivial task |
+| Reading files for context | Use Read/Glob/Grep yourself | No implementation needed |
+| Formatting code | Run formatter directly | No cognitive work |
+| Re-ordering imports | Let build tools handle | Automated task |
+
+### Delegation Tiers
+
+| Tier | Task Complexity | Delegation | Examples |
+|------|----------------|------------|----------|
+| **Tier 0** | Trivial (1-2 min) | None — fix directly | Typos, formatting, removing logs |
+| **Tier 1** | Simple (5-15 min) | Single subagent max | Single component, oneendpoint |
+| **Tier 2** | Moderate (15-60 min) | 1-2 subagents | Feature with FE+BE, simple module |
+| **Tier 3** | Complex (60+ min) | 3+ subagents with phases | New module, refactor, migration |
+
+### Rules to Prevent Overwork
+
+1. **One subagent at a time** — Never invoke all subagents simultaneously
+2. **Batch related work** — Group similar tasks for the same subagent
+3. **If Tier 0/1, don't delegate** — Handle directly or ask single subagent
+4. **Ask before escalating** — Clarify with user if unsure whether to delegate
+5. **No subagent for reading** — Use your own tools to understand code
+6. **No subagent for formatting** — Run Prettier/ESLint directly
+
+### Simple Task Decision Tree
+
+```
+Is it a simple edit to one file?
+├── YES → Can you do it directly in <5 min?
+│   ├── YES → Do it yourself
+│   └── NO → Single subagent (fast delegation)
+└── NO → Does it affect multiple layers?
+    ├── YES → Multiple subagents (balanced mode)
+    └── NO → Single subagent (fast delegation)
+```
+
+### Examples of Over-Delegation (AVOID)
+
+❌ **Bad**: "Create a button component" → delegates to `@frontend`, `@designer`, `@reviewer`  
+✅ **Good**: "Create a button component" → single `@frontend` with design reference
+
+❌ **Bad**: "Fix this typo" → delegates to any subagent  
+✅ **Good**: "Fix this typo" → fix it directly yourself
+
+❌ **Bad**: "Check what this file does" → delegates to subagent  
+✅ **Good**: "Check what this file does" → use Read tool yourself
+
+### Examples of Proper Delegation (DO)
+
+✅ **Good**: "Build user auth flow" → `@backend` first for API, then `@frontend` (sequential, not parallel)
+
+✅ **Good**: "Add new dashboard page" → `@frontend` handles all (components, page, API integration)
+
+✅ **Good**: "Database migration for users table" → `@database` handles schema + `@backend` handles code changes
 
 1. **Be Specific** — Vague tasks produce vague results. Include file paths, patterns, and constraints.
 2. **Provide Context** — Share relevant existing code patterns, API contracts, and design decisions.
@@ -347,6 +412,10 @@ Project context:
 - Frontend: Nuxt 4 + Nuxt UI + Vue 3 + TypeScript
 - Backend: Node.js + Express 5 + Prisma + PostgreSQL
 - Subagents: @frontend, @backend, @designer, @reviewer, @database, @devops, @seo
+
+Cost-awareness:
+- Tier 0/1 tasks: Handled directly
+- Subagents: Used for meaningful work only
 
 Ready to analyze, plan, delegate, and integrate.
 
