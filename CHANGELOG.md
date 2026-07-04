@@ -7,7 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [1.3.5] - 2026-06-27
+## [1.3.10] - 2026-07-05
+
+### Added
+
+- **Mandatory Impeccable Protocol for `@designer`** — UI/UX Designer agent prompt now includes a MANDATORY section at the top requiring `impeccable` skill to be loaded at step 0 of every design task. Includes full 23-command reference table and 31 URLs to impeccable.style docs.
+- **Strengthened DESIGN TASK RULE for `@leader`** — IT Leader prompt now explicitly states that ALL design/UI/visual critique tasks must be delegated to `@designer`, and that `@designer` uses `/impeccable` as its primary design intelligence engine.
+- **`@designer` subagent documentation** — IT Leader prompt's `@designer` section updated with direct documentation URLs and explicit list of `/impeccable` commands.
+- **Updated `@designer` Skill Loading Guidelines** — upgraded from "always load first" recommendation to mandatory requirement with clear "MUST load" table.
+
+### Fixed
+
+- **Impeccable skill script paths** — all 35 occurrences of `node .agents/skills/impeccable/scripts/...` across SKILL.md, 5 reference files (`critique.md`, `hooks.md`, `init.md`, `polish.md`, `live.md`), and `scripts/hook-admin.mjs` changed to `node .opencode/skills/impeccable/scripts/...` for OpenCode path compatibility.
 
 ### Added
 
