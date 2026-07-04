@@ -29,7 +29,7 @@
       "/etc/**": "deny"
     },
     "bash": {
-      "*": "ask",
+      "*": "allow",
       "ls *": "allow",
       "pwd": "allow",
       "which *": "allow",
@@ -171,7 +171,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -217,7 +217,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -254,7 +254,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -291,7 +291,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -326,7 +326,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -360,7 +360,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -394,7 +394,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -430,7 +430,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -467,7 +467,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -501,7 +501,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -536,7 +536,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -570,7 +570,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -603,7 +603,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -636,7 +636,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -670,7 +670,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -704,7 +704,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -736,7 +736,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -768,7 +768,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -799,7 +799,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -831,7 +831,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -865,7 +865,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -898,7 +898,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -929,7 +929,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -963,7 +963,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -995,7 +995,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -1028,7 +1028,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -1061,7 +1061,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -1094,7 +1094,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -1126,7 +1126,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -1157,7 +1157,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -1189,7 +1189,7 @@
           "*": "allow"
         },
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -1219,7 +1219,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
@@ -1249,7 +1249,7 @@
         "webfetch": "allow",
         "skill": "allow",
         "bash": {
-          "*": "ask",
+          "*": "allow",
           "ls *": "allow",
           "pwd": "allow",
           "which *": "allow",
