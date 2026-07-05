@@ -7,7 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [1.3.11] - 2026-07-05
+## [1.3.12] - 2026-07-06
+
+### Added
+
+- **`flutter-dio-multi-service` skill** — Multi-microservice Dio patterns for Flutter: shared `PersistCookieJar` across 5+ Dio instances, cookie-based auth with `cookie_jar` + `dio_cookie_manager`, Bearer token fallback for cross-origin services, `AuthInterceptor` with 401 detection on both `onResponse` and `onError`, static `onUnauthorized` callback bridging Dio to Riverpod, `ApiService` thin typed wrapper, `ApiResponseHelper` dual-format response envelope parser (`status`/`success`), `CursorPage<T>` generic pagination model, dual-layer error hierarchy (`Exception` + `Failure`), service-specific env config via `--dart-define-from-file`, Auth Bridge (`AuthRouterBridge` + `Future.microtask` deferral + multi-state redirect), and complete testing patterns. Extracted from `olpos_business_owner_dashboard` reference project.
+- **`flutter-dashboard-patterns` skill** — Production dashboard UI patterns for Flutter: animation tokens system (durations, curves, spring physics, staggered entrance helpers), 4 GoRouter custom page transitions (`fadeScale`, `slide`, `sharedAxis`, `fade`) with `prefers-reduced-motion` support, `GlassCard`/`OlposGlassCard` glassmorphism components with glow border, `PressScaleWrapper` tactile feedback, `GradientStatCard` with `AnimatedCounter` number roll-up, `AppShimmer`/`AppLoading` skeleton states, `AppErrorWidget` shake animation on error, `EmptyStateWidget` staggered entrance, `SectionHeader`/`StatusBadge`/`GlowDot` supporting widgets, multi-tenant store selection with `FlutterSecureStorage` persistence, schema-based feature visibility via Riverpod `Provider` switch, and cross-provider invalidation on store change.
+- **Auth Bridge Riverpod→GoRouter** to `flutter-state-management` (§3.6) — `AuthRouterBridge` with `refreshListenable`, `Future.microtask` deferral to avoid notification cycle races, static `onUnauthorized` callback wiring Dio interceptor to Riverpod, safe `setUnauthenticated()` (no API call — prevents infinite loop), and multi-state redirect handling 3 auth states (`AuthChecking`/`AuthInitial`/`AuthAuthenticated`) with splash screen.
+- **Derived & Computed Providers** to `flutter-state-management` (§2.9) — `Provider` for schema-based feature visibility (`salesDashboardVisibilityProvider`), boolean flags from entities (`isVariantProvider`, `isSchemaLaundryProvider`), and auto-redirect via `ref.listen` on derived provider changes.
+- **Production `analysis_options.yaml` template** to `dart-run-static-analysis` — 231-rule template covering core Dart lint, Flutter-specific rules, and SonarQube Dart rule set, plus a minimal template for simple projects.
+
+### Changed
+
+- `flutter-developer.md`: registered `flutter-dio-multi-service` and `flutter-dashboard-patterns` in Contextual Skills (with task descriptions) and Skills list
+
+---
 
 ### Added
 
