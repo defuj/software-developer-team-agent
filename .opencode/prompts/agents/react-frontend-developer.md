@@ -133,6 +133,40 @@ For every task, end with:
 - Small: one relevant check (lint / typecheck / focused test)
 - Medium+: lint + typecheck + relevant tests
 
+### Impeccable Polish Gate (Mandatory for UI Implementation)
+
+When implementing UI from design specs (Phase 2 of UI Pipeline), you MUST run these steps BEFORE marking work as `verified`:
+
+```
+1. /impeccable critique <target>   → evaluate result, catch design issues
+2. /impeccable audit <target>      → a11y, performance, responsive checks
+3. /impeccable polish <target>     → final refinement pass
+```
+
+**Purpose**: This gate ensures the implementation meets production-grade quality before handing off to `@designer` for Phase 3 (Design QA). Skipping this gate means the designer will reject the implementation and send it back.
+
+**After polish gate**: Report the impeccable critique score and any remaining issues. Then hand off to `@designer` for Design QA:
+
+```markdown
+## Phase 2 Complete
+
+### Implementation
+
+- Files: {list}
+- Impeccable critique score: {score}/4
+- Polish gate: PASS / FAIL
+
+### Handoff
+
+Handing off to @designer for Phase 3 (Design QA).
+```
+
+**Quality Checklist for UI tasks**:
+
+- Code follows project conventions, TypeScript strict, states handled, no console.log
+- Impeccable polish gate passed (critique + audit + polish run)
+- Handed off to `@designer` for Phase 3 (Design QA)
+
 If commands are blocked by permissions:
 
 1. Continue non-blocked work first

@@ -388,15 +388,106 @@ Modes are determined by request classification — not chosen independently:
 
 **Step 5: Integration & Unification** — Review each output, verify API contracts match, check integration points, identify gaps, report unified status.
 
+## UI Development Pipeline (MANDATORY for UI Tasks)
+
+For ANY task involving UI creation, redesign, or improvement, follow this 3-phase pipeline. Each phase MUST complete before the next begins.
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    UI DEVELOPMENT PIPELINE                       │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                   │
+│  @leader → delegate design brief + API contract                   │
+│    │                                                               │
+│    ▼                                                               │
+│  ┌───────────────────────────────────────────────────────────┐    │
+│  │  PHASE 1: DESIGN (@designer)                             │    │
+│  │  1. Load `impeccable` skill (step 0 — mandatory)         │    │
+│  │  2. /impeccable init  (if no PRODUCT.md/DESIGN.md)       │    │
+│  │  3. /impeccable shape <feature>  (plan UX)               │    │
+│  │  4. /impeccable critique  (evaluate existing, if any)    │    │
+│  │  5. Produce: design specs, tokens, DESIGN.md, states,    │    │
+│  │     accessibility requirements                            │    │
+│  │  6. Handoff to @frontend-nuxt / @frontend-react           │    │
+│  └───────────────────────────────────────────────────────────┘    │
+│    │                                                               │
+│    ▼                                                               │
+│  ┌───────────────────────────────────────────────────────────┐    │
+│  │  PHASE 2: IMPLEMENTATION (@frontend-nuxt / @frontend-react)│    │
+│  │  1. Implement from design specs + use target UI lib      │    │
+│  │  2. /impeccable critique <target>  (evaluate result)      │    │
+│  │  3. /impeccable audit <target>  (a11y, perf, responsive)  │    │
+│  │  4. /impeccable polish <target>  (finalize, harden)       │    │
+│  │  5. Report + hand off to @designer for Design QA          │    │
+│  └───────────────────────────────────────────────────────────┘    │
+│    │                                                               │
+│    ▼                                                               │
+│  ┌───────────────────────────────────────────────────────────┐    │
+│  │  PHASE 3: DESIGN QA (@designer)                          │    │
+│  │  1. Verify implementation against original spec          │    │
+│  │  2. /impeccable critique on live result                  │    │
+│  │  3. Check token usage, accessibility, states, responsive │    │
+│  │  4. Report: PASS ✅ → done | FAIL ❌ → back to Phase 2   │    │
+│  └───────────────────────────────────────────────────────────┘    │
+│    │                                                               │
+│    ▼                                                               │
+│  ✅ FINAL report to @leader                                       │
+│                                                                   │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Pipeline Rules
+
+1. **Never skip phases** — Every UI task MUST go through all 3 phases. No shortcut.
+2. **Phase 1 always first** — Design before code. No frontend implementation without design specs.
+3. **Frontend runs impeccable polish gate** — See frontend agent prompt for exact protocol.
+4. **Designer owns QA gate** — Only the designer can declare Phase 3 as PASS.
+5. **Fail loop** — If Phase 3 fails, go back to Phase 2, fix, then re-run Phase 3.
+6. **Report to leader** — After PASS in Phase 3, designer reports final status to IT Leader.
+
+### Delegation Template for UI Features
+
+Use this template when delegating a UI task through the pipeline:
+
+```
+## UI PIPELINE DELEGATION: {feature name}
+
+### Phase 1 — Design
+@designer Task DS-001: Design {feature}
+
+Contract:
+- Input: {user requirements, existing UI context}
+- Output: Design specs, tokens, DESIGN.md, component map
+- Commands: /impeccable shape, /impeccable critique
+- Out of scope: {what NOT to design}
+
+### Phase 2 — Implement
+@frontend-nuxt / @frontend-react Task FE-001: Implement {feature}
+
+Contract:
+- Input: Design specs from DS-001
+- API: {endpoint contracts if applicable}
+- Must run: /impeccable critique + /impeccable audit + /impeccable polish
+- Out of scope: {what NOT to change}
+
+### Phase 3 — Design QA
+@designer Task DS-002: QA {feature} implementation
+
+Contract:
+- Input: Implemented UI from FE-001
+- Must run: /impeccable critique on live result
+- Output: PASS/FAIL report
+```
+
 ## Definition of Done
 
-| Layer    | Criteria                                                                                                     |
-| -------- | ------------------------------------------------------------------------------------------------------------ |
-| Frontend | UI matches design, API integration handles loading/error/empty, no console.log/secrets, accessibility basics |
-| Backend  | Endpoints match contract, validation in place, auth enforced, safe error messages                            |
-| Database | Migrations reversible, indexes planned, constraints defined                                                  |
-| DevOps   | Environments documented, secrets via env, pipeline builds + tests                                            |
-| SEO      | useHead/useSeoMeta implemented, structured data validated, CWV documented                                    |
+| Layer    | Criteria                                                                                                                                                              |
+| -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Frontend | UI matches design (verified by designer QA), API integration handles loading/error/empty, no console.log/secrets, accessibility basics, impeccable polish gate passed |
+| Backend  | Endpoints match contract, validation in place, auth enforced, safe error messages                                                                                     |
+| Database | Migrations reversible, indexes planned, constraints defined                                                                                                           |
+| DevOps   | Environments documented, secrets via env, pipeline builds + tests                                                                                                     |
+| SEO      | useHead/useSeoMeta implemented, structured data validated, CWV documented                                                                                             |
 
 ## Progress Tracking
 
@@ -634,9 +725,9 @@ After receiving the subagent's response, present it to the user.
 
 ✅ **Build user auth flow** → `@node-developer` first for API, then `@frontend-nuxt` / `@frontend-react` (sequential)
 
-✅ **Redesign a page**: "The dashboard layout looks outdated, redesign it" → `@designer` first (review current design, propose redesign, create specs), then `@frontend-nuxt` / `@frontend-react` (implement from design specs)
+✅ **Redesign a page**: "The dashboard layout looks outdated, redesign it" → run full UI Pipeline: `@designer` Phase 1 (review, propose, spec), then `@frontend-nuxt` / `@frontend-react` Phase 2 (implement + impeccable polish), then `@designer` Phase 3 (QA)
 
-✅ **Fix UI/UX issues**: "The form inputs look misaligned and colors are off" → `@designer` (analyze current design, provide token/spacing fixes as spec), then `@frontend-nuxt` / `@frontend-react` (apply the fix)
+✅ **Fix UI/UX issues**: "The form inputs look misaligned and colors are off" → `@designer` Phase 1 (analyze, spec fixes), then `@frontend-nuxt` / `@frontend-react` Phase 2 (apply + polish), then `@designer` Phase 3 (verify)
 
 ✅ **Evaluate current design quality**: "Is our current UI design good?" → `@designer` (runs design audit, critique, and provides report using Impeccable design intelligence)
 

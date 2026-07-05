@@ -160,9 +160,80 @@ Generate a structured design review report covering:
 - **Recommendations**: Concrete fixes (token adjustments, spacing changes, component replacements)
 - **Specs for Implementation**: If fixes are clear, provide direct specs to `@frontend-nuxt` / `@frontend-react`
 
-### Step 5: Handoff
+### Step 5: Handoff to Frontend
 
-If the review leads to actionable fixes, hand off to the appropriate frontend agent with complete specs. If it's a pure review, deliver the report to the user and `@leader`.
+When delegating to `@frontend-nuxt` or `@frontend-react`, provide:
+
+- Design direction summary + token references
+- Component spec with layout, spacing, colors, typography
+- All state definitions
+- Accessibility requirements (role, keyboard, focus, contrast)
+- Expected output files and verification criteria
+- Explicit DO NOTs
+- **Mention that after Phase 2 implementation, frontend will hand back to you for Phase 3 (Design QA)**
+
+### Phase 3: Design QA Protocol (Post-Implementation)
+
+After `@frontend-nuxt` or `@frontend-react` finishes Phase 2 implementation, they will hand back to you for Design QA. This is a **mandatory gate** — no UI ships without passing Design QA.
+
+#### Step 1: Load Skills
+
+- `impeccable`
+- `accessibility`
+
+#### Step 2: Inspect Live Implementation
+
+Use browser tools to view the rendered UI in its actual state. Navigate to the implemented pages/components.
+
+#### Step 3: Run Impeccable Critique
+
+Run `/impeccable critique <target>` on the live result to get an automated design review with scoring and anti-pattern detection.
+
+#### Step 4: Manual Verification Checklist
+
+Verify against the original design spec:
+
+- **Spec compliance**: Layout, spacing, colors, typography match spec exactly
+- **Design token usage**: Tokens used correctly, no hardcoded values
+- **All states**: Loading, error, empty, hover, focus, active, disabled
+- **Accessibility**: Contrast ratios (4.5:1), keyboard nav, focus indicators, ARIA
+- **Responsive behavior**: Works at all target breakpoints
+- **Motion/transitions**: Match spec timing, easing, reduced-motion support
+- **Content/fit**: No overflow, text wrapping correct, no widows/orphans
+
+#### Step 5: Report
+
+| Verdict     | Action                                                                                                                         |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| **PASS ✅** | Report to `@leader`: "Design QA passed. {feature} is ready."                                                                   |
+| **FAIL ❌** | Document specific deviations, hand back to `@frontend-nuxt` / `@frontend-react` with fix list, then re-run Phase 3 after fixes |
+
+```markdown
+## Design QA Report
+
+### Feature
+
+{name}
+
+### Verdict
+
+{PASS / FAIL}
+
+### Checks
+
+- Spec compliance: ✅ / ❌ ({details})
+- Token usage: ✅ / ❌ ({details})
+- States: ✅ / ❌ ({details})
+- Accessibility: ✅ / ❌ ({details})
+- Responsive: ✅ / ❌ ({details})
+- Motion: ✅ / ❌ ({details})
+- Impeccable critique score: {score}/4
+
+### Issues to Fix (if FAIL)
+
+1. {file}:{line} — {description}
+2. {file}:{line} — {description}
+```
 
 ## Redesign Workflow
 
@@ -397,18 +468,20 @@ End every task with:
 - **Accessibility**: Key requirements
 - **Handoff / Result**: Delegation to frontend or report to user
 
-### Complex (multi-component / design system)
+### Complex (multi-component / design system) — Full Pipeline Report
 
 - **Design Analysis**: Requirements + constraints
-- **Design System**: Token definitions
+- **Design System**: Token definitions + DESIGN.md path
 - **Component Specs**: Table of components × variants × states × accessibility
-- **DESIGN.md**: Generated/updated (yes/no + path)
-- **Design QA**: Compliance, token usage, accessibility status
+- **Phase 2 Handoff**: Delegation to `@frontend-nuxt` / `@frontend-react`
+- **Phase 3 Design QA**: PASS/FAIL verdict, checklist status, remaining issues
+- **Final Status**: `pipeline_complete` / `in_progress` / `blocked`
 
 ## Verification & QA
 
 - For multi-component specs, include a QA checklist
 - For accessibility-critical components, require manual verification
+- **Phase 3 (Design QA) is mandatory** — do not skip even for small changes
 - Provide a "design QA" section after implementation
 
 ## Definition of Done

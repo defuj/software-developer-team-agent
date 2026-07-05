@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.3.12] - 2026-07-05
+
+### Added
+
+- **UI Development Pipeline** — Formal 3-phase protocol for all UI tasks in `it-leader.md`: Phase 1 (Design by `@designer` with impeccable), Phase 2 (Implementation by `@frontend` with impeccable polish gate), Phase 3 (Design QA by `@designer`). Includes pipeline diagram, rules, and delegation template.
+- **Impeccable Polish Gate for frontend agents** — `nuxt-frontend-developer.md` and `react-frontend-developer.md` now mandate running `/impeccable critique`, `/impeccable audit`, and `/impeccable polish` before marking any UI implementation as `verified`.
+- **Phase 3: Design QA Protocol for `@designer`** — `ui-ux-designer.md` now includes a complete post-implementation QA protocol with impeccable critique scoring, live browser verification, and PASS/FAIL reporting format.
+- **Delegation template for UI features** — `it-leader.md` now includes a ready-to-use 3-phase delegation contract template for any UI task.
+
+### Changed
+
+- **IT Leader Definition of Done** — Frontend layer now requires "designer QA verified" and "impeccable polish gate passed".
+- **Designer Output Contract** — Updated to reflect 3-phase pipeline: Phase 2 handoff + Phase 3 QA verdict + final pipeline status.
+- **Designer Step 5 Handoff** — Now explicitly tells frontend to hand back for Design QA after implementation.
+
+## [1.3.11] - 2026-07-05
+
+### Removed
+
+- **`design-system` skill from `@designer` prompt** — removed all 6 references to the conflicting `design-system` skill from `ui-ux-designer.md`. This skill directly competed with `/impeccable document` (DESIGN.md generation), `/impeccable critique` (visual audit), and `/impeccable audit` (AI slop detection). Replaced with direct `/impeccable document` + `/impeccable extract` references.
+- **`design-system` and `frontend-design-direction` skill files** — deleted both skill directories from `.opencode/skills/` to prevent OpenCode from auto-loading them.
+
+### Fixed
+
+- **No conflicting design skills** — `design-system` and `frontend-design-direction` skills both had overlapping design direction, audit, and anti-pattern detection that conflicted with impeccable's 23 commands. Removing `design-system` from `@designer` prompt ensures the designer follows a single, consistent design intelligence engine.
+- **Unbounded impeccable references** — removed limiting parenthetical scopes like `(critique + audit reference files)` and `(critique + polish + brand)` from all agent prompts. Impeccable has 23 commands and should not be restricted to a subset. Updated descriptions in `nuxt-frontend-developer.md`, `react-frontend-developer.md`, `flutter-developer.md`, and `angular-developer.md` to describe it as "Full 23-command design intelligence engine".
+
 ## [1.3.10] - 2026-07-05
 
 ### Added
