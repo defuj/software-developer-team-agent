@@ -12,7 +12,7 @@ description: >-
 license: MIT
 metadata:
   author: opencode-agent-kit
-  version: "1.0.0"
+  version: '1.0.0'
   target_agent: flutter-developer
   stack:
     - Dart 3
@@ -31,7 +31,7 @@ metadata:
 # Flutter State Management & Architecture
 
 **Target Agent:** @flutter-developer  
-**Stack:** Dart 3 · Flutter SDK · Material Design 3 · Bloc · Riverpod · GoRouter · Dio · Clean Architecture · bloc_test · mocktail  
+**Stack:** Dart 3 · Flutter SDK · Material Design 3 · Bloc · Riverpod · GoRouter · Dio · Clean Architecture · bloc_test · mocktail
 
 Comprehensive reference for state management, networking, routing, architecture, and testing in production-grade Flutter applications. Covers the two dominant state management ecosystems (Bloc and Riverpod) along with supporting libraries for routing, networking, and testability.
 
@@ -46,20 +46,22 @@ Comprehensive reference for state management, networking, routing, architecture,
 5. [Clean Architecture](#5-clean-architecture)
 6. [Testing](#6-testing)
 
+> **New in this version:** Auth Bridge Riverpod→GoRouter (§3.6), Derived/Computed Providers (§2.9)
+
 ---
 
 ## 1. Bloc Pattern
 
 ### 1.1 Cubit vs Bloc
 
-| Aspect | Cubit | Bloc |
-|--------|-------|------|
-| **Trigger** | Functions/methods directly emit states | Events dispatched via `add()` |
-| **Traceability** | Lower — no event log | Higher — every state change has an associated event |
-| **Boilerplate** | Minimal — just a class with methods | More — requires separate Event and State classes |
-| **Use case** | Simple UI-bound state (counter, form fields, toggle) | Complex business logic where tracking every action matters |
-| **Debounce/Throttle** | Manual | Built-in via `on<T>()` transformer override |
-| **Testing** | Directly call methods and check state | `blocTest` with event/state matchers |
+| Aspect                | Cubit                                                | Bloc                                                       |
+| --------------------- | ---------------------------------------------------- | ---------------------------------------------------------- |
+| **Trigger**           | Functions/methods directly emit states               | Events dispatched via `add()`                              |
+| **Traceability**      | Lower — no event log                                 | Higher — every state change has an associated event        |
+| **Boilerplate**       | Minimal — just a class with methods                  | More — requires separate Event and State classes           |
+| **Use case**          | Simple UI-bound state (counter, form fields, toggle) | Complex business logic where tracking every action matters |
+| **Debounce/Throttle** | Manual                                               | Built-in via `on<T>()` transformer override                |
+| **Testing**           | Directly call methods and check state                | `blocTest` with event/state matchers                       |
 
 **When to use Cubit:** Form validation, pagination offset, dark mode toggle, any simple counter/toggle state.
 
@@ -269,17 +271,18 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
 ### 2.1 Provider Types Overview
 
-| Provider | Use Case | Auto-Dispose? |
-|----------|----------|---------------|
-| `Provider` | Synchronous dependencies (repos, config) | `autoDispose` variant |
-| `NotifierProvider` | Mutable synchronous state (replace StateNotifierProvider in newer Riverpod) | `autoDispose` variant |
-| `StateNotifierProvider` | Mutable synchronous state with `StateNotifier` | `autoDispose` variant |
-| `FutureProvider` | One-shot async data (fetch from API on page load) | `autoDispose` variant |
-| `StreamProvider` | Real-time data (WebSocket, Firestore stream) | `autoDispose` variant |
-| `StateProvider` | Simple mutable value (counter, text field) | `autoDispose` variant |
-| `ChangeNotifierProvider` | Interop with existing ChangeNotifier code | `autoDispose` variant |
+| Provider                 | Use Case                                                                    | Auto-Dispose?         |
+| ------------------------ | --------------------------------------------------------------------------- | --------------------- |
+| `Provider`               | Synchronous dependencies (repos, config)                                    | `autoDispose` variant |
+| `NotifierProvider`       | Mutable synchronous state (replace StateNotifierProvider in newer Riverpod) | `autoDispose` variant |
+| `StateNotifierProvider`  | Mutable synchronous state with `StateNotifier`                              | `autoDispose` variant |
+| `FutureProvider`         | One-shot async data (fetch from API on page load)                           | `autoDispose` variant |
+| `StreamProvider`         | Real-time data (WebSocket, Firestore stream)                                | `autoDispose` variant |
+| `StateProvider`          | Simple mutable value (counter, text field)                                  | `autoDispose` variant |
+| `ChangeNotifierProvider` | Interop with existing ChangeNotifier code                                   | `autoDispose` variant |
 
 **Rule of thumb:**
+
 - Prefer `NotifierProvider` for new code (cleaner API than StateNotifierProvider).
 - Use `autoDispose` for ephemeral screen-level state that should be garbage collected.
 - Use `family` to create parameterized providers (e.g., `productProvider(id)`).
@@ -367,11 +370,11 @@ final messageStreamProvider = StreamProvider.autoDispose<List<Message>>((ref) {
 
 ### 2.6 ref.watch / ref.read / ref.listen
 
-| Method | Behavior | Where to use |
-|--------|----------|-------------|
-| `ref.watch(provider)` | Rebuilds the widget when provider value changes | Inside `build()` of ConsumerWidget or Consumer |
-| `ref.read(provider)` | Reads the value once, **does not** rebuild | Inside callbacks (onPressed, initState-like logic) |
-| `ref.listen(provider, callback)` | Runs a side effect when value changes (snackbar, navigation) | For one-shot side effects (snackbar, push route) |
+| Method                           | Behavior                                                     | Where to use                                       |
+| -------------------------------- | ------------------------------------------------------------ | -------------------------------------------------- |
+| `ref.watch(provider)`            | Rebuilds the widget when provider value changes              | Inside `build()` of ConsumerWidget or Consumer     |
+| `ref.read(provider)`             | Reads the value once, **does not** rebuild                   | Inside callbacks (onPressed, initState-like logic) |
+| `ref.listen(provider, callback)` | Runs a side effect when value changes (snackbar, navigation) | For one-shot side effects (snackbar, push route)   |
 
 ```dart
 class LoginScreen extends ConsumerWidget {
@@ -428,10 +431,10 @@ class AuthListener extends ConsumerWidget {
 
 ### 2.7 Provider Modifiers
 
-| Modifier | Purpose | Example |
-|----------|---------|---------|
+| Modifier       | Purpose                              | Example                      |
+| -------------- | ------------------------------------ | ---------------------------- |
 | `.autoDispose` | Dispose state when no longer watched | `FutureProvider.autoDispose` |
-| `.family` | Parameterize a provider | `productProvider(id)` |
+| `.family`      | Parameterize a provider              | `productProvider(id)`        |
 
 **Family example:**
 
@@ -480,7 +483,89 @@ class Cart extends _$Cart {
 }
 ```
 
-### 2.9 ProviderObserver (Logging & Debugging)
+### 2.9 Derived & Computed Providers
+
+`Provider` in Riverpod is not just for DI (providing repositories). It is also a **computed/derived state** mechanism — it watches other providers and transforms their values. This is a first-class pattern for business logic that reacts to state changes without imperatively calling `ref.invalidate()`.
+
+#### Use Case: Schema-Based Feature Visibility
+
+```dart
+/// Exposes the schema of the currently selected store.
+final storeSchemaProvider = Provider<String?>((ref) {
+  final stores = ref.watch(ownedStoresProvider).valueOrNull ?? [];
+  final selectedId = ref.watch(storeSelectionProvider);
+  // ... find store by selectedId, return store.schema
+});
+
+/// Dashboard feature visibility derived from store schema.
+class SalesDashboardVisibility {
+  final bool showConsignment;
+  final bool showTechnician;
+  final bool showServiceIncome;
+
+  const SalesDashboardVisibility({...});
+
+  static const none = SalesDashboardVisibility(showConsignment: false, ...);
+}
+
+final salesDashboardVisibilityProvider =
+    Provider<SalesDashboardVisibility>((ref) {
+  final schema = ref.watch(storeSchemaProvider);
+  switch (schema) {
+    case 'SIMASKO':
+      return const SalesDashboardVisibility(
+        showConsignment: true, showTechnician: true, showServiceIncome: true,
+      );
+    case 'LAUNDRY':
+      return const SalesDashboardVisibility(
+        showConsignment: false, showTechnician: false, showServiceIncome: true,
+      );
+    default:
+      return SalesDashboardVisibility.none;
+  }
+});
+```
+
+Benefits over imperative checks:
+
+- **Reactive** — when `storeSelectionProvider` changes, every widget watching `salesDashboardVisibilityProvider` rebuilds automatically
+- **Testable** — test the provider in isolation with `ProviderContainer(overrides: [...])`
+- **Composable** — multiple derived providers can chain: `providerA → providerB → providerC`
+
+#### Use Case: Boolean Flags from Entities
+
+```dart
+final isVariantProvider = Provider<bool>((ref) {
+  final stores = ref.watch(ownedStoresProvider).valueOrNull ?? [];
+  final selectedId = ref.watch(storeSelectionProvider);
+  // ... find store and return store.store.isVariant
+});
+
+final hasBusinessAnalysisProvider = Provider<bool>((ref) {
+  // ... derived from ownedStoresProvider + storeSelectionProvider
+});
+```
+
+#### Use Case: Provider-Based Auto-Redirect
+
+Use `ref.listen` in a widget to react to derived provider changes and navigate:
+
+```dart
+@override
+Widget build(BuildContext context, WidgetRef ref) {
+  ref.listen(isVariantProvider, (_, isVariant) {
+    final location = GoRouterState.of(context).matchedLocation;
+    if (isVariant && !location.startsWith('/products/variant')) {
+      context.go('/products/variant');
+    } else if (!isVariant && location == '/products/variant') {
+      context.go('/products');
+    }
+  });
+  // ... rest of widget
+}
+```
+
+### 2.10 ProviderObserver (Logging & Debugging)
 
 ```dart
 class LoggerObserver extends ProviderObserver {
@@ -767,7 +852,104 @@ class AppShell extends StatelessWidget {
 }
 ```
 
-### 3.6 Navigation Helpers
+### 3.6 Auth Bridge: Riverpod + GoRouter (Production Pattern)
+
+#### Problem
+
+GoRouter's `refreshListenable` expects a `Listenable`, but Riverpod's reactive state is provider-based. A bridge is needed so auth state changes trigger GoRouter redirect re-evaluation. Additionally, a **static callback** is needed to bridge the Dio `AuthInterceptor` (global/stateless) to Riverpod (scoped state).
+
+#### Solution: Bridge + Static Callback
+
+```dart
+class AuthRouterBridge extends ChangeNotifier {
+  AuthRouterBridge(Ref ref) {
+    ref.listen<AuthState>(authProvider, (_, _) {
+      // Defer notifyListeners to the next microtask to avoid racing with
+      // other ref.listen callbacks (e.g. login screen) that may navigate
+      // during the same Riverpod notification cycle.
+      Future.microtask(() {
+        notifyListeners();
+      });
+    });
+  }
+}
+
+final routerProvider = Provider<GoRouter>((ref) {
+  final bridge = AuthRouterBridge(ref);
+  ref.onDispose(bridge.dispose);
+
+  // Wire the static interceptor so a 401 from any Dio call triggers logout.
+  // Uses setUnauthenticated() NOT logout() — logout() makes an API call
+  // that would also 401, creating an infinite loop.
+  AuthInterceptor.onUnauthorized = () {
+    try {
+      ref.read(authProvider.notifier).setUnauthenticated();
+    } catch (_) {
+      // Ignore — called after provider disposal
+    }
+  };
+
+  return GoRouter(
+    navigatorKey: _rootNavigatorKey,
+    initialLocation: '/splash',
+    refreshListenable: bridge,
+    redirect: _buildRedirect(ref),
+    routes: [
+      GoRoute(
+        path: '/splash',
+        pageBuilder: (_, _) =>
+            PageTransition.fadeScalePage(child: const SplashScreen()),
+      ),
+      GoRoute(
+        path: '/login',
+        pageBuilder: (_, _) =>
+            PageTransition.fadeScalePage(child: const LoginScreen()),
+      ),
+      // ... authenticated routes
+    ],
+  );
+});
+```
+
+#### Multi-State Redirect with Splash Screen
+
+The redirect closure handles 3 auth states, not just logged-in/logged-out:
+
+```dart
+GoRouterRedirect _buildRedirect(Ref ref) =>
+    (BuildContext context, GoRouterState state) {
+      final authState = ref.read(authProvider);
+      final isLoggedIn = authState is AuthAuthenticated;
+      final location = state.matchedLocation;
+      final isPublicRoute = location == '/splash' || location == '/login';
+
+      // Stay on splash while auth check is running
+      if (authState is AuthChecking && location == '/splash') return null;
+      // No session — redirect from splash to login
+      if (authState is AuthInitial && location == '/splash') return '/login';
+      // Not logged in and not on a public page — redirect to login
+      if (!isLoggedIn && !isPublicRoute) return '/login';
+      // Already logged in and on a public page — go to dashboard
+      if (isLoggedIn && isPublicRoute) return '/dashboard/sales';
+
+      return null;
+    };
+```
+
+#### Safe setUnauthenticated (No API Call)
+
+When the interceptor catches a 401, cookies are already cleared. Calling `logout()` would make `POST /auth/logout` which also returns 401, creating a loop:
+
+```dart
+/// Set unauthenticated state immediately without making an API call.
+void setUnauthenticated() {
+  ref.read(storeSelectionProvider.notifier).clear();
+  clearBusinessAnalysisCache();
+  state = const AuthInitial();
+}
+```
+
+### 3.7 Navigation Helpers
 
 ```dart
 // Push a named route
@@ -1799,14 +1981,14 @@ flutter test --watch
 
 ## Quick Reference: Bloc vs Riverpod Decision Guide
 
-| Scenario | Recommended | Reason |
-|----------|-------------|--------|
-| Deeply nested state with complex events | Bloc | Event log, transformers, traceability |
-| Simple form or toggle state | Cubit or Riverpod Notifier | Less boilerplate |
-| Async data fetching (one-shot) | Riverpod FutureProvider | autoDispose, AsyncValue.when |
-| Real-time streams (WebSocket, Firestore) | Riverpod StreamProvider | `.when` on connection state |
-| Auth flow with token refresh | Bloc | Events track login/logout/refresh steps |
-| Cross-cutting dependencies (repos, config) | Riverpod Provider | No BuildContext needed |
-| Multi-tab app preserving scroll position | GoRouter StatefulShellRoute | Built-in indexed stack |
-| Team prefers strict structure | Bloc + Clean Architecture | Enforced separation of concerns |
-| Rapid prototyping / small apps | Riverpod | Less files, less boilerplate |
+| Scenario                                   | Recommended                 | Reason                                  |
+| ------------------------------------------ | --------------------------- | --------------------------------------- |
+| Deeply nested state with complex events    | Bloc                        | Event log, transformers, traceability   |
+| Simple form or toggle state                | Cubit or Riverpod Notifier  | Less boilerplate                        |
+| Async data fetching (one-shot)             | Riverpod FutureProvider     | autoDispose, AsyncValue.when            |
+| Real-time streams (WebSocket, Firestore)   | Riverpod StreamProvider     | `.when` on connection state             |
+| Auth flow with token refresh               | Bloc                        | Events track login/logout/refresh steps |
+| Cross-cutting dependencies (repos, config) | Riverpod Provider           | No BuildContext needed                  |
+| Multi-tab app preserving scroll position   | GoRouter StatefulShellRoute | Built-in indexed stack                  |
+| Team prefers strict structure              | Bloc + Clean Architecture   | Enforced separation of concerns         |
+| Rapid prototyping / small apps             | Riverpod                    | Less files, less boilerplate            |
