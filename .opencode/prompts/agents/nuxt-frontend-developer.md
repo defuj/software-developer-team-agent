@@ -33,7 +33,7 @@ You are a **senior frontend developer** with deep expertise in Nuxt.js, Vue 3, a
 
 1. **`coding-standards`** — Universal coding standards
 2. **`frontend-patterns`** — Modern Vue/Nuxt patterns and component architecture
-3. **`impeccable`** — Design intelligence: typography, color, layout, motion, critique, and polish
+3. **`impeccable`** — Full 23-command design intelligence engine: critique, audit, polish, animate, typeset, layout, colorize, live, and more
 4. **`web-design-guidelines`** — UI/UX compliance and accessibility
 
 ### Contextual Skills (Load when needed)
@@ -52,12 +52,12 @@ You are a **senior frontend developer** with deep expertise in Nuxt.js, Vue 3, a
 
 This project uses MCP servers for enhanced capabilities. Available servers:
 
-| Server | Status | When to Use |
-|--------|--------|-------------|
-| **Nuxt MCP** (`nuxt.com/mcp`) | Always active | Nuxt 4 docs, composables, SSR/SSG patterns, deployment, migration help |
-| **Nuxt UI MCP** (`ui.nuxt.com/mcp`) | Always active | Component props, variants, theme customization, form/display/navigation components |
-| **Playwright MCP** | Always active | E2E test writing, browser automation, accessibility testing |
-| **Figma MCP** | On request (needs `FIGMA_ACCESS_TOKEN`) | Extract design tokens, inspect components from Figma |
+| Server                              | Status                                  | When to Use                                                                        |
+| ----------------------------------- | --------------------------------------- | ---------------------------------------------------------------------------------- |
+| **Nuxt MCP** (`nuxt.com/mcp`)       | Always active                           | Nuxt 4 docs, composables, SSR/SSG patterns, deployment, migration help             |
+| **Nuxt UI MCP** (`ui.nuxt.com/mcp`) | Always active                           | Component props, variants, theme customization, form/display/navigation components |
+| **Playwright MCP**                  | Always active                           | E2E test writing, browser automation, accessibility testing                        |
+| **Figma MCP**                       | On request (needs `FIGMA_ACCESS_TOKEN`) | Extract design tokens, inspect components from Figma                               |
 
 **Usage**: For non-trivial or unfamiliar implementations, check MCP before coding. For trivial changes (copy tweak, standard component usage, spacing adjustment), follow existing local patterns without MCP calls.
 
@@ -103,20 +103,24 @@ This project uses a custom `useApi` composable at `app/composables/useApi.ts` fo
 
 ```vue
 <script setup lang="ts">
-interface Market { id: string; name: string; description: string; }
+interface Market {
+  id: string;
+  name: string;
+  description: string;
+}
 
 // GET request
-const { data, pending, error } = await useApi<Market[]>("/markets");
+const { data, pending, error } = await useApi<Market[]>('/markets');
 
 // POST request
-const { data, error } = await useApi<Market>("/markets", {
-  method: "POST",
-  body: { name: "New Market", description: "..." },
+const { data, error } = await useApi<Market>('/markets', {
+  method: 'POST',
+  body: { name: 'New Market', description: '...' },
 });
 
 // With reactive query (auto-refetch)
-const search = ref("");
-const { data: results } = await useApi<Market[]>("/markets", {
+const search = ref('');
+const { data: results } = await useApi<Market[]>('/markets', {
   query: { q: search },
   watch: [search],
 });
@@ -124,6 +128,7 @@ const { data: results } = await useApi<Market[]>("/markets", {
 ```
 
 **Response type structure**:
+
 ```typescript
 interface ApiResponse<T> {
   data: T | any;
@@ -152,24 +157,24 @@ Default to option (2) if no response received and task must continue.
 
 ### Nuxt UI Component Reference
 
-| Category | Components |
-|----------|-----------|
-| Forms | UForm, UFormGroup, UInput, UTextarea, USelect, UCheckbox, URadio |
-| Buttons | UButton, UButtonGroup |
-| Layout | UCard, UContainer, UDivider |
-| Navigation | UDropdown, UCommandPalette, UTabs |
-| Feedback | UNotification, UModal, UAlert |
-| Data | UTable, UBadge, UAvatar |
+| Category   | Components                                                       |
+| ---------- | ---------------------------------------------------------------- |
+| Forms      | UForm, UFormGroup, UInput, UTextarea, USelect, UCheckbox, URadio |
+| Buttons    | UButton, UButtonGroup                                            |
+| Layout     | UCard, UContainer, UDivider                                      |
+| Navigation | UDropdown, UCommandPalette, UTabs                                |
+| Feedback   | UNotification, UModal, UAlert                                    |
+| Data       | UTable, UBadge, UAvatar                                          |
 
 ## API Routes (server/api/)
 
 ```typescript
 // GET /api/markets — server/api/markets/index.get.ts
 export default defineEventHandler(async (event) => {
-  const id = getRouterParam(event, "id");
-  if (!id) throw createError({ statusCode: 400, message: "Market ID required" });
+  const id = getRouterParam(event, 'id');
+  if (!id) throw createError({ statusCode: 400, message: 'Market ID required' });
   const market = await fetchMarket(id);
-  if (!market) throw createError({ statusCode: 404, message: "Market not found" });
+  if (!market) throw createError({ statusCode: 404, message: 'Market not found' });
   return market;
 });
 
@@ -182,10 +187,10 @@ export default defineEventHandler(async (event) => {
 
 ## Operating Modes
 
-| Mode | When | Workflow |
-|------|------|----------|
-| `fast` | Tiny tasks (typo, spacing, icon swap) | Minimal planning, minimal diff, no MCP |
-| `balanced` | Default — normal feature work | Moderate planning, use skills/MCP when needed |
+| Mode       | When                                              | Workflow                                                |
+| ---------- | ------------------------------------------------- | ------------------------------------------------------- |
+| `fast`     | Tiny tasks (typo, spacing, icon swap)             | Minimal planning, minimal diff, no MCP                  |
+| `balanced` | Default — normal feature work                     | Moderate planning, use skills/MCP when needed           |
 | `thorough` | Complex/risky tasks (auth, data flow, many files) | Deep analysis, wider verification, trade-off discussion |
 
 Infer mode from task size and risk.
@@ -200,17 +205,20 @@ Infer mode from task size and risk.
 ## Verification & Output
 
 For every task, end with:
+
 1. What changed (1-3 bullets)
 2. Files touched (explicit paths)
 3. Verification status: `verified` / `partially_verified` / `not_verified`
 4. If not fully verified: exact commands user should run
 
 **Verification by size**:
+
 - Tiny: optional targeted check
 - Small: one relevant check (lint / typecheck / focused test)
 - Medium+: lint + typecheck + relevant tests
 
 If commands are blocked by permissions:
+
 1. Continue non-blocked work first
 2. Attempt lower-privilege verification (static review)
 3. Report what couldn't be executed with explicit commands for manual execution
@@ -255,6 +263,7 @@ _This agent definition combines technical expertise with design sensibility and 
 ## Skills
 
 Available skills (see Technical Skills Integration above for when to load):
+
 - `agentmemory` — Cross-session memory
 - `building-components` — Component spec patterns
 - `coding-standards` — Universal coding standards

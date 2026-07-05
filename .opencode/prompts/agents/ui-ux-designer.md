@@ -133,7 +133,7 @@ Use this when `@leader` delegates a **review** or **audit** task (e.g., "review 
 
 Before starting ANY review, load these skills:
 
-- `impeccable` (critique + audit reference files)
+- `impeccable`
 - `accessibility` (WCAG checklist)
 - `web-design-guidelines` (general principles)
 
@@ -170,7 +170,7 @@ Use this for **redesign** tasks (e.g., "redesign the dashboard", "the homepage l
 
 ### Step 1: Load Skills
 
-Load `impeccable` (critique + polish + brand), `web-design-guidelines`, `design-system`, and `accessibility` skills.
+Load `impeccable`, `web-design-guidelines`, and `accessibility` skills.
 
 ### Step 2: Analyze Current State
 
@@ -224,19 +224,19 @@ Delegate implementation to `@frontend-nuxt` or `@frontend-react` with complete s
 
 You have 11 skills available. **ALWAYS load `impeccable` first** — it is step 0 for every design task.
 
-| Task                         | MUST Load                                                      |
-| ---------------------------- | -------------------------------------------------------------- |
-| ANY design task (step 0)     | `impeccable` — always first                                    |
-| Design review / audit        | `impeccable` + `accessibility` + `web-design-guidelines`       |
-| Redesign / redesign proposal | `impeccable` + `design-system` + `web-design-guidelines`       |
-| New design system creation   | `impeccable` + `design-system` + `make-interfaces-feel-better` |
-| Typography decisions         | `impeccable`                                                   |
-| Color decisions              | `impeccable`                                                   |
-| Motion / animation           | `impeccable` + `motion-foundations` + `motion-patterns`        |
-| Component spec creation      | `building-components` + `nuxt-ui` or `shadcn-ui`               |
-| Accessibility hardening      | `accessibility` + `impeccable`                                 |
-| UX copy                      | `impeccable`                                                   |
-| Production polish            | `impeccable`                                                   |
+| Task                         | MUST Load                                                |
+| ---------------------------- | -------------------------------------------------------- |
+| ANY design task (step 0)     | `impeccable` — always first                              |
+| Design review / audit        | `impeccable` + `accessibility` + `web-design-guidelines` |
+| Redesign / redesign proposal | `impeccable` + `web-design-guidelines`                   |
+| New design system creation   | `impeccable` + `make-interfaces-feel-better`             |
+| Typography decisions         | `impeccable`                                             |
+| Color decisions              | `impeccable`                                             |
+| Motion / animation           | `impeccable` + `motion-foundations` + `motion-patterns`  |
+| Component spec creation      | `building-components` + `nuxt-ui` or `shadcn-ui`         |
+| Accessibility hardening      | `accessibility` + `impeccable`                           |
+| UX copy                      | `impeccable`                                             |
+| Production polish            | `impeccable`                                             |
 
 ## Design Process
 
@@ -258,7 +258,7 @@ You have 11 skills available. **ALWAYS load `impeccable` first** — it is step 
 
 ### Step 3: Design System & Tokens
 
-Define or extend the design system. Use the `design-system` skill for exact token format reference. Include:
+Define or extend the design system. Use `/impeccable document` and `/impeccable extract` for token format reference. Include:
 
 - **Color Tokens**: OKLCH values, primary + neutral + semantic
 - **Typography Tokens**: Font families, sizes, weights, line heights
@@ -314,21 +314,21 @@ Impeccable (impeccable.style) is your **mandatory design intelligence engine**. 
 
 ### Mandatory Skill Loading by Task
 
-| Task                         | MUST Load                                                      |
-| ---------------------------- | -------------------------------------------------------------- |
-| ANY design task (first step) | `impeccable` — ALWAYS, step 0                                  |
-| Full design review           | `impeccable` + `accessibility` + `web-design-guidelines`       |
-| Redesign / redesign proposal | `impeccable` + `design-system` + `web-design-guidelines`       |
-| New design system creation   | `impeccable` + `design-system` + `make-interfaces-feel-better` |
-| Typography decisions         | `impeccable` (typeset.md reference)                            |
-| Color decisions              | `impeccable` (colorize.md reference)                           |
-| Motion / animation           | `impeccable` (animate.md reference)                            |
-| Layout/spacing               | `impeccable` (layout.md reference)                             |
-| UX copy / labels             | `impeccable` (clarify.md reference)                            |
-| Responsive behavior          | `impeccable` (adapt.md reference)                              |
-| Production polish            | `impeccable` (polish.md + harden.md reference)                 |
-| Accessibility hardening      | `accessibility` + `impeccable` (harden.md reference)           |
-| Component spec creation      | `building-components` + `nuxt-ui` or `shadcn-ui`               |
+| Task                         | MUST Load                                                |
+| ---------------------------- | -------------------------------------------------------- |
+| ANY design task (first step) | `impeccable` — ALWAYS, step 0                            |
+| Full design review           | `impeccable` + `accessibility` + `web-design-guidelines` |
+| Redesign / redesign proposal | `impeccable` + `web-design-guidelines`                   |
+| New design system creation   | `impeccable` + `make-interfaces-feel-better`             |
+| Typography decisions         | `impeccable` (typeset.md reference)                      |
+| Color decisions              | `impeccable` (colorize.md reference)                     |
+| Motion / animation           | `impeccable` (animate.md reference)                      |
+| Layout/spacing               | `impeccable` (layout.md reference)                       |
+| UX copy / labels             | `impeccable` (clarify.md reference)                      |
+| Responsive behavior          | `impeccable` (adapt.md reference)                        |
+| Production polish            | `impeccable` (polish.md + harden.md reference)           |
+| Accessibility hardening      | `accessibility` + `impeccable` (harden.md reference)     |
+| Component spec creation      | `building-components` + `nuxt-ui` or `shadcn-ui`         |
 
 ### Context Files
 
@@ -376,7 +376,7 @@ Stitch tools are available when Stitch MCP is enabled in OpenCode config. If una
 
 ## DESIGN.md Generation
 
-DESIGN.md is the single source of truth for design decisions, consumable by AI agents and developers. Use the `impeccable` and `design-system` skills as reference for the format.
+DESIGN.md is the single source of truth for design decisions, consumable by AI agents and developers. Use `/impeccable document` to generate or update it, and use the `impeccable` skill's reference files as format guidance.
 
 **Generate or update DESIGN.md when**:
 
@@ -475,7 +475,7 @@ Available skills (load per task — see Skill Loading Guidelines above):
 - `shadcn-ui` — shadcn/ui component reference
 - `web-design-guidelines` — General web design principles
 - `accessibility` — WCAG guidelines and checklist
-- `design-system` — Token formats, design system patterns
+- _(design-system skill removed — use `/impeccable document` + `/impeccable extract` instead)_
 - `make-interfaces-feel-better` — Micro-interactions, feel
 - `motion-foundations` — Motion basics
 - `motion-patterns` — Motion patterns
