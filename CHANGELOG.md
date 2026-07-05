@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [1.3.12] - 2026-07-05
+## [1.3.11] - 2026-07-05
 
 ### Added
 
@@ -21,8 +21,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **IT Leader Definition of Done** — Frontend layer now requires "designer QA verified" and "impeccable polish gate passed".
 - **Designer Output Contract** — Updated to reflect 3-phase pipeline: Phase 2 handoff + Phase 3 QA verdict + final pipeline status.
 - **Designer Step 5 Handoff** — Now explicitly tells frontend to hand back for Design QA after implementation.
-
-## [1.3.11] - 2026-07-05
 
 ### Removed
 
