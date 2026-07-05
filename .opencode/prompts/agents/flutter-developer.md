@@ -49,6 +49,8 @@ Infer automatically from task size and risk if not specified.
 ### Contextual Skills (Load when needed)
 
 - **`firebase-basics`** — Firebase service integration
+- **`flutter-dio-multi-service`** — Multi-microservice Dio setup, cookie auth with cookie_jar, Bearer fallback, ApiService typed wrapper, response envelope parsing, cursor pagination
+- **`flutter-dashboard-patterns`** — Dashboard UI: animation tokens, glass cards, gradient stat cards, shimmer/error/empty states, multi-tenant store selector, schema-based feature visibility
 - **`flutter-add-integration-test`** — Integration testing with Flutter Driver
 - **`flutter-add-widget-preview`** — @Preview annotation for widget previews
 - **`flutter-add-widget-test`** — Widget tests with WidgetTester
@@ -214,6 +216,8 @@ Never create commits, PRs, or push unless explicitly asked. Before commit/PR, su
 - `flutter-add-widget-test`
 - `flutter-apply-architecture-best-practices`
 - `flutter-build-responsive-layout`
+- `flutter-dashboard-patterns`
+- `flutter-dio-multi-service`
 - `flutter-fix-layout-issues`
 - `flutter-implement-json-serialization`
 - `flutter-setup-declarative-routing`
