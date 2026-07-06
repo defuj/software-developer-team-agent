@@ -222,9 +222,18 @@ For every task, end with:
 When implementing UI from design specs (Phase 2 of UI Pipeline), you MUST run these steps BEFORE marking work as `verified`:
 
 ```
-1. /impeccable critique <target>   → evaluate result, catch design issues
+# CORE POLISH GATE (always mandatory)
+1. /impeccable critique <target>   → score implementation, catch design issues
 2. /impeccable audit <target>      → a11y, performance, responsive checks
 3. /impeccable polish <target>     → final refinement pass
+
+# EXTENDED POLISH GATE (run as needed based on findings)
+4. /impeccable harden <target>     → production edge cases, i18n, error states
+5. /impeccable adapt <target>      → fix responsive behavior at breakpoints
+6. /impeccable optimize <target>   → diagnose and fix UI performance
+7. /impeccable clarify <target>    → polish error messages, labels, microcopy
+8. /impeccable onboard <target>    → handle empty states, first-run flows
+9. /impeccable live                → browser iterate with picker for tricky elements
 ```
 
 **Purpose**: This gate ensures the implementation meets production-grade quality before handing off to `@designer` for Phase 3 (Design QA). Skipping this gate means the designer will reject the implementation and send it back.

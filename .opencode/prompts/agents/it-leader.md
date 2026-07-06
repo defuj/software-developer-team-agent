@@ -393,47 +393,92 @@ Modes are determined by request classification — not chosen independently:
 For ANY task involving UI creation, redesign, or improvement, follow this 3-phase pipeline. Each phase MUST complete before the next begins.
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                    UI DEVELOPMENT PIPELINE                       │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                   │
-│  @leader → delegate design brief + API contract                   │
-│    │                                                               │
-│    ▼                                                               │
-│  ┌───────────────────────────────────────────────────────────┐    │
-│  │  PHASE 1: DESIGN (@designer)                             │    │
-│  │  1. Load `impeccable` skill (step 0 — mandatory)         │    │
-│  │  2. /impeccable init  (if no PRODUCT.md/DESIGN.md)       │    │
-│  │  3. /impeccable shape <feature>  (plan UX)               │    │
-│  │  4. /impeccable critique  (evaluate existing, if any)    │    │
-│  │  5. Produce: design specs, tokens, DESIGN.md, states,    │    │
-│  │     accessibility requirements                            │    │
-│  │  6. Handoff to @frontend-nuxt / @frontend-react           │    │
-│  └───────────────────────────────────────────────────────────┘    │
-│    │                                                               │
-│    ▼                                                               │
-│  ┌───────────────────────────────────────────────────────────┐    │
-│  │  PHASE 2: IMPLEMENTATION (@frontend-nuxt / @frontend-react)│    │
-│  │  1. Implement from design specs + use target UI lib      │    │
-│  │  2. /impeccable critique <target>  (evaluate result)      │    │
-│  │  3. /impeccable audit <target>  (a11y, perf, responsive)  │    │
-│  │  4. /impeccable polish <target>  (finalize, harden)       │    │
-│  │  5. Report + hand off to @designer for Design QA          │    │
-│  └───────────────────────────────────────────────────────────┘    │
-│    │                                                               │
-│    ▼                                                               │
-│  ┌───────────────────────────────────────────────────────────┐    │
-│  │  PHASE 3: DESIGN QA (@designer)                          │    │
-│  │  1. Verify implementation against original spec          │    │
-│  │  2. /impeccable critique on live result                  │    │
-│  │  3. Check token usage, accessibility, states, responsive │    │
-│  │  4. Report: PASS ✅ → done | FAIL ❌ → back to Phase 2   │    │
-│  └───────────────────────────────────────────────────────────┘    │
-│    │                                                               │
-│    ▼                                                               │
-│  ✅ FINAL report to @leader                                       │
-│                                                                   │
-└─────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────────┐
+│                     UI DEVELOPMENT PIPELINE — ALL 23 COMMANDS               │
+├────────────────────────────────────────────────────────────────────────────┤
+│                                                                            │
+│  @leader → delegate design brief + API contract                            │
+│    │                                                                        │
+│    ▼                                                                        │
+│  ┌──────────────────────────────────────────────────────────────────┐     │
+│  │  PHASE 1: DESIGN (@designer)                                     │     │
+│  │  ──────────────────────────                                      │     │
+│  │  Load `impeccable` (step 0 — mandatory)                          │     │
+│  │                                                                    │     │
+│  │  SETUP CONTEXT:                                                   │     │
+│  │    /impeccable init     — Create PRODUCT.md, DESIGN.md            │     │
+│  │    /impeccable document — Generate DESIGN.md from real code       │     │
+│  │    /impeccable extract  — Pull tokens into design system          │     │
+│  │                                                                    │     │
+│  │  PLAN UX:                                                         │     │
+│  │    /impeccable shape    — Discovery interview, design brief       │     │
+│  │    /impeccable craft    — Full end-to-end (shape → build)         │     │
+│  │                                                                    │     │
+│  │  EVALUATE EXISTING:                                               │     │
+│  │    /impeccable critique — Review current UI with scoring          │     │
+│  │    /impeccable distill  — Strip unnecessary complexity            │     │
+│  │    /impeccable clarify  — Improve UX copy, labels, error messages │     │
+│  │                                                                    │     │
+│  │  DEFINE VISUAL LANGUAGE:                                          │     │
+│  │    /impeccable typeset  — Set typography hierarchy                │     │
+│  │    /impeccable colorize — Add strategic color palette             │     │
+│  │    /impeccable layout   — Fix spacing, rhythm, visual hierarchy   │     │
+│  │    /impeccable animate  — Plan purposeful motion                  │     │
+│  │    /impeccable delight  — Add personality and polish              │     │
+│  │    /impeccable overdrive— Push past conventional limits           │     │
+│  │    /impeccable bolder   — Amplify safe/bland designs              │     │
+│  │    /impeccable quieter  — Tone down aggressive designs            │     │
+│  │    /impeccable onboard  — Plan first-run flows, empty states      │     │
+│  │                                                                    │     │
+│  │  OUTPUT: Design specs, DESIGN.md, tokens, states, a11y reqs       │     │
+│  │                                                                    │     │
+│  │  6. Handoff to @frontend-nuxt / @frontend-react                   │     │
+│  └──────────────────────────────────────────────────────────────────┘     │
+│    │                                                                        │
+│    ▼                                                                        │
+│  ┌──────────────────────────────────────────────────────────────────┐     │
+│  │  PHASE 2: IMPLEMENTATION (@frontend-nuxt / @frontend-react)      │     │
+│  │  ──────────────────────────────────────────────────────          │     │
+│  │  1. Implement from design specs + use target UI lib              │     │
+│  │                                                                    │     │
+│  │  POLISH GATE (mandatory before done):                            │     │
+│  │    /impeccable critique — Score implementation quality           │     │
+│  │    /impeccable audit    — a11y, perf, responsive, anti-patterns  │     │
+│  │    /impeccable polish   — Final refinement pass                  │     │
+│  │    /impeccable harden   — Edge cases, i18n, error states         │     │
+│  │    /impeccable adapt    — Verify responsive behavior             │     │
+│  │    /impeccable optimize — Diagnose and fix UI performance        │     │
+│  │    /impeccable clarify  — Polish error messages, labels          │     │
+│  │    /impeccable onboard  — Handle empty states, first-run         │     │
+│  │    /impeccable live     — Browser iterate with picker            │     │
+│  │                                                                    │     │
+│  │  5. Report + hand off to @designer for Design QA                 │     │
+│  └──────────────────────────────────────────────────────────────────┘     │
+│    │                                                                        │
+│    ▼                                                                        │
+│  ┌──────────────────────────────────────────────────────────────────┐     │
+│  │  PHASE 3: DESIGN QA (@designer)                                 │     │
+│  │  ─────────────────────────────                                  │     │
+│  │  1. Verify implementation against original spec                 │     │
+│  │                                                                    │     │
+│  │  VERIFICATION:                                                   │     │
+│  │    /impeccable critique — Score live implementation             │     │
+│  │    /impeccable audit    — Technical compliance check             │     │
+│  │    /impeccable layout   — Verify spacing, rhythm, alignment      │     │
+│  │    /impeccable typeset  — Verify typography matches spec         │     │
+│  │    /impeccable colorize — Verify color tokens match spec         │     │
+│  │    /impeccable adapt    — Verify responsive breakpoints          │     │
+│  │    /impeccable distill  — Verify no complexity creep             │     │
+│  │    /impeccable clarify  — Verify copy quality, error messages    │     │
+│  │    /impeccable harden   — Verify edge cases covered              │     │
+│  │                                                                    │     │
+│  │  3. Report: PASS ✅ → done | FAIL ❌ → back to Phase 2           │     │
+│  └──────────────────────────────────────────────────────────────────┘     │
+│    │                                                                        │
+│    ▼                                                                        │
+│  ✅ FINAL report to @leader                                                │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ### Pipeline Rules
@@ -443,7 +488,35 @@ For ANY task involving UI creation, redesign, or improvement, follow this 3-phas
 3. **Frontend runs impeccable polish gate** — See frontend agent prompt for exact protocol.
 4. **Designer owns QA gate** — Only the designer can declare Phase 3 as PASS.
 5. **Fail loop** — If Phase 3 fails, go back to Phase 2, fix, then re-run Phase 3.
-6. **Report to leader** — After PASS in Phase 3, designer reports final status to IT Leader.
+6. **All 23 commands available** — Any command not listed for a specific phase can still be used when relevant. The mapping above shows the primary phase for each command.
+
+### Complete Command-to-Phase Mapping
+
+| Command                 |   Phase 1 (Design)    | Phase 2 (Implement) |      Phase 3 (QA)       |
+| ----------------------- | :-------------------: | :-----------------: | :---------------------: |
+| `/impeccable init`      |   ✅ Setup context    |          —          |            —            |
+| `/impeccable shape`     |    ✅ UX planning     |          —          |            —            |
+| `/impeccable craft`     |  ✅ Full build flow   |          —          |            —            |
+| `/impeccable document`  | ✅ Generate DESIGN.md |          —          |            —            |
+| `/impeccable extract`   |  ✅ Token extraction  |          —          |            —            |
+| `/impeccable critique`  | ✅ Evaluate existing  |   ✅ Score result   | ✅ Score implementation |
+| `/impeccable audit`     |           —           | ✅ a11y/perf check  |   ✅ Compliance check   |
+| `/impeccable polish`    |           —           | ✅ Final refinement |            —            |
+| `/impeccable harden`    |           —           |    ✅ Edge cases    |  ✅ Verify edge cases   |
+| `/impeccable adapt`     |           —           |    ✅ Responsive    |  ✅ Verify responsive   |
+| `/impeccable optimize`  |           —           | ✅ Performance fix  |            —            |
+| `/impeccable live`      |           —           | ✅ Browser iterate  |            —            |
+| `/impeccable clarify`   |      ✅ UX copy       |  ✅ Error messages  |       ✅ Copy QA        |
+| `/impeccable onboard`   |    ✅ Empty states    |  ✅ Handle states   |            —            |
+| `/impeccable typeset`   |     ✅ Typography     |          —          |  ✅ Verify typography   |
+| `/impeccable colorize`  |   ✅ Color palette    |          —          |    ✅ Verify colors     |
+| `/impeccable layout`    |   ✅ Spacing/rhythm   |          —          |    ✅ Verify spacing    |
+| `/impeccable animate`   |    ✅ Motion plan     |          —          |            —            |
+| `/impeccable delight`   |    ✅ Personality     |          —          |            —            |
+| `/impeccable overdrive` |    ✅ Push limits     |          —          |            —            |
+| `/impeccable bolder`    |      ✅ Amplify       |          —          |            —            |
+| `/impeccable quieter`   |     ✅ Tone down      |          —          |            —            |
+| `/impeccable distill`   |      ✅ Simplify      |          —          |  ✅ Verify simplicity   |
 
 ### Delegation Template for UI Features
 

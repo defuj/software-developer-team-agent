@@ -19,6 +19,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **All 23 impeccable commands mapped to pipeline phases** — `it-leader.md` now includes a complete command-to-phase mapping table and expanded pipeline diagram showing every command in its primary phase (10 in Phase 1 Design, 11 in Phase 2 Implementation, 9 in Phase 3 QA).
+- **Frontend polish gate expanded** — Both `nuxt-frontend-developer.md` and `react-frontend-developer.md` now list 9 commands in the polish gate: core (critique, audit, polish) + extended (harden, adapt, optimize, clarify, onboard, live).
+- **Designer command-by-phase table** — `ui-ux-designer.md` now has a Command-by-Phase Reference table grouping all 23 commands into Design, Implement, and Design QA phases.
 - `flutter-developer.md`: registered `flutter-dio-multi-service` and `flutter-dashboard-patterns` in Contextual Skills (with task descriptions) and Skills list
 
 ---
