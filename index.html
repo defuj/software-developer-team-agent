@@ -371,6 +371,7 @@
         color: var(--text-primary);
         margin-bottom: var(--space-3);
         line-height: 1.15;
+        text-wrap: balance;
       }
       .section-sub {
         font-size: var(--text-lg);
@@ -478,7 +479,7 @@
         left: 0;
         width: 0%;
         height: 3px;
-        background: linear-gradient(90deg, var(--primary), var(--primary) 80%, transparent);
+        background: linear-gradient(90deg, var(--primary), var(--gold) 80%, transparent);
         box-shadow: 0 0 8px var(--primary-glow);
         z-index: var(--z-modal);
         will-change: width;
@@ -829,10 +830,11 @@
       .hero-headline {
         font-size: var(--text-hero);
         font-weight: var(--weight-bold);
-        letter-spacing: -0.03em;
+        letter-spacing: -0.035em;
         line-height: 1.05;
         color: var(--text-primary);
         margin-bottom: var(--space-5);
+        text-wrap: balance;
       }
       .hero-headline-accent {
         color: var(--primary);
@@ -875,6 +877,15 @@
         align-items: center;
         justify-content: center;
       }
+      .hero-stat:nth-child(1) .hero-stat-number {
+        transition-delay: 0s;
+      }
+      .hero-stat:nth-child(2) .hero-stat-number {
+        transition-delay: 0.15s;
+      }
+      .hero-stat:nth-child(3) .hero-stat-number {
+        transition-delay: 0.3s;
+      }
       .hero-stat-number {
         font-size: var(--text-stat);
         font-weight: var(--weight-bold);
@@ -882,6 +893,12 @@
         line-height: 1;
         letter-spacing: -0.02em;
         text-shadow: 0 0 20px var(--gold-glow);
+        transition: text-shadow var(--duration-slow) var(--ease-out);
+      }
+      .hero-stat-number.revealed {
+        text-shadow:
+          0 0 30px var(--gold-glow),
+          0 0 60px var(--gold-glow);
       }
       .hero-stat-label {
         font-size: var(--text-sm);
@@ -889,75 +906,7 @@
         margin-top: var(--space-2);
       }
 
-      /* Terminal Preview */
-      .terminal-preview {
-        max-width: 640px;
-        margin: 0 auto var(--space-8);
-        border-radius: var(--radius-lg);
-        background: var(--bg-surface);
-        border: var(--border-default);
-        overflow: hidden;
-        transition: all var(--duration-normal) var(--ease-out);
-        position: relative;
-      }
-      .terminal-preview:hover {
-        border-color: var(--border-primary);
-        box-shadow: var(--shadow-primary);
-      }
-      .terminal-preview-header {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: var(--space-3) var(--space-4);
-        background: var(--bg-raised);
-        border-bottom: var(--border-default);
-      }
-      .terminal-preview-dots {
-        display: flex;
-        gap: 6px;
-      }
-      .terminal-preview-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-      }
-      .terminal-preview-dot-red {
-        background: #ff5f56;
-      }
-      .terminal-preview-dot-yellow {
-        background: #ffbd2e;
-      }
-      .terminal-preview-dot-green {
-        background: #27c93f;
-      }
-      .terminal-preview-title {
-        margin-left: auto;
-        font-family: var(--font-mono);
-        font-size: var(--text-xs);
-        color: var(--text-muted);
-      }
-      .terminal-preview-body {
-        padding: var(--space-5);
-        font-family: var(--font-mono);
-        font-size: var(--text-code);
-        line-height: 1.8;
-        color: var(--text-secondary);
-        min-height: 180px;
-        background: var(--bg-inset);
-      }
-      .terminal-preview-prompt {
-        color: var(--primary);
-        font-weight: var(--weight-semibold);
-      }
-      .terminal-preview-cursor {
-        display: inline-block;
-        width: 8px;
-        height: 16px;
-        background: var(--primary);
-        animation: blink 1s step-end infinite;
-        vertical-align: text-bottom;
-        margin-left: 2px;
-      }
+      /* Terminal Preview — moved to Install section */
 
       @media (max-width: 768px) {
         .hero-stats {
@@ -1051,6 +1000,7 @@
         );
         opacity: 0.5;
         width: 0%;
+        transition: width 1.2s var(--ease-out);
       }
       .problem-bar-fill-solid {
         background: var(--primary);
@@ -1123,11 +1073,23 @@
         color: var(--text-muted);
         text-align: center;
       }
+      @keyframes arrow-pulse {
+        0%,
+        100% {
+          opacity: 0.6;
+          transform: translateX(0);
+        }
+        50% {
+          opacity: 1;
+          transform: translateX(4px);
+        }
+      }
       .memory-arrow {
         font-size: var(--text-h3);
         color: var(--primary);
         padding: 0 16px;
         flex-shrink: 0;
+        animation: arrow-pulse 2s var(--ease-out) infinite;
       }
       .memory-table {
         width: 100%;
@@ -1273,7 +1235,7 @@
         background: var(--bg);
         border: var(--border-default);
         border-radius: var(--radius-lg);
-        padding: 20px;
+        padding: 24px;
         cursor: default;
         overflow: hidden;
         display: flex;
@@ -1281,11 +1243,13 @@
         gap: 10px;
         transition:
           border-color 0.3s var(--ease-out),
-          transform 0.3s var(--ease-out);
+          transform 0.3s var(--ease-out),
+          box-shadow 0.3s var(--ease-out);
       }
       .agent-card:hover {
         border-color: var(--border-hover);
-        transform: scale(1.01);
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
       }
 
       /* Spotlight glow overlay on hover */
@@ -1521,6 +1485,15 @@
         line-height: 1.15;
         color: var(--text-primary);
         margin-bottom: var(--space-4);
+      }
+      .devloop-title {
+        font-size: var(--text-h2);
+        font-weight: var(--weight-bold);
+        letter-spacing: -0.015em;
+        line-height: 1.15;
+        color: var(--text-primary);
+        margin-bottom: var(--space-4);
+        text-wrap: balance;
       }
       .devloop-text p {
         font-size: var(--text-base);
@@ -1913,6 +1886,7 @@
         padding-bottom: 160px;
         position: relative;
         overflow: hidden;
+        background: var(--bg-surface);
       }
       .cta-ambient {
         position: absolute;
@@ -1938,7 +1912,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: radial-gradient(circle, var(--gold-glow) 0%, transparent 60%);
+        background: radial-gradient(circle, var(--primary-glow) 0%, transparent 60%);
         pointer-events: none;
       }
       .cta-content {
@@ -1954,6 +1928,7 @@
         line-height: 1.15;
         letter-spacing: -0.02em;
         color: var(--text-primary);
+        text-wrap: balance;
       }
       .cta-sub {
         font-size: var(--text-lg);
@@ -2207,6 +2182,12 @@
         .problem-bar-fill {
           transition: none;
         }
+        .memory-arrow {
+          animation: none;
+        }
+        .devloop-status-dot {
+          animation: none;
+        }
       }
     </style>
   </head>
@@ -2226,13 +2207,13 @@ C2: NAVBAR
           <span class="nav-logo-icon" aria-hidden="true">K</span>
           <span class="nav-logo-text">Agent Kit</span>
         </a>
-        <div class="nav-links" role="menubar">
-          <a href="#problem" role="menuitem" class="nav-link">Why</a>
-          <a href="#hero" role="menuitem" class="nav-link">Platform</a>
-          <a href="#memory" role="menuitem" class="nav-link">Memory</a>
-          <a href="#devloop" role="menuitem" class="nav-link">Dev Loop</a>
-          <a href="#agents" role="menuitem" class="nav-link">Agents</a>
-          <a href="#install" role="menuitem" class="nav-link">Install</a>
+        <div class="nav-links">
+          <a href="#problem" class="nav-link">Why</a>
+          <a href="#hero" class="nav-link">Platform</a>
+          <a href="#memory" class="nav-link">Memory</a>
+          <a href="#devloop" class="nav-link">Dev Loop</a>
+          <a href="#agents" class="nav-link">Agents</a>
+          <a href="#install" class="nav-link">Install</a>
         </div>
         <div class="nav-actions">
           <button
@@ -2322,33 +2303,18 @@ C3: HERO — Typographic Headline + Stat Counters
           <div class="hero-content">
             <div class="hero-label">OpenCode Agent Kit</div>
             <h1 class="hero-headline">
-              Portable AI agents that
-              <span class="hero-headline-accent">see what you see</span>
-              & fix it
+              Build smarter with AI agents
+              <span class="hero-headline-accent">that remember</span>
             </h1>
             <p class="hero-subtitle">
-              33 specialized agents. 207 skill playbooks. Persistent cross-session memory. Visual
-              dev loop. One command to install.
+              33 specialized agents &middot; 207 skill playbooks &middot; persistent cross-session
+              memory &middot; one command to install.
             </p>
             <div class="hero-actions">
               <a href="#install" class="btn btn-primary btn-lg">Install Now</a>
               <a href="https://github.com/defuj/opencode-agent-kit" class="btn btn-secondary btn-lg"
                 >View on GitHub</a
               >
-            </div>
-            <div class="terminal-preview reveal">
-              <div class="terminal-preview-header">
-                <div class="terminal-preview-dots" aria-hidden="true">
-                  <span class="terminal-preview-dot terminal-preview-dot-red"></span>
-                  <span class="terminal-preview-dot terminal-preview-dot-yellow"></span>
-                  <span class="terminal-preview-dot terminal-preview-dot-green"></span>
-                </div>
-                <span class="terminal-preview-title">bash — install</span>
-              </div>
-              <div class="terminal-preview-body">
-                <span class="terminal-preview-prompt">$</span> npx opencode-agent-kit init --global
-                <span class="terminal-preview-cursor"></span>
-              </div>
             </div>
             <hr class="hero-divider" aria-hidden="true" />
             <div class="hero-stats">
@@ -2361,7 +2327,7 @@ C3: HERO — Typographic Headline + Stat Counters
                 <span class="hero-stat-label">Skill Playbooks</span>
               </div>
               <div class="hero-stat">
-                <span class="hero-stat-number" data-target="47">0</span>
+                <span class="hero-stat-number" data-target="46">0</span>
                 <span class="hero-stat-label">CLI Commands</span>
               </div>
             </div>
@@ -2529,7 +2495,7 @@ C6B: VISUAL DEV LOOP
 
           <div class="devloop-grid reveal">
             <div class="devloop-text">
-              <h2>The visual development loop</h2>
+              <h3 class="devloop-title">The visual development loop</h3>
               <p>
                 Instead of describing UI bugs and waiting for screenshots, the agent runs an
                 autonomous cycle: start the dev server, open the browser, take screenshots, check
@@ -3325,78 +3291,6 @@ JAVASCRIPT
         }
 
         /* ------------------------------------------
-           HERO TERMINAL TYPEWRITER
-         ------------------------------------------ */
-        var termBody = document.querySelector('.terminal-preview-body');
-        if (termBody) {
-          var termLines = [
-            {
-              text: '<span class="terminal-preview-prompt">$</span> npx opencode-agent-kit init --global',
-              delay: 500,
-            },
-            {
-              text: '<span style="color: var(--text-muted)">  → OpenCode home: ~/.config/opencode/</span>',
-              delay: 1000,
-            },
-            {
-              text: '<span style="color: var(--text-muted)">  → Copying skills, prompts, commands...</span>',
-              delay: 1800,
-            },
-            {
-              text: '<span style="color: var(--success)">  ✓</span> <span style="color: var(--text-muted)">Dependencies installed</span>',
-              delay: 2600,
-            },
-            {
-              text: '<span style="color: var(--success)">  ✓</span> <span style="color: var(--text-muted)">agentmemory ready</span>',
-              delay: 3200,
-            },
-            {
-              text: '<span style="color: var(--success)">  ✅</span> <span style="color: var(--text-primary)">opencode-agent-kit v1.3.10 installed globally</span>',
-              delay: 4000,
-            },
-          ];
-          var lineIdx = 0;
-          function typeNext() {
-            if (lineIdx >= termLines.length) {
-              setTimeout(function () {
-                lineIdx = 0;
-                termBody.innerHTML = '';
-                setTimeout(typeNext, 1000);
-              }, 3000);
-              return;
-            }
-            var line = termLines[lineIdx];
-            setTimeout(
-              function () {
-                if (lineIdx === 0) {
-                  termBody.innerHTML = line.text + '<span class="terminal-preview-cursor"></span>';
-                } else {
-                  termBody.innerHTML =
-                    termBody.innerHTML.replace(
-                      '<span class="terminal-preview-cursor"></span>',
-                      '',
-                    ) +
-                    '<br>' +
-                    line.text;
-                }
-                lineIdx++;
-                typeNext();
-              },
-              lineIdx === 0
-                ? 0
-                : line.delay - (termLines[lineIdx - 1] ? termLines[lineIdx - 1].delay : 0),
-            );
-          }
-          if (!window.matchMedia('(prefers-reduced-motion:reduce)').matches) {
-            setTimeout(typeNext, 1500);
-          } else {
-            // Show final state for reduced motion
-            termBody.innerHTML =
-              '<span class="terminal-preview-prompt">$</span> npx opencode-agent-kit init --global<br><span style="color: var(--success)">  ✅</span> <span style="color: var(--text-primary)">opencode-agent-kit v1.3.10 installed globally</span>';
-          }
-        }
-
-        /* ------------------------------------------
            STATS COUNTER ON REVEAL
          ------------------------------------------ */
         var statsRevealObserver = new IntersectionObserver(
@@ -3454,8 +3348,39 @@ JAVASCRIPT
         }
 
         /* ------------------------------------------
+           NAV ACTIVE SECTION HIGHLIGHTING
+         ------------------------------------------ */
+        var navLinks = document.querySelectorAll('.nav-link');
+        var sections = [];
+        navLinks.forEach(function (link) {
+          var href = link.getAttribute('href');
+          if (href && href.startsWith('#')) {
+            var section = document.getElementById(href.substring(1));
+            if (section) sections.push({ el: section, link: link });
+          }
+        });
+        function updateActiveNav() {
+          var scrollY = window.scrollY + 120;
+          var current = null;
+          sections.forEach(function (s) {
+            var top = s.el.offsetTop;
+            var bottom = top + s.el.offsetHeight;
+            if (scrollY >= top && scrollY < bottom) current = s.link;
+          });
+          navLinks.forEach(function (l) {
+            l.style.color = '';
+          });
+          if (current)
+            current.style.color = getComputedStyle(document.documentElement)
+              .getPropertyValue('--primary')
+              .trim();
+        }
+        window.addEventListener('scroll', updateActiveNav, { passive: true });
+        window.addEventListener('load', updateActiveNav);
+
+        /* ------------------------------------------
            KEYBOARD TRAP for mobile menu
-        ------------------------------------------ */
+         ------------------------------------------ */
         mobilePanel.addEventListener('keydown', function (e) {
           if (e.key === 'Escape') toggleMenu(false);
         });

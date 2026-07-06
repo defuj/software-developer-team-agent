@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.3.13] - 2026-07-06
+
+### Added
+
+- **24 OpenCode slash commands for Impeccable** — created command files in `.opencode/commands/` so OpenCode recognizes `/impeccable` and all 22 subcommands. Includes main `impeccable.md` (with full command reference table) plus pinned shortcuts: `/critique`, `/audit`, `/polish`, `/craft`, `/shape`, `/init`, `/live`, `/document`, `/extract`, `/harden`, `/layout`, `/typeset`, `/colorize`, `/animate`, `/distill`, `/clarify`, `/adapt`, `/bolder`, `/quieter`, `/delight`, `/overdrive`, `/optimize`, `/onboard`, `/hooks`.
+
+### Fixed
+
+- **`/impeccable` returns "No matching items"** — OpenCode slash commands require `.md` files in `.opencode/commands/`. Without these files, none of the impeccable commands were discoverable in OpenCode.
+
 ## [1.3.12] - 2026-07-06
 
 ### Added
