@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **UI Development Pipeline section to INSTRUCTIONS.md** — added comprehensive 3-phase pipeline documentation, 24-entry available slash commands table, and 5 rules for all agents. This file is loaded by every agent, so all agents now know about the pipeline and impeccable commands.
 - **24 OpenCode slash commands for Impeccable** — created command files in `.opencode/commands/` so OpenCode recognizes `/impeccable` and all 22 subcommands. Includes main `impeccable.md` (with full command reference table) plus pinned shortcuts: `/critique`, `/audit`, `/polish`, `/craft`, `/shape`, `/init`, `/live`, `/document`, `/extract`, `/harden`, `/layout`, `/typeset`, `/colorize`, `/animate`, `/distill`, `/clarify`, `/adapt`, `/bolder`, `/quieter`, `/delight`, `/overdrive`, `/optimize`, `/onboard`, `/hooks`.
 
 ### Fixed

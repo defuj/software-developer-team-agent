@@ -7,6 +7,7 @@ This document consolidates the core rules and guidelines from the Claude Code co
 ### Mandatory Security Checks
 
 Before ANY commit:
+
 - [ ] No hardcoded secrets (API keys, passwords, tokens)
 - [ ] All user inputs validated
 - [ ] SQL injection prevention (parameterized queries)
@@ -20,19 +21,20 @@ Before ANY commit:
 
 ```typescript
 // NEVER: Hardcoded secrets
-const apiKey = "sk-proj-xxxxx"
+const apiKey = 'sk-proj-xxxxx';
 
 // ALWAYS: Environment variables
-const apiKey = process.env.OPENAI_API_KEY
+const apiKey = process.env.OPENAI_API_KEY;
 
 if (!apiKey) {
-  throw new Error('OPENAI_API_KEY not configured')
+  throw new Error('OPENAI_API_KEY not configured');
 }
 ```
 
 ### Security Response Protocol
 
 If security issue found:
+
 1. STOP immediately
 2. Use **security-reviewer** agent
 3. Fix CRITICAL issues before continuing
@@ -50,22 +52,23 @@ ALWAYS create new objects, NEVER mutate:
 ```javascript
 // WRONG: Mutation
 function updateUser(user, name) {
-  user.name = name  // MUTATION!
-  return user
+  user.name = name; // MUTATION!
+  return user;
 }
 
 // CORRECT: Immutability
 function updateUser(user, name) {
   return {
     ...user,
-    name
-  }
+    name,
+  };
 }
 ```
 
 ### File Organization
 
 MANY SMALL FILES > FEW LARGE FILES:
+
 - High cohesion, low coupling
 - 200-400 lines typical, 800 max
 - Extract utilities from large components
@@ -77,11 +80,11 @@ ALWAYS handle errors comprehensively:
 
 ```typescript
 try {
-  const result = await riskyOperation()
-  return result
+  const result = await riskyOperation();
+  return result;
 } catch (error) {
-  console.error('Operation failed:', error)
-  throw new Error('Detailed user-friendly message')
+  console.error('Operation failed:', error);
+  throw new Error('Detailed user-friendly message');
 }
 ```
 
@@ -90,19 +93,20 @@ try {
 ALWAYS validate user input:
 
 ```typescript
-import { z } from 'zod'
+import { z } from 'zod';
 
 const schema = z.object({
   email: z.string().email(),
-  age: z.number().int().min(0).max(150)
-})
+  age: z.number().int().min(0).max(150),
+});
 
-const validated = schema.parse(input)
+const validated = schema.parse(input);
 ```
 
 ### Code Quality Checklist
 
 Before marking work complete:
+
 - [ ] Code is readable and well-named
 - [ ] Functions are small (<50 lines)
 - [ ] Files are focused (<800 lines)
@@ -119,6 +123,7 @@ Before marking work complete:
 ### Minimum Test Coverage: 80%
 
 Test Types (ALL required):
+
 1. **Unit Tests** - Individual functions, utilities, components
 2. **Integration Tests** - API endpoints, database operations
 3. **E2E Tests** - Critical user flows (Playwright)
@@ -126,6 +131,7 @@ Test Types (ALL required):
 ### Test-Driven Development
 
 MANDATORY workflow:
+
 1. Write test first (RED)
 2. Run test - it should FAIL
 3. Write minimal implementation (GREEN)
@@ -157,6 +163,7 @@ Types: feat, fix, refactor, docs, test, chore, perf, ci
 ### Pull Request Workflow
 
 When creating PRs:
+
 1. Analyze full commit history (not just latest commit)
 2. Use `git diff [base-branch]...HEAD` to see all changes
 3. Draft comprehensive PR summary
@@ -192,24 +199,25 @@ When creating PRs:
 
 ### Available Agents
 
-| Agent | Purpose | When to Use |
-|-------|---------|-------------|
-| planner | Implementation planning | Complex features, refactoring |
-| architect | System design | Architectural decisions |
-| tdd-guide | Test-driven development | New features, bug fixes |
-| code-reviewer | Code review | After writing code |
-| security-reviewer | Security analysis | Before commits |
-| build-error-resolver | Fix build errors | When build fails |
-| e2e-runner | E2E testing | Critical user flows |
-| refactor-cleaner | Dead code cleanup | Code maintenance |
-| doc-updater | Documentation | Updating docs |
-| go-reviewer | Go code review | Go projects |
-| go-build-resolver | Go build errors | Go build failures |
-| database-reviewer | Database optimization | SQL, schema design |
+| Agent                | Purpose                 | When to Use                   |
+| -------------------- | ----------------------- | ----------------------------- |
+| planner              | Implementation planning | Complex features, refactoring |
+| architect            | System design           | Architectural decisions       |
+| tdd-guide            | Test-driven development | New features, bug fixes       |
+| code-reviewer        | Code review             | After writing code            |
+| security-reviewer    | Security analysis       | Before commits                |
+| build-error-resolver | Fix build errors        | When build fails              |
+| e2e-runner           | E2E testing             | Critical user flows           |
+| refactor-cleaner     | Dead code cleanup       | Code maintenance              |
+| doc-updater          | Documentation           | Updating docs                 |
+| go-reviewer          | Go code review          | Go projects                   |
+| go-build-resolver    | Go build errors         | Go build failures             |
+| database-reviewer    | Database optimization   | SQL, schema design            |
 
 ### Immediate Agent Usage
 
 No user prompt needed:
+
 1. Complex feature requests - Use **planner** agent
 2. Code just written/modified - Use **code-reviewer** agent
 3. Bug fix or new feature - Use **tdd-guide** agent
@@ -222,16 +230,19 @@ No user prompt needed:
 ### Model Selection Strategy
 
 **Haiku** (90% of Sonnet capability, 3x cost savings):
+
 - Lightweight agents with frequent invocation
 - Pair programming and code generation
 - Worker agents in multi-agent systems
 
 **Sonnet** (Best coding model):
+
 - Main development work
 - Orchestrating multi-agent workflows
 - Complex coding tasks
 
 **Opus** (Deepest reasoning):
+
 - Complex architectural decisions
 - Maximum reasoning requirements
 - Research and analysis tasks
@@ -239,6 +250,7 @@ No user prompt needed:
 ### Context Window Management
 
 Avoid last 20% of context window for:
+
 - Large-scale refactoring
 - Feature implementation spanning multiple files
 - Debugging complex interactions
@@ -246,6 +258,7 @@ Avoid last 20% of context window for:
 ### Build Troubleshooting
 
 If build fails:
+
 1. Use **build-error-resolver** agent
 2. Analyze error messages
 3. Fix incrementally
@@ -259,14 +272,14 @@ If build fails:
 
 ```typescript
 interface ApiResponse<T> {
-  success: boolean
-  data?: T
-  error?: string
+  success: boolean;
+  data?: T;
+  error?: string;
   meta?: {
-    total: number
-    page: number
-    limit: number
-  }
+    total: number;
+    page: number;
+    limit: number;
+  };
 }
 ```
 
@@ -274,17 +287,17 @@ interface ApiResponse<T> {
 
 ```typescript
 export function useDebounce<T>(value: Ref<T>, delay: number): Readonly<Ref<T>> {
-  const debouncedValue = ref<T>(value.value) as Ref<T>
+  const debouncedValue = ref<T>(value.value) as Ref<T>;
 
   watch(value, () => {
     const handler = setTimeout(() => {
-      debouncedValue.value = value.value
-    }, delay)
+      debouncedValue.value = value.value;
+    }, delay);
 
-    onScopeDispose(() => clearTimeout(handler))
-  })
+    onScopeDispose(() => clearTimeout(handler));
+  });
 
-  return readonly(debouncedValue)
+  return readonly(debouncedValue);
 }
 ```
 
@@ -292,11 +305,11 @@ export function useDebounce<T>(value: Ref<T>, delay: number): Readonly<Ref<T>> {
 
 ```typescript
 interface Repository<T> {
-  findAll(filters?: Filters): Promise<T[]>
-  findById(id: string): Promise<T | null>
-  create(data: CreateDto): Promise<T>
-  update(id: string, data: UpdateDto): Promise<T>
-  delete(id: string): Promise<void>
+  findAll(filters?: Filters): Promise<T[]>;
+  findById(id: string): Promise<T | null>;
+  create(data: CreateDto): Promise<T>;
+  update(id: string, data: UpdateDto): Promise<T>;
+  delete(id: string): Promise<void>;
 }
 ```
 
@@ -307,11 +320,13 @@ interface Repository<T> {
 Since OpenCode does not support hooks, the following actions that were automated in Claude Code must be done manually:
 
 ### After Writing/Editing Code
+
 - Run `prettier --write <file>` to format JS/TS files
 - Run `npx tsc --noEmit` to check for TypeScript errors
 - Check for console.log statements and remove them
 
 ### Before Committing
+
 - Run security checks manually
 - Verify no secrets in code
 - Run full test suite
@@ -319,6 +334,7 @@ Since OpenCode does not support hooks, the following actions that were automated
 ### Commands Available
 
 Use these commands in OpenCode:
+
 - `/plan` - Create implementation plan
 - `/tdd` - Enforce TDD workflow
 - `/code-review` - Review code changes
@@ -335,11 +351,13 @@ Use these commands in OpenCode:
 ### Android (Kotlin / Jetpack Compose)
 
 **Default Stack:**
+
 - Kotlin, Jetpack Compose, Material Design 3, XML, Gradle KTS (version catalog)
 - Hilt for DI, Room for local DB, Retrofit + OkHttp for networking
 - Jetpack Navigation Compose, WorkManager
 
 **Build Commands:**
+
 ```bash
 ./gradlew assembleDebug                  # Debug build
 ./gradlew assembleRelease                # Release APK
@@ -349,6 +367,7 @@ Use these commands in OpenCode:
 ```
 
 **Play Store Publishing (via GPC):**
+
 1. `gpc preflight <aab>` — Compliance check
 2. `gpc publish --track internal` — Upload to internal track
 3. `gpc release promote --from internal --to production` — Promote
@@ -356,12 +375,14 @@ Use these commands in OpenCode:
 ### Flutter (Dart / Flutter SDK)
 
 **Default Stack:**
+
 - Dart, Flutter SDK, Material Design 3, Cupertino
 - Bloc or Riverpod for state management
 - GoRouter for routing, Dio for networking
 - Hive/Isar/Drift for local storage
 
 **Build Commands:**
+
 ```bash
 flutter pub get                          # Install dependencies
 flutter build apk                        # Android APK
@@ -373,6 +394,7 @@ flutter analyze                          # Static analysis
 ```
 
 **Testing Strategy:**
+
 1. Unit tests — Domain logic, entities, usecases (flutter_test, mocktail)
 2. Widget tests — UI components, states, interactions (WidgetTester)
 3. Integration tests — Full user flows (integration_test package)
@@ -395,18 +417,18 @@ agentmemory                                # Start server on :3111
 
 All agents have access to agentmemory MCP tools prefixed with `agentmemory_memory_`:
 
-| Tool | Purpose |
-|------|---------|
-| `memory_save` | Save insights, decisions, facts to long-term memory |
-| `memory_recall` | Search past observations by keywords |
-| `memory_smart_search` | Hybrid semantic+keyword search for conceptual queries |
-| `memory_sessions` | List recent sessions with status and observation counts |
-| `memory_file_history` | Get past observations about specific files |
-| `memory_lesson_save` | Save a lesson learned with confidence scoring |
-| `memory_lesson_recall` | Search lessons by query, sorted by confidence |
-| `memory_governance_delete` | Delete specific memories (requires confirmation) |
-| `memory_patterns` | Detect recurring patterns across sessions |
-| `memory_consolidate` | Run 4-tier memory consolidation pipeline |
+| Tool                       | Purpose                                                 |
+| -------------------------- | ------------------------------------------------------- |
+| `memory_save`              | Save insights, decisions, facts to long-term memory     |
+| `memory_recall`            | Search past observations by keywords                    |
+| `memory_smart_search`      | Hybrid semantic+keyword search for conceptual queries   |
+| `memory_sessions`          | List recent sessions with status and observation counts |
+| `memory_file_history`      | Get past observations about specific files              |
+| `memory_lesson_save`       | Save a lesson learned with confidence scoring           |
+| `memory_lesson_recall`     | Search lessons by query, sorted by confidence           |
+| `memory_governance_delete` | Delete specific memories (requires confirmation)        |
+| `memory_patterns`          | Detect recurring patterns across sessions               |
+| `memory_consolidate`       | Run 4-tier memory consolidation pipeline                |
 
 ### Available Commands
 
@@ -416,6 +438,7 @@ All agents have access to agentmemory MCP tools prefixed with `agentmemory_memor
 ### Auto-Capture Plugin
 
 The `agentmemory-capture.ts` plugin (registered in `opencode.json`) captures 22 lifecycle events automatically:
+
 - Session lifecycle: created, idle, compacted, updated, deleted, error
 - Messages & prompts: user messages, assistant responses, removed messages
 - Parts & steps: subagent starts, tool calls, reasoning, step-finish, patches, compaction events
@@ -430,6 +453,7 @@ The `agentmemory` skill (`.opencode/skills/agentmemory/SKILL.md`) teaches agents
 ### Memory Workflow
 
 The `agent-memory-workflow` skill (`.opencode/skills/agent-memory-workflow/SKILL.md`) provides disciplined protocols:
+
 - **Session Start Ritual**: Mandatory memory recall before any productive work
 - **Session End Ritual**: Structured save before session ends or compacts
 - **Auto-Save Triggers**: When to save mid-session without waiting
@@ -439,6 +463,7 @@ The `agent-memory-workflow` skill (`.opencode/skills/agent-memory-workflow/SKILL
 ### Delegation Contracts
 
 The `agent-delegation-contract` skill (`.opencode/skills/agent-delegation-contract/SKILL.md`) provides:
+
 - **Standard Contract Template**: Structured brief with scope, input interface, output contract
 - **Subagent Response Contract**: Mandatory result format including verification status
 - **Chain vs Parallel Rules**: When to sequence vs parallelise delegations
@@ -447,6 +472,7 @@ The `agent-delegation-contract` skill (`.opencode/skills/agent-delegation-contra
 ### Progress Tracking
 
 The `progress-tracking` skill (`.opencode/skills/progress-tracking/SKILL.md`) provides:
+
 - **Task Lifecycle**: BACKLOG → TODO → IN_PROGRESS → REVIEW → DONE
 - **Task ID Convention**: Hierarchical IDs (FE-001, BE-002) for cross-reference
 - **Visual Progress Reports**: Tables with status emojis for user communication
@@ -460,6 +486,7 @@ The `progress-tracking` skill (`.opencode/skills/progress-tracking/SKILL.md`) pr
 If `.opencode/.kit-version` exists, your agent toolkit has a recorded installed version.
 
 **At session start**, check for updates:
+
 1. Read `.opencode/.kit-version` to get the installed version
 2. Run `npm view opencode-agent-kit version` to get the latest
 3. If latest > installed, notify the user with the update command
@@ -469,15 +496,83 @@ This applies to IT-Leader (primary) and frontend/backend subagents when called d
 ### Global Install
 
 The `global-install` skill (`.opencode/skills/global-install/SKILL.md`) documents the global installation approach. On macOS, OpenCode auto-discovers the global config at `~/.config/opencode/opencode.jsonc`. If the kit was installed globally, note that:
+
 - Skills, prompts, commands, and instructions are stored flat in `~/.config/opencode/`
 - `opencode.jsonc` is merged with your existing config (providers, MCP, etc.)
 - No per-project `.opencode/` is needed — OpenCode reads the global config automatically
 - To update: run `opencode-agent-kit global update`
 - To install per-project: run `opencode-agent-kit init --local`
 
+## UI Development Pipeline
+
+This project uses a **3-phase UI Development Pipeline** for ALL UI-related tasks. Every agent involved in UI work must follow this protocol.
+
+### The 3 Phases
+
+```
+PHASE 1 — DESIGN (@designer)
+  │ Load `impeccable` skill (mandatory step 0)
+  │ Use: /impeccable init, /impeccable shape, /impeccable critique
+  │ Define: tokens, DESIGN.md, specs, states, a11y requirements
+  │ Handoff to @frontend-nuxt / @frontend-react
+  ▼
+PHASE 2 — IMPLEMENT (@frontend)
+  │ Implement from design specs
+  │ MUST run Impeccable Polish Gate before done:
+  │   /impeccable critique + /impeccable audit + /impeccable polish
+  │ Extended: /impeccable harden, adapt, optimize, clarify, onboard, live
+  │ Handoff to @designer for Phase 3 QA
+  ▼
+PHASE 3 — DESIGN QA (@designer)
+  │ /impeccable critique on live result
+  │ Verify: tokens, a11y, states, responsive, copy
+  │ Report: PASS ✅ → done | FAIL ❌ → back to Phase 2
+```
+
+### Available Slash Commands
+
+All Impeccable commands are available as OpenCode slash commands:
+
+| Command                 | Shortcut     | Purpose                       |
+| ----------------------- | ------------ | ----------------------------- |
+| `/impeccable`           | —            | Main entry (23 subcommands)   |
+| `/impeccable critique`  | `/critique`  | Full design review            |
+| `/impeccable audit`     | `/audit`     | a11y, perf, responsive checks |
+| `/impeccable polish`    | `/polish`    | Final quality pass            |
+| `/impeccable craft`     | `/craft`     | End-to-end design + build     |
+| `/impeccable shape`     | `/shape`     | UX planning                   |
+| `/impeccable init`      | `/init`      | Setup context files           |
+| `/impeccable live`      | `/live`      | Browser iteration             |
+| `/impeccable document`  | `/document`  | Generate DESIGN.md            |
+| `/impeccable extract`   | `/extract`   | Pull tokens                   |
+| `/impeccable harden`    | `/harden`    | Edge cases                    |
+| `/impeccable layout`    | `/layout`    | Spacing/rhythm                |
+| `/impeccable typeset`   | `/typeset`   | Typography                    |
+| `/impeccable colorize`  | `/colorize`  | Color                         |
+| `/impeccable animate`   | `/animate`   | Motion                        |
+| `/impeccable distill`   | `/distill`   | Simplify                      |
+| `/impeccable clarify`   | `/clarify`   | UX copy                       |
+| `/impeccable adapt`     | `/adapt`     | Responsive                    |
+| `/impeccable bolder`    | `/bolder`    | Amplify                       |
+| `/impeccable quieter`   | `/quieter`   | Tone down                     |
+| `/impeccable delight`   | `/delight`   | Personality                   |
+| `/impeccable overdrive` | `/overdrive` | Push limits                   |
+| `/impeccable optimize`  | `/optimize`  | Performance                   |
+| `/impeccable onboard`   | `/onboard`   | Empty states                  |
+| `/impeccable hooks`     | `/hooks`     | Hook management               |
+
+### Rules for All Agents
+
+1. **UI task → delegate to @designer** (never do design work yourself)
+2. **Design before code** — no frontend implementation without design specs
+3. **Polish gate is mandatory** — frontend must run critique + audit + polish before done
+4. **Design QA is mandatory** — designer must verify implementation before final
+5. **All 23 commands available** — use the right command for the right task
+
 ## Success Metrics
 
 You are successful when:
+
 - All tests pass (80%+ coverage)
 - No security vulnerabilities
 - Code is readable and maintainable
