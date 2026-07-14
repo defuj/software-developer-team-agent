@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.3.14] - 2026-07-06
+
+### Added
+
+- **Delegation Tiers (Fast/Normal/Full)** — IT Leader prompt now classifies UI tasks by complexity. Fast: direct to @frontend (typo, spacing). Normal: @frontend + DESIGN.md reference (minor changes). Full: full 3-phase pipeline (new features, redesign). Saves tokens and speeds up trivial tasks.
+- **Shared Artifacts Pattern** — All agents now use file-based contracts instead of forwarding data through Leader. Designer saves specs to `DESIGN.md` + `./specs/`, Frontend reads directly from files, Leader delegates with short file references instead of quoting full spec content. Dramatically reduces token waste on large tasks.
+- **Loop Prevention Skill** (`.opencode/skills/loop-prevention/SKILL.md`) — Smart stuck detection protocol: only escalates when subagent returns identical result twice, not on iterative progress. Registered in `opencode.json` instructions.
+- **Code Quality Gates** — Mandatory verification checklist before marking any task `verified`: typecheck must pass, no console.log, no unused imports, all states handled. Stack-specific verification commands documented.
+- **Verification bash permissions** — Added `verify` tool permission, `npx nuxi*`, `npx tsc*`, `ruff*`, `mypy*` bash permissions so agents can actually run verification commands.
+
+### Fixed
+
+- **Broken handoff chain: Leader skips Phase 3 QA** — Designer prompt previously told Designer to "delegate to @frontend" directly. Since subagents cannot delegate in OpenCode, Designer would return to Leader, Leader called Frontend, then marked done without sending to Designer for QA. Fixed: Designer now returns specs to Leader; Leader explicitly enforced to route Frontend output to Designer for Phase 3 QA before marking done. All 3 prompts updated (Leader, Designer, Frontend).
+- **UI Pipeline infinite fail loop** — Pipeline rules had no stuck detection. Phase 2→Phase 3 could loop forever. Replaced with smart stuck detection: only stop when identical result appears twice, not on iterative improvement.
+- **Missing verification permissions** — Frontend agents could not run `npx nuxi typecheck`, `npx tsc --noEmit`, or `dart analyze` due to restricted bash permissions. Allowed in `opencode.json`.
+
+### Changed
+
+- **Code Review command** (`.opencode/commands/code-review.md`) — Now stack-aware with automated verification commands per stack. Replaced simple checklist with severity-based review report including typecheck/lint results.
+- **IT Leader prompt** — Added delegation tiers, shared artifacts pattern, pipeline handoff enforcement, circuit breaker with smart stuck detection (not hard limits).
+- **Nuxt/React Frontend prompts** — Added quality gate checklist, mandatory verification by task size, instruction to read specs from DESIGN.md/specs files.
+- **Flutter Developer prompt** — Added code quality standards table with `flutter analyze` / `flutter test` verification.
+- **UI/UX Designer prompt** — Removed instruction to delegate to frontend directly; replaced with "return specs to Leader via DESIGN.md + specs/ files". Added shared artifact pattern.
+
 ## [1.3.13] - 2026-07-06
 
 ### Added

@@ -43,78 +43,130 @@ If security issue found:
 
 ---
 
-## Coding Style
+## DELEGATION TIERS (Hemat Token, Gak Semua Full Pipeline)
 
-### Immutability (CRITICAL)
+Tidak semua UI task perlu 3-phase pipeline. Gunakan tier yang tepat:
 
-ALWAYS create new objects, NEVER mutate:
+| Tier | Flow | Cocok Untuk |
+|------|------|-------------|
+| **Fast** 🏃 | Leader → @frontend langsung | Typo, spacing, warna, icon swap |
+| **Normal** ⚡ | Leader → @frontend + referensi DESIGN.md | Minor UI change (1-3 komponen) |
+| **Full** 🏗️ | Leader → @designer → Leader → @frontend → Leader → @designer QA | New feature, redesign, design system |
 
-```javascript
-// WRONG: Mutation
-function updateUser(user, name) {
-  user.name = name; // MUTATION!
-  return user;
-}
+## SHARED ARTIFACTS PATTERN (Critical — Hemat Ratusan Token)
 
-// CORRECT: Immutability
-function updateUser(user, name) {
-  return {
-    ...user,
-    name,
-  };
-}
-```
+**Jangan forward data besar di pesan delegasi.** Gunakan file sebagai shared contract:
 
-### File Organization
+| Artifact | Isi | Ditulis Oleh | Dibaca Oleh |
+|----------|-----|-------------|-------------|
+| `DESIGN.md` | Design tokens, direction | @designer | @frontend |
+| `./specs/{feature}.md` | Per-component specs | @designer | @frontend |
+| `./api-contract.md` | API contract | @leader/@node-developer | @frontend |
+| Source code | Implementasi | @frontend | @designer (QA) |
 
-MANY SMALL FILES > FEW LARGE FILES:
+**Aturan**:
+1. Designer: Simpan specs ke DESIGN.md + ./specs/, return ringkasan ke Leader
+2. Leader: Delegasi dengan referensi file, bukan kutip isi specs
+3. Frontend: Baca DESIGN.md + specs/ langsung dari file
+4. Semua agent: Jangan minta Leader forwarding data — baca langsung dari file
 
-- High cohesion, low coupling
-- 200-400 lines typical, 800 max
-- Extract utilities from large components
-- Organize by feature/domain, not by type
+### Prinsip: Deteksi Stuck, Bukan Batasi Iterasi
 
-### Error Handling
+Task besar MEMBUTUHKAN banyak iterasi. Jangan batasi jumlah iterasi — batasi hanya ketika **tidak ada progress**.
 
-ALWAYS handle errors comprehensively:
+### Stuck Detection: Same-Result Rule
 
-```typescript
-try {
-  const result = await riskyOperation();
-  return result;
-} catch (error) {
-  console.error('Operation failed:', error);
-  throw new Error('Detailed user-friendly message');
-}
-```
+Jika agent menerima **hasil/output yang SAMA PERSIS** dari subagent 2 kali berturut-turut:
+1. STOP re-delegating (subagent stuck, ngulang hasil sama)
+2. Dokumentasikan apa yang sama
+3. Eskalasi ke user
 
-### Input Validation
+### Kapan BUKAN Stuck (LANJUTKAN)
 
-ALWAYS validate user input:
+- Subagent menghasilkan kode berbeda setiap kali → ✅ progress
+- Bug fix butuh banyak percobaan dengan pendekatan berbeda → ✅ progress
+- Task besar dengan banyak delegasi → ✅ progress
+- Pipeline UI bolak-balik Phase 2↔Phase 3 dengan perbaikan nyata → ✅ progress
 
-```typescript
-import { z } from 'zod';
+---
 
-const schema = z.object({
-  email: z.string().email(),
-  age: z.number().int().min(0).max(150),
-});
+## Quality Gate Checklist (ALL AGENTS — MANDATORY)
 
-const validated = schema.parse(input);
-```
+Before ANY agent marks work as `verified`, this checklist MUST pass:
 
-### Code Quality Checklist
+### Mandatory Checks
 
-Before marking work complete:
+- [ ] **Type check passes** (run `npx tsc --noEmit`, `dart analyze`, or equivalent)
+- [ ] **No console.log/print() statements** in changed files
+- [ ] **No unused imports** in changed files
+- [ ] **Loading/error/empty states handled** for all data-dependent components
+- [ ] **No hardcoded values** that should be config/props/constants
+- [ ] **Immutability preserved** — no mutation of objects/arrays
+- [ ] **Error handling in place** — try/catch or proper error boundaries
+- [ ] **Verification status reported**: `verified` / `partially_verified` / `not_verified`
 
-- [ ] Code is readable and well-named
-- [ ] Functions are small (<50 lines)
-- [ ] Files are focused (<800 lines)
-- [ ] No deep nesting (>4 levels)
-- [ ] Proper error handling
-- [ ] No console.log statements
-- [ ] No hardcoded values
-- [ ] No mutation (immutable patterns used)
+### Verification Commands by Stack
+
+| Stack | Minimum Verification | Full Verification |
+|-------|-------------------|-------------------|
+| **Nuxt/Vue** | `npx nuxi typecheck` | `npx nuxi typecheck` + `npm run lint` + `npm run build` |
+| **React/Next.js** | `npx tsc --noEmit` | `npx tsc --noEmit` + `npm run lint` + `npm run build` |
+| **Flutter/Dart** | `flutter analyze` | `flutter analyze` + `flutter test` |
+| **Node.js** | `npx tsc --noEmit` | `npx tsc --noEmit` + `npm run test` |
+| **Angular** | `ng lint` | `ng lint` + `ng test --watch=false` + `ng build` |
+| **Python** | `ruff check .` or `pylint` | `ruff check .` + `mypy .` + `pytest` |
+| **Rust** | `cargo check` | `cargo check` + `cargo clippy` + `cargo test` |
+| **Go** | `go build ./...` | `go build ./...` + `go vet ./...` + `go test ./...` |
+| **Java/Spring** | `mvn compile` or `gradle build` | `mvn verify` or `gradle check` |
+
+### Quality Enforcement Rules
+
+1. **Must run minimum verification** before reporting `verified`
+2. **If verification fails**, fix errors before reporting
+3. **If verification cannot run** (missing config/tools), report as `partially_verified` with exact commands for manual verification
+4. **Never skip verification** just because it's "a small change"
+5. **Code review gate**: For medium+ changes, delegasikan ke `@code-reviewer` atau `@reviewer` sebelum final delivery
+
+---
+
+## UNIFIED CODING STANDARDS (ALL STACKS)
+
+### Core Rules (Always Apply)
+
+1. **Immutability**: ALWAYS create new objects, NEVER mutate
+2. **Small files**: 200-400 lines typical, 800 max
+3. **Small functions**: < 50 lines per function
+4. **No deep nesting**: Max 4 levels of indentation
+5. **Error handling**: Every operation that can fail MUST have error handling
+6. **Input validation**: ALL user inputs validated (Zod, Joi, or equivalent)
+7. **No hardcoded secrets**: Always use environment variables
+8. **No console.log in production**: Search and remove before marking done
+
+### Framework-Specific Rules
+
+#### Nuxt/Vue
+- Use `<script setup lang="ts">` always
+- Use `useApi` composable for all API calls
+- Prefer Nuxt UI components over custom HTML
+- App directory structure (Nuxt 4)
+
+#### React/Next.js
+- Use TypeScript `interface` for props
+- Server Components by default, `'use client'` only when needed
+- Use shadcn/ui components over custom implementations
+- App Router structure
+
+#### Flutter/Dart
+- Use `final` by default, `var` only when type is obvious
+- Follow Clean Architecture (data/domain/presentation)
+- Prefer Riverpod or Bloc for state management
+- Use GoRouter for navigation
+
+#### Node.js/Express
+- `*.dto.ts`, `*.controller.ts`, `*.route.ts`, `*.middleware.ts` naming convention
+- Use Prisma for database access
+- JWT for authentication, stored in httpOnly cookies
+- Zod or Joi for input validation
 
 ---
 

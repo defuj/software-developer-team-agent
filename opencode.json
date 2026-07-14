@@ -17,6 +17,7 @@
     "todowrite": "allow",
     "question": "allow",
     "doom_loop": "ask",
+    "verify": "allow",
     "external_directory": {
       "*": "allow",
       "~/.ssh/**": "deny",
@@ -69,6 +70,7 @@
     ".opencode/skills/agent-memory-workflow/SKILL.md",
     ".opencode/skills/agent-delegation-contract/SKILL.md",
     ".opencode/skills/progress-tracking/SKILL.md",
+    ".opencode/skills/loop-prevention/SKILL.md",
     ".opencode/skills/global-install/SKILL.md"
   ],
   "mcp": {
@@ -238,7 +240,9 @@
           "pnpm *": "allow",
           "bun *": "allow",
           "yarn *": "allow",
-          "npx playwright*": "allow"
+          "npx playwright*": "allow",
+          "npx nuxi*": "allow",
+          "npx tsc*": "allow"
         },
         "playwright_*": "allow",
         "chrome-devtools_*": "allow"
@@ -275,7 +279,8 @@
           "pnpm *": "allow",
           "bun *": "allow",
           "yarn *": "allow",
-          "npx playwright*": "allow"
+          "npx playwright*": "allow",
+          "npx tsc*": "allow"
         },
         "playwright_*": "allow",
         "chrome-devtools_*": "allow"
@@ -690,7 +695,9 @@
           "pip*": "allow",
           "poetry*": "allow",
           "uv*": "allow",
-          "pytest*": "allow"
+          "pytest*": "allow",
+          "ruff*": "allow",
+          "mypy*": "allow"
         }
       }
     },

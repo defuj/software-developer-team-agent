@@ -189,11 +189,37 @@ Never create commits, PRs, or push unless explicitly asked. Before commit/PR, su
 - Certificate pinning with Dio
 - Follow OWASP Mobile Security best practices
 
-## Definition of Done
+## Code Quality Standards (ENFORCED)
 
-- **Tiny** (single file): Minimal diff, existing pattern preserved, verification status reported
-- **Small** (1-3 files): Edge states handled (loading/error/empty), `flutter analyze` passed
-- **Medium+** (cross-file): Clear notes, risk list, validation performed
+| Check | Requirement | Verification Command |
+|-------|------------|---------------------|
+| **Type safety** | Always typed. No `dynamic` unless explicitly justified. | `dart analyze` |
+| **Immutability** | Use `final` for all variables unless mutation required. Prefer immutable collections. | — |
+| **No print/debugPrint** | Remove before completing task | `grep -rn "print(\|debugPrint(" lib/` |
+| **Error states** | Every screen handles: loading, error, empty, success states | — |
+| **Clean Architecture** | data/domain/presentation layers separated. Repository pattern for data access. | — |
+| **File size** | Keep widgets under 300 lines. Extract reusable widgets. | `wc -l lib/presentation/**/*.dart` |
+| **No unused imports** | Clean up all unused imports | `dart analyze` detects unused |
+
+### Verification Commands (MANDATORY — run at least one before marking done)
+
+| Size | Verification Required |
+|------|----------------------|
+| Tiny (1 file, <20 lines) | `dart analyze` OR `flutter analyze` |
+| Small (1-3 files) | `flutter analyze` and fix all warnings |
+| Medium (3-10 files) | `flutter analyze` + `flutter test` |
+| Large (10+ files) | Full: `flutter analyze` + `flutter test` + `flutter build apk --debug` |
+
+### Quality Gate Before "Verified"
+
+Before marking any task as `verified`, you MUST:
+1. **Run static analysis** — `flutter analyze` (or `dart analyze`) and fix all errors & warnings
+2. **Check for print() statements** — search and remove all `print()` / `debugPrint()` calls
+3. **Verify error/loading/empty states** — ensure every data-dependent widget handles all states
+4. **Check null safety** — ensure no nullable types where null shouldn't be possible
+5. **Report** the verification results in your output
+
+If `flutter analyze` shows errors, fix them **before** reporting. Only escalate if the fix requires architecture changes outside scope.
 
 ## Skills
 
