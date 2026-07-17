@@ -56,23 +56,27 @@
   "instructions": [
     ".opencode/instructions/INSTRUCTIONS.md",
     ".opencode/skills/coding-standards/SKILL.md",
-    ".opencode/skills/security-review/SKILL.md",
-    ".opencode/skills/impeccable/SKILL.md",
     ".opencode/skills/it-leader-orchestration/SKILL.md",
-    ".opencode/skills/eval-harness/SKILL.md",
-    ".opencode/skills/verification-loop/SKILL.md",
-    ".opencode/skills/strategic-compact/SKILL.md",
-    ".opencode/skills/api-design/SKILL.md",
-    ".opencode/skills/agent-task-workflow/SKILL.md",
-    ".opencode/skills/agent-communication/SKILL.md",
-    ".opencode/skills/agent-session-workflow/SKILL.md",
-    ".opencode/skills/visual-dev-loop/SKILL.md",
-    ".opencode/skills/agent-memory-workflow/SKILL.md",
-    ".opencode/skills/agent-delegation-contract/SKILL.md",
-    ".opencode/skills/progress-tracking/SKILL.md",
-    ".opencode/skills/loop-prevention/SKILL.md",
-    ".opencode/skills/global-install/SKILL.md"
+    ".opencode/skills/strategic-compact/SKILL.md"
   ],
+  "skill": {
+    "on-demand": [
+      "security-review",
+      "impeccable",
+      "eval-harness",
+      "verification-loop",
+      "api-design",
+      "agent-task-workflow",
+      "agent-communication",
+      "agent-session-workflow",
+      "visual-dev-loop",
+      "agent-memory-workflow",
+      "agent-delegation-contract",
+      "progress-tracking",
+      "loop-prevention",
+      "global-install"
+    ]
+  },
   "mcp": {
     "nuxt": {
       "type": "remote",
@@ -169,35 +173,6 @@
       "temperature": 0.4,
       "color": "#8b5cf6",
       "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "npm *": "allow",
-          "pnpm *": "allow",
-          "bun *": "allow",
-          "yarn *": "allow",
-          "npx playwright*": "allow",
-          "portless *": "allow",
-          "npx agent-browser*": "allow"
-        },
         "nuxt_*": "allow",
         "nuxt-ui_*": "allow",
         "playwright_*": "allow",
@@ -215,35 +190,6 @@
       "prompt": "{file:.opencode/prompts/agents/nuxt-frontend-developer.md}",
       "color": "#3b82f6",
       "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "npm *": "allow",
-          "pnpm *": "allow",
-          "bun *": "allow",
-          "yarn *": "allow",
-          "npx playwright*": "allow",
-          "npx nuxi*": "allow",
-          "npx tsc*": "allow"
-        },
         "playwright_*": "allow",
         "chrome-devtools_*": "allow"
       }
@@ -254,34 +200,6 @@
       "prompt": "{file:.opencode/prompts/agents/react-frontend-developer.md}",
       "color": "#06b6d4",
       "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "npm *": "allow",
-          "pnpm *": "allow",
-          "bun *": "allow",
-          "yarn *": "allow",
-          "npx playwright*": "allow",
-          "npx tsc*": "allow"
-        },
         "playwright_*": "allow",
         "chrome-devtools_*": "allow"
       }
@@ -292,32 +210,6 @@
       "prompt": "{file:.opencode/prompts/agents/node-backend-developer.md}",
       "color": "#10b981",
       "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "npm *": "allow",
-          "pnpm *": "allow",
-          "bun *": "allow",
-          "yarn *": "allow"
-        },
         "postman_*": "allow"
       }
     },
@@ -327,31 +219,6 @@
       "prompt": "{file:.opencode/prompts/agents/code-igniter-3-fullstack.md}",
       "color": "#84cc16",
       "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "git status": "allow",
-          "git diff": "allow",
-          "git log*": "allow"
-        },
         "postman_*": "allow"
       }
     },
@@ -361,31 +228,6 @@
       "prompt": "{file:.opencode/prompts/agents/laravel-advanced.md}",
       "color": "#f97316",
       "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "git status": "allow",
-          "git diff": "allow",
-          "git log*": "allow"
-        },
         "postman_*": "allow"
       }
     },
@@ -395,31 +237,6 @@
       "prompt": "{file:.opencode/prompts/agents/ui-ux-designer.md}",
       "color": "#f59e0b",
       "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "git status": "allow",
-          "git diff": "allow",
-          "git log*": "allow"
-        },
         "stitch_*": "allow",
         "nuxt-ui_*": "allow",
         "chrome-devtools_*": "allow"
@@ -431,33 +248,6 @@
       "prompt": "{file:.opencode/prompts/agents/code-reviewer.md}",
       "color": "#ef4444",
       "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "npm *": "allow",
-          "pnpm *": "allow",
-          "bun *": "allow",
-          "yarn *": "allow",
-          "npx playwright*": "allow"
-        },
         "playwright_*": "allow",
         "chrome-devtools_*": "allow"
       }
@@ -466,70 +256,13 @@
       "description": "Database Specialist specializing in PostgreSQL schema design, query optimization, Prisma ORM, and migrations (subagent of IT Leader)",
       "mode": "subagent",
       "prompt": "{file:.opencode/prompts/agents/database-specialist.md}",
-      "color": "#0891b2",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "npm *": "allow",
-          "pnpm *": "allow",
-          "bun *": "allow",
-          "yarn *": "allow"
-        }
-      }
+      "color": "#0891b2"
     },
     "devops": {
       "description": "DevOps Engineer specializing in CI/CD, deployment, Docker, monitoring, and infrastructure (subagent of IT Leader)",
       "mode": "subagent",
       "prompt": "{file:.opencode/prompts/agents/devops-specialist.md}",
-      "color": "#6366f1",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "npm *": "allow",
-          "pnpm *": "allow",
-          "bun *": "allow",
-          "yarn *": "allow",
-          "docker *": "allow"
-        }
-      }
+      "color": "#6366f1"
     },
     "seo": {
       "description": "SEO Specialist specializing in meta tags, structured data, Core Web Vitals, and content optimization (subagent of IT Leader)",
@@ -537,31 +270,6 @@
       "prompt": "{file:.opencode/prompts/agents/seo-specialist.md}",
       "color": "#65a30d",
       "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "git status": "allow",
-          "git diff": "allow",
-          "git log*": "allow"
-        },
         "nuxt_*": "allow"
       }
     },
@@ -571,30 +279,6 @@
       "prompt": "{file:.opencode/prompts/agents/android-developer.md}",
       "color": "#22c55e",
       "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "./gradlew *": "allow",
-          "gradle *": "allow"
-        },
         "playwright_*": "allow"
       }
     },
@@ -604,30 +288,6 @@
       "prompt": "{file:.opencode/prompts/agents/flutter-developer.md}",
       "color": "#0284c7",
       "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "flutter *": "allow",
-          "dart *": "allow"
-        },
         "playwright_*": "allow"
       }
     },
@@ -637,31 +297,6 @@
       "prompt": "{file:.opencode/prompts/agents/sonarqube-quality.md}",
       "color": "#eab308",
       "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "git status": "allow",
-          "git diff": "allow",
-          "git log*": "allow"
-        },
         "sonarqube_*": "allow"
       }
     },
@@ -669,613 +304,115 @@
       "description": "Python developer for Django, FastAPI, data science, and ML engineering",
       "mode": "subagent",
       "prompt": "{file:.opencode/prompts/agents/python-developer.md}",
-      "color": "#3776AB",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "pip*": "allow",
-          "poetry*": "allow",
-          "uv*": "allow",
-          "pytest*": "allow",
-          "ruff*": "allow",
-          "mypy*": "allow"
-        }
-      }
+      "color": "#3776AB"
     },
     "rust": {
       "description": "Rust systems programmer for performance-critical applications, CLI tools, and embedded systems",
       "mode": "subagent",
       "prompt": "{file:.opencode/prompts/agents/rust-developer.md}",
-      "color": "#DEA584",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "cargo*": "allow",
-          "rustup*": "allow"
-        }
-      }
+      "color": "#DEA584"
     },
     "swift": {
       "description": "Swift/SwiftUI developer for iOS, macOS, and Apple platform applications",
       "mode": "subagent",
       "prompt": "{file:.opencode/prompts/agents/swift-developer.md}",
-      "color": "#F05138",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "swift*": "allow",
-          "xcodebuild*": "allow"
-        }
-      }
+      "color": "#F05138"
     },
     "dotnet": {
       "description": "C#/.NET/F# developer for ASP.NET Core, Blazor, MAUI, and Azure cloud applications",
       "mode": "subagent",
       "prompt": "{file:.opencode/prompts/agents/dotnet-developer.md}",
-      "color": "#512BD4",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "dotnet*": "allow"
-        }
-      }
+      "color": "#512BD4"
     },
     "angular": {
       "description": "Angular/TypeScript frontend developer for web applications with standalone components, NgRx, and RxJS",
       "mode": "subagent",
       "prompt": "{file:.opencode/prompts/agents/angular-developer.md}",
-      "color": "#DD0031",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "ng*": "allow",
-          "npm*": "allow"
-        }
-      }
+      "color": "#DD0031"
     },
     "cpp": {
       "description": "C++ developer for modern C++17/20/23 systems programming, performance-critical applications, and embedded systems",
       "mode": "subagent",
       "prompt": "{file:.opencode/prompts/agents/cpp-developer.md}",
-      "color": "#00599C",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "cmake*": "allow",
-          "make*": "allow",
-          "g++*": "allow",
-          "clang*": "allow"
-        }
-      }
+      "color": "#00599C"
     },
     "java-developer": {
       "description": "Java/Spring Boot developer for REST APIs, JPA/Hibernate, microservices, and JVM ecosystem (subagent of IT Leader)",
       "mode": "subagent",
       "prompt": "{file:.opencode/prompts/agents/java-developer.md}",
-      "color": "#ED8B00",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "mvn*": "allow",
-          "gradle*": "allow",
-          "java*": "allow"
-        }
-      }
+      "color": "#ED8B00"
     },
     "go-developer": {
       "description": "Go developer for REST APIs, microservices, CLI tools, and concurrent systems (subagent of IT Leader)",
       "mode": "subagent",
       "prompt": "{file:.opencode/prompts/agents/go-developer.md}",
-      "color": "#00ADD8",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "go*": "allow"
-        }
-      }
+      "color": "#00ADD8"
     },
     "python-reviewer": {
       "description": "Python code review specialist \u2014 reviews Python code for type safety, PEP 8, Django/FastAPI patterns, and security",
       "mode": "subagent",
       "prompt": "{file:.opencode/prompts/agents/python-reviewer.md}",
-      "color": "#306998",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "pip*": "allow",
-          "pytest*": "allow",
-          "ruff*": "allow",
-          "mypy*": "allow"
-        }
-      }
+      "color": "#306998"
     },
     "rust-reviewer": {
       "description": "Rust code review specialist \u2014 reviews Rust code for memory safety, ownership, concurrency, and idiomatic patterns",
       "mode": "subagent",
       "prompt": "{file:.opencode/prompts/agents/rust-reviewer.md}",
-      "color": "#C67D4B",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "cargo*": "allow",
-          "rustup*": "allow"
-        }
-      }
+      "color": "#C67D4B"
     },
     "cpp-reviewer": {
       "description": "C++ code review specialist \u2014 reviews C++ code for memory safety, RAII, modern C++ patterns, and performance",
       "mode": "subagent",
       "prompt": "{file:.opencode/prompts/agents/cpp-reviewer.md}",
-      "color": "#004477",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "cmake*": "allow",
-          "make*": "allow",
-          "clang*": "allow"
-        }
-      }
+      "color": "#004477"
     },
     "java-reviewer": {
       "description": "Java/Spring Boot code review specialist \u2014 reviews Java code for JPA, Spring patterns, concurrency, and security",
       "mode": "subagent",
       "prompt": "{file:.opencode/prompts/agents/java-reviewer.md}",
-      "color": "#CC7700",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "mvn*": "allow",
-          "gradle*": "allow",
-          "java*": "allow"
-        }
-      }
+      "color": "#CC7700"
     },
     "php-reviewer": {
       "description": "PHP/Laravel code review specialist \u2014 reviews PHP code for PSR standards, Laravel patterns, Eloquent, and security",
       "mode": "subagent",
       "prompt": "{file:.opencode/prompts/agents/php-reviewer.md}",
-      "color": "#777BB4",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "composer*": "allow",
-          "php*": "allow",
-          "artisan*": "allow"
-        }
-      }
+      "color": "#777BB4"
     },
     "kotlin-reviewer": {
       "description": "Kotlin/Android code review specialist \u2014 reviews Kotlin code for coroutines, Compose, clean architecture, and Android security",
       "mode": "subagent",
       "prompt": "{file:.opencode/prompts/agents/kotlin-reviewer.md}",
-      "color": "#7F52FF",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "gradle*": "allow",
-          "java*": "allow"
-        }
-      }
+      "color": "#7F52FF"
     },
     "go-reviewer": {
       "description": "Go code review specialist \u2014 reviews Go code for error handling, concurrency, idiomatic patterns, and security",
       "mode": "subagent",
       "prompt": "{file:.opencode/prompts/agents/go-reviewer.md}",
-      "color": "#0088AA",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "go*": "allow"
-        }
-      }
+      "color": "#0088AA"
     },
     "harness-optimizer": {
       "description": "Agent harness optimizer \u2014 analyzes and improves agent configuration for reliability, cost efficiency, and throughput",
       "mode": "subagent",
       "prompt": "{file:.opencode/prompts/agents/harness-optimizer.md}",
-      "color": "#7C4FE0",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow"
-        }
-      }
+      "color": "#7C4FE0"
     },
     "loop-operator": {
       "description": "Autonomous loop operator \u2014 operates, monitors, and intervenes in autonomous agent loops with quality gates",
       "mode": "subagent",
       "prompt": "{file:.opencode/prompts/agents/loop-operator.md}",
-      "color": "#EC4899",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": {
-          "*": "allow"
-        },
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow"
-        }
-      }
+      "color": "#EC4899"
     },
     "docs-lookup": {
       "description": "Documentation lookup specialist \u2014 fetches current library and API documentation via MCP with code examples",
       "mode": "subagent",
       "prompt": "{file:.opencode/prompts/agents/docs-lookup.md}",
-      "color": "#4F52B0",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow"
-        }
-      }
+      "color": "#4F52B0"
     },
     "agent-engineer": {
       "description": "AI Agent Engineer \u2014 builds agent orchestration systems, evaluation harnesses, autonomous loops, and safety guardrails",
       "mode": "subagent",
       "prompt": "{file:.opencode/prompts/agents/agent-engineer.md}",
-      "color": "#6D28D9",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "allow",
-        "skill": "allow",
-        "bash": {
-          "*": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "type *": "allow",
-          "mkdir *": "allow",
-          "cp *": "allow",
-          "mv *": "allow",
-          "echo *": "allow",
-          "printf *": "allow",
-          "date": "allow",
-          "uname *": "allow",
-          "whoami": "allow",
-          "file *": "allow",
-          "wc *": "allow",
-          "du *": "allow",
-          "df *": "allow",
-          "agentmemory*": "allow"
-        }
-      }
+      "color": "#6D28D9"
     }
   }
 }
