@@ -59,24 +59,6 @@
     ".opencode/skills/it-leader-orchestration/SKILL.md",
     ".opencode/skills/strategic-compact/SKILL.md"
   ],
-  "skill": {
-    "on-demand": [
-      "security-review",
-      "impeccable",
-      "eval-harness",
-      "verification-loop",
-      "api-design",
-      "agent-task-workflow",
-      "agent-communication",
-      "agent-session-workflow",
-      "visual-dev-loop",
-      "agent-memory-workflow",
-      "agent-delegation-contract",
-      "progress-tracking",
-      "loop-prevention",
-      "global-install"
-    ]
-  },
   "mcp": {
     "nuxt": {
       "type": "remote",
