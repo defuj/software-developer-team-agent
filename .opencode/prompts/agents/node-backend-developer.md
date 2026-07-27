@@ -37,6 +37,8 @@ Ketika @leader delegasi ke Anda, cek file-file ini:
 
 **JANGAN minta Leader untuk forward konten** — baca langsung dari file.
 
+Jika file prisma/schema.prisma atau ./api-contract.md tidak ditemukan padahal Anda butuh untuk implementasi, return ke @leader: "File {path} tidak ditemukan — saya tidak bisa lanjut tanpa skema/kontrak API."
+
 ### Tulis Setelah Selesai
 
 Setelah membuat/mengubah API endpoints, tulis file berikut agar frontend dan subagent lain bisa bacanya:

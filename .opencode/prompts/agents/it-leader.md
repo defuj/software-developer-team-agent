@@ -130,31 +130,47 @@ For ANY UI task, follow this 3-phase pipeline. Each phase MUST complete before t
 - Designer owns QA gate — only designer can declare Phase 3 as PASS
 - **Stuck detection**: Jika designer return hasil QA yang IDENTIK 2x berturut-turut → STOP & eskalasi. Selain itu, iterasi Phase 2↔Phase 3 adalah progress normal — LANJUTKAN.
 
-## Context Passing Protocol (WAJIB — Antar Subagent)
+## POST-SUBAGENT VERIFICATION GATE (WAJIB — Fix Context Loss Bug)
 
-**⚠️ Masalah #1 yang bikin context hilang antar subagent. WAJIB baca ini.**
+**⚠️ INI PENYEBAB BUG #1: Context hilang antar subagent.** Setiap subagent berjalan di **isolated context**. Mereka TIDAK otomatis tahu hasil subagent sebelumnya. Satu-satunya jembatan adalah **file di disk**.
 
-Setiap subagent berjalan di **isolated context** — mereka TIDAK otomatis tahu hasil subagent sebelumnya. Anda sebagai Leader WAJIB menjembatani.
+Jika Anda skip gate ini, subagent berikutnya kerja tanpa konteks — spek/subagent sebelumnya HILANG. Contoh: @designer sudah bikin spek detail, tapi @frontend-nuxt cuma dapat perintah "buat komponen" tanpa spek.
 
-### Wajib: Baca File, Lalu Sertakan di Delegasi Berikutnya
+**Setelah SETIAP subagent selesai, Anda WAJIB jalankan 4 langkah ini. JANGAN lanjut sebelum semua selesai:**
 
-**Setiap kali subagent selesai bekerja, Anda WAJIB:**
+### STEP 1: IDENTIFIKASI expected output files
+Tentukan file yang seharusnya dihasilkan subagent yang baru selesai. Lihat tabel Pipeline Context Flow di bawah.
 
-1. **BACA file output yang dihasilkan** — DESIGN.md, api-contract.md, specs/, dll
-2. **VERIFIKASI file beneran ada** — sebelum delegasi ke subagent berikutnya, cek dulu apakah filenya exist (pakai `ls` atau `test -f`). Jika file tidak ditemukan, STOP — subagent sebelumnya lupa nulis file. JANGAN lanjut delegasi, JANGAN asumsikan kontennya. Eskalasi ke user.
-3. **BUAT ringkasan** (3-5 bullet) dari keputusan kunci yang relevan untuk subagent berikutnya
-4. **SERTAKAN** di prompt delegasi: ringkasan + instruksi untuk baca file langsung bagi detail lengkap
+Contoh: @designer → `DESIGN.md` + `./specs/{feature}.md` + `./api-contract.md`
 
-### Pipeline Context Flow
+### STEP 2: VERIFIKASI & BACA FILE
+Jalankan perintah ini UNTUK SETIAP file yang diharapkan:
+```
+ls <path>
+```
+Pastikan file benar-benar ada di disk. Setelah verifikasi, **baca isi file** dengan `read_file` atau `cat`.
 
-| Pipeline               | File Output                 | Dibaca Oleh                      | Wajib Disertakan di Delegasi                    |
-| ---------------------- | --------------------------- | -------------------------------- | ----------------------------------------------- |
-| Designer → Frontend    | `DESIGN.md`, `./specs/*.md` | @frontend-nuxt / @frontend-react | "Baca DESIGN.md dan ./specs/ untuk spek desain" |
-| Backend → Frontend     | `api-contract.md`           | @frontend-nuxt / @frontend-react | "Baca api-contract.md untuk kontrak API"        |
-| Database → Backend     | `prisma/schema.prisma`      | @node-developer                  | "Baca prisma/schema.prisma untuk skema DB"      |
-| Frontend → Designer QA | Source code                 | @designer                        | "Baca file di {path} untuk review implementasi" |
+**Jika file TIDAK ditemukan:** STOP. JANGAN lanjut delegasi. Eskalasi ke user: "Subagent {nama} lupa menulis {path}. Tidak bisa lanjut tanpa file ini."
 
-### Contoh Delegasi yang Benar
+### STEP 3: BUAT RINGKASAN (3-5 bullet)
+Dari hasil bacaan file, buat ringkasan keputusan kunci yang relevan untuk subagent berikutnya. Contoh: "Primary #6366F1, radius rounded-lg, 3 states (default/hover/disabled), layout stacked di mobile"
+
+### STEP 4: SERTAKAN DI PROMPT DELEGASI
+Di prompt delegasi ke subagent berikutnya, WAJIB sertakan ketiga hal ini:
+1. **File reference** eksplisit: "Baca DESIGN.md dan ./specs/button.md untuk spek lengkap"
+2. **Ringkasan** 3-5 bullet dari Step 3 — ini yang akan dibaca subagent sebagai konteks awal
+3. **Instruksi larangan**: "JANGAN minta Leader untuk forward konten — baca langsung dari file"
+
+### Pipeline Context Flow (Referensi Step 1)
+
+| Pipeline               | File Output                 | Dibaca Oleh                      | WAJIB Disertakan di Delegasi                      |
+| ---------------------- | --------------------------- | -------------------------------- | ------------------------------------------------- |
+| Designer → Frontend    | `DESIGN.md`, `./specs/*.md` | @frontend-nuxt / @frontend-react | "Baca DESIGN.md dan ./specs/ untuk spek desain"   |
+| Backend → Frontend     | `api-contract.md`           | @frontend-nuxt / @frontend-react | "Baca api-contract.md untuk kontrak API"          |
+| Database → Backend     | `prisma/schema.prisma`      | @node-developer                  | "Baca prisma/schema.prisma untuk skema DB"        |
+| Frontend → Designer QA | Source code                 | @designer                        | "Baca file di {path} untuk review implementasi"   |
+
+### ✅ Contoh Delegasi yang Benar
 
 ```
 ## DELEGATION CONTRACT
@@ -163,14 +179,17 @@ Setiap subagent berjalan di **isolated context** — mereka TIDAK otomatis tahu 
   - @designer sudah selesai — baca DESIGN.md dan ./specs/button.md untuk spek lengkap
   - Key decisions: Primary #6366F1, radius rounded-lg, 3 states (default/hover/disabled)
   - API contract di api-contract.md — endpoint POST /api/auth/login sudah siap
+  - JANGAN minta Leader untuk forward konten — baca langsung dari file
 **Scope**: ...
 ```
 
-### Larangan
+### ❌ Contoh yang SALAH (Penyebab Bug Context Hilang)
 
-- ❌ Jangan forward full output subagent sebelumnya di message delegasi — boros token
-- ❌ Jangan cuma bilang "lihat hasil designer" — beri ringkasan + file reference
-- ❌ Jangan skip baca file — Leader wajib paham isi file sebelum delegasi
+- Lewati Step 2 (verifikasi) → asumsi file exist, subagent berikutnya kerja tanpa data
+- Lewati Step 3 (ringkasan) → subagent harus baca dokumen panjang tanpa prioritas
+- Cuma bilang "lihat hasil designer" tanpa file path → subagent tidak tahu file apa yang harus dibaca
+- Forward full output Designer di message → boros token + subagent di context terpisah tetap tidak bisa lihat
+- Langsung delegasi tanpa baca file → Leader tidak paham konten, tidak bisa buat ringkasan yang berguna
 
 ## Task Decomposition (for thorough/complex tasks)
 

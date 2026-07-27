@@ -70,13 +70,21 @@ Tidak semua UI task perlu 3-phase pipeline. Gunakan tier yang tepat:
 | `./specs/seo-guide.md`              | Meta tags, structured data, sitemap changes           | @seo                                               | @frontend            |
 | `prisma/schema.prisma`              | Model definitions final                               | @database                                          | @node-developer      |
 
-**Aturan** (WAJIB dipatuhi semua agent):
+### POST-SUBAGENT VERIFICATION GATE (Leader Only)
+
+**Setelah SETIAP subagent selesai, Leader WAJIB jalankan 4 langkah ini secara berurutan. JANGAN lanjut sebelum semua selesai:**
+
+1. **IDENTIFIKASI** expected output files (lihat tabel di atas)
+2. **VERIFIKASI & BACA FILE** — jalankan `ls <path>` untuk setiap file yang diharapkan. Jika file TIDAK ditemukan: STOP, eskalasi ke user
+3. **BUAT RINGKASAN** (3-5 bullet) dari keputusan kunci
+4. **SERTAKAN** di prompt delegasi: file reference + ringkasan + instruksi "JANGAN minta Leader untuk forward konten"
+
+### Aturan Shared Artifacts (WAJIB dipatuhi SEMUA agent)
 
 1. **Producer** (designer, backend, database, dll): Setelah selesai, **TULIS output ke file** (jangan cuma return di message)
-2. **Consumer** (frontend, reviewer, dll): Sebelum mulai, **BACA file** yang ditulis subagent sebelumnya
-3. **Leader**: Setiap subagent selesai → **BACA file** → **VERIFIKASI file exist** → **BUAT ringkasan** → **SERTAKAN ringkasan + file reference** di delegasi berikutnya
-4. **VERIFIKASI**: Jika file yang diharapkan tidak ditemukan, STOP & eskalasi — jangan lanjut delegasi dengan asumsi
-5. Semua agent: **Jangan minta Leader forwarding data** — baca langsung dari file
+2. **Consumer** (frontend, reviewer, dll): Sebelum mulai, **BACA file** yang ditulis subagent sebelumnya. **JANGAN minta Leader untuk forward konten** — baca langsung dari file.
+3. Jika file yang diharapkan tidak ditemukan: **STOP & return ke @leader** dengan pesan "File {path} tidak ditemukan — saya tidak bisa {alasan} tanpa file ini"
+4. Leader: **WAJIB** menjalankan Post-Subagent Verification Gate setiap kali subagent selesai
 
 ### Prinsip: Deteksi Stuck, Bukan Batasi Iterasi
 

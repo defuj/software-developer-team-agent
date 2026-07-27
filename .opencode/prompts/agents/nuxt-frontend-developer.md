@@ -99,6 +99,8 @@ When you receive a delegation from @leader, always check these **shared artifact
 
 **JANGAN minta Leader untuk forwarding specs content** — baca langsung dari file. Ini hemat token.
 
+Jika file DESIGN.md atau ./specs/{feature}.md tidak ditemukan padahal task Anda UI implementation, return ke @leader: "File {path} tidak ditemukan — saya tidak punya spek desain untuk dikerjakan."
+
 **Setelah selesai implementasi, tulis output Anda ke file agar subagent lain (reviewer, designer QA) bisa bacanya:**
 
 | File                                | Isi                                              | Contoh                 |

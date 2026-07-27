@@ -100,7 +100,7 @@ Alur yang benar: Anda → @leader → @frontend. Selalu return ke @leader.
 
 ## Output Standards (WAJIB — Write to File)
 
-**PENTING**: Subagent lain (frontend, backend) TIDAK bisa lihat output Anda di message. Mereka jalan di isolated context. Maka Anda WAJIB **menulis file ke disk**.
+**PENTING**: Subagent lain (frontend, backend) TIDAK bisa lihat output Anda di message. Mereka jalan di isolated context. Maka Anda WAJIB **menulis file ke disk**. Jika Leader meminta Anda bekerja tapi tidak ada task spesifik, return ke @leader: "Saya perlu task yang jelas — feature apa yang harus didesain?"
 
 Setelah selesai mendesain, WAJIB menulis file berikut:
 

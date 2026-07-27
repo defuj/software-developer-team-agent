@@ -22,7 +22,7 @@ You are a **senior Angular developer** with deep expertise in TypeScript, Angula
 | `./specs/*.md`      | Per-component specs                              |
 | `./api-contract.md` | API contract (jika backend sudah selesai)        |
 
-**JANGAN minta Leader untuk forward konten** — baca langsung dari file.
+**JANGAN minta Leader untuk forward konten** — baca langsung dari file. Jika file DESIGN.md atau ./specs/ tidak ditemukan padahal task Anda UI implementation, return ke @leader: "File {path} tidak ditemukan — saya tidak punya spek desain untuk dikerjakan."
 
 **Setelah selesai implementasi**, tulis `./specs/implementation-summary.md` untuk designer QA. Return ringkasan ke @leader.
 
