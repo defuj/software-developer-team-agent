@@ -76,6 +76,15 @@ When you receive a delegation from @leader, always check these **shared artifact
 
 **JANGAN minta Leader untuk forwarding specs content** — baca langsung dari file. Ini hemat token.
 
+**Setelah selesai implementasi, tulis output Anda ke file agar subagent lain (reviewer, designer QA) bisa bacanya:**
+
+| File                                | Isi                                              | Contoh                 |
+| ----------------------------------- | ------------------------------------------------ | ---------------------- |
+| `./specs/implementation-summary.md` | Komponen yang dibuat, file paths, state handling | Untuk designer QA      |
+| `./api-contract.md`                 | Endpoints yang dipanggil + response type         | Untuk reviewer/backend |
+
+Return ringkasan (bukan full output) ke @leader.
+
 ## Framework-Specific Patterns
 
 ### Next.js 15 App Router
@@ -123,29 +132,30 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 ## Code Quality Standards (ENFORCED)
 
-| Check | Requirement | Verification Command |
-|-------|------------|---------------------|
-| **TypeScript strict** | Always typed. No `any` unless explicitly justified. | `npx tsc --noEmit` |
-| **Immutability** | Never mutate objects/arrays — spread or immutable patterns only | — |
-| **No console.log** | Remove before completing task | `grep -r "console.log" src/ app/ --include="*.ts" --include="*.tsx"` |
-| **Component structure** | `interface Props {}` for typed props, functional components | — |
-| **Error states** | Every component handles: loading, error, empty, success states | — |
-| **shadcn/ui first** | Use shadcn/ui components before custom HTML implementations | — |
-| **File size** | Keep components under 400 lines. Extract utilities from large files. | `wc -l src/components/*.tsx` |
-| **Server Components** | Default to Server Components; only add `'use client'` when interactivity required | — |
+| Check                   | Requirement                                                                       | Verification Command                                                 |
+| ----------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| **TypeScript strict**   | Always typed. No `any` unless explicitly justified.                               | `npx tsc --noEmit`                                                   |
+| **Immutability**        | Never mutate objects/arrays — spread or immutable patterns only                   | —                                                                    |
+| **No console.log**      | Remove before completing task                                                     | `grep -r "console.log" src/ app/ --include="*.ts" --include="*.tsx"` |
+| **Component structure** | `interface Props {}` for typed props, functional components                       | —                                                                    |
+| **Error states**        | Every component handles: loading, error, empty, success states                    | —                                                                    |
+| **shadcn/ui first**     | Use shadcn/ui components before custom HTML implementations                       | —                                                                    |
+| **File size**           | Keep components under 400 lines. Extract utilities from large files.              | `wc -l src/components/*.tsx`                                         |
+| **Server Components**   | Default to Server Components; only add `'use client'` when interactivity required | —                                                                    |
 
 ### Verification Commands (MANDATORY — run at least one before marking done)
 
-| Size | Verification Required |
-|------|----------------------|
+| Size                     | Verification Required                           |
+| ------------------------ | ----------------------------------------------- |
 | Tiny (1 file, <20 lines) | Visual check + `npm run lint` if project has it |
-| Small (1-3 files) | `npx tsc --noEmit` OR `npm run typecheck` |
-| Medium (3-10 files) | Typecheck + lint + relevant test |
-| Large (10+ files) | Full: typecheck + lint + test + build |
+| Small (1-3 files)        | `npx tsc --noEmit` OR `npm run typecheck`       |
+| Medium (3-10 files)      | Typecheck + lint + relevant test                |
+| Large (10+ files)        | Full: typecheck + lint + test + build           |
 
 ### Quality Gate Before "Verified"
 
 Before marking any task as `verified`, you MUST:
+
 1. **Run type check** — `npx tsc --noEmit` and fix all errors
 2. **Check for console.log** — search and remove all `console.log` statements
 3. **Check for unused imports** — remove any unused imports

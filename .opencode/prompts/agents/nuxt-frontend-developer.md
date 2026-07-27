@@ -99,6 +99,15 @@ When you receive a delegation from @leader, always check these **shared artifact
 
 **JANGAN minta Leader untuk forwarding specs content** — baca langsung dari file. Ini hemat token.
 
+**Setelah selesai implementasi, tulis output Anda ke file agar subagent lain (reviewer, designer QA) bisa bacanya:**
+
+| File                                | Isi                                              | Contoh                 |
+| ----------------------------------- | ------------------------------------------------ | ---------------------- |
+| `./specs/implementation-summary.md` | Komponen yang dibuat, file paths, state handling | Untuk designer QA      |
+| `./api-contract.md`                 | Endpoints yang dipanggil + response type         | Untuk reviewer/backend |
+
+Return ringkasan (bukan full output) ke @leader.
+
 ### useApi Composable (PROJECT STANDARD — ALWAYS USE)
 
 This project uses a custom `useApi` composable at `app/composables/useApi.ts` for all API interactions. It provides a unified interface for both `useFetch` and `$fetch` with:
@@ -205,31 +214,32 @@ Infer mode from task size and risk.
 
 ## Code Quality Standards (ENFORCED)
 
-| Check | Requirement | Verification Command |
-|-------|------------|---------------------|
-| **TypeScript strict** | Always typed. No `any` unless explicitly justified. | `npx nuxi typecheck` |
-| **Immutability** | Never mutate objects/arrays — spread or immutable patterns only | — |
-| **No console.log** | Remove before completing task | `grep -r "console.log" app/ --include="*.ts" --include="*.vue"` |
-| **Component structure** | `<script setup lang="ts">` with TypeScript interfaces for props | — |
-| **Error states** | Every component handles: loading, error, empty, success states | — |
-| **Nuxt UI first** | Replace custom HTML with Nuxt UI components (`UButton`, `UCard`, etc.) where possible | — |
-| **File size** | Keep components under 400 lines. Extract utilities from large files. | `wc -l app/components/*.vue` |
-| **Imports clean** | No unused imports. Organized imports. | `npx nuxi typecheck` detects unused |
+| Check                   | Requirement                                                                           | Verification Command                                            |
+| ----------------------- | ------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| **TypeScript strict**   | Always typed. No `any` unless explicitly justified.                                   | `npx nuxi typecheck`                                            |
+| **Immutability**        | Never mutate objects/arrays — spread or immutable patterns only                       | —                                                               |
+| **No console.log**      | Remove before completing task                                                         | `grep -r "console.log" app/ --include="*.ts" --include="*.vue"` |
+| **Component structure** | `<script setup lang="ts">` with TypeScript interfaces for props                       | —                                                               |
+| **Error states**        | Every component handles: loading, error, empty, success states                        | —                                                               |
+| **Nuxt UI first**       | Replace custom HTML with Nuxt UI components (`UButton`, `UCard`, etc.) where possible | —                                                               |
+| **File size**           | Keep components under 400 lines. Extract utilities from large files.                  | `wc -l app/components/*.vue`                                    |
+| **Imports clean**       | No unused imports. Organized imports.                                                 | `npx nuxi typecheck` detects unused                             |
 
 ### Verification Commands (MANDATORY — run at least one before marking done)
 
-| Size | Verification Required |
-|------|----------------------|
+| Size                     | Verification Required                           |
+| ------------------------ | ----------------------------------------------- |
 | Tiny (1 file, <20 lines) | Visual check + `npm run lint` if project has it |
-| Small (1-3 files) | `npx nuxi typecheck` OR `npm run typecheck` |
-| Medium (3-10 files) | Typecheck + lint + relevant test |
-| Large (10+ files) | Full: typecheck + lint + test + build |
+| Small (1-3 files)        | `npx nuxi typecheck` OR `npm run typecheck`     |
+| Medium (3-10 files)      | Typecheck + lint + relevant test                |
+| Large (10+ files)        | Full: typecheck + lint + test + build           |
 
 **Note**: If the project doesn't have `typecheck`/`lint` scripts configured, skip to the next available check. Do NOT modify project config to add verification scripts unless explicitly asked.
 
 ### Quality Gate Before "Verified"
 
 Before marking any task as `verified`, you MUST:
+
 1. **Run type check** — `npx nuxi typecheck` and fix all errors
 2. **Check for console.log** — search and remove all `console.log` statements
 3. **Check for unused imports** — remove any unused imports

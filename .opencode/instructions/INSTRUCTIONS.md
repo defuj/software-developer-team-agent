@@ -47,28 +47,35 @@ If security issue found:
 
 Tidak semua UI task perlu 3-phase pipeline. Gunakan tier yang tepat:
 
-| Tier | Flow | Cocok Untuk |
-|------|------|-------------|
-| **Fast** 🏃 | Leader → @frontend langsung | Typo, spacing, warna, icon swap |
-| **Normal** ⚡ | Leader → @frontend + referensi DESIGN.md | Minor UI change (1-3 komponen) |
-| **Full** 🏗️ | Leader → @designer → Leader → @frontend → Leader → @designer QA | New feature, redesign, design system |
+| Tier          | Flow                                                            | Cocok Untuk                          |
+| ------------- | --------------------------------------------------------------- | ------------------------------------ |
+| **Fast** 🏃   | Leader → @frontend langsung                                     | Typo, spacing, warna, icon swap      |
+| **Normal** ⚡ | Leader → @frontend + referensi DESIGN.md                        | Minor UI change (1-3 komponen)       |
+| **Full** 🏗️   | Leader → @designer → Leader → @frontend → Leader → @designer QA | New feature, redesign, design system |
 
 ## SHARED ARTIFACTS PATTERN (Critical — Hemat Ratusan Token)
 
+**⚠️ KENAPA INI PENTING**: Setiap subagent berjalan di **isolated context**. Mereka TIDAK otomatis tahu hasil subagent sebelumnya. Satu-satunya jembatan adalah file.
+
 **Jangan forward data besar di pesan delegasi.** Gunakan file sebagai shared contract:
 
-| Artifact | Isi | Ditulis Oleh | Dibaca Oleh |
-|----------|-----|-------------|-------------|
-| `DESIGN.md` | Design tokens, direction | @designer | @frontend |
-| `./specs/{feature}.md` | Per-component specs | @designer | @frontend |
-| `./api-contract.md` | API contract | @leader/@node-developer | @frontend |
-| Source code | Implementasi | @frontend | @designer (QA) |
+| Artifact                            | Isi                                                   | Ditulis Oleh                                       | Dibaca Oleh          |
+| ----------------------------------- | ----------------------------------------------------- | -------------------------------------------------- | -------------------- |
+| `DESIGN.md`                         | Design tokens, direction, component map               | @designer                                          | @frontend, @reviewer |
+| `./specs/{feature}.md`              | Per-component specs (layout, states, variants, color) | @designer                                          | @frontend            |
+| `./api-contract.md`                 | API contract (endpoints, request/response, auth)      | @leader / backend (node, ci3, laravel, java, go)   | @frontend, @reviewer |
+| `./specs/implementation-summary.md` | Komponen dibuat, file paths, state handling           | @frontend (nuxt, react, flutter, android, angular) | @designer (QA)       |
+| `./specs/review-report.md`          | Review findings + severity                            | @reviewer                                          | @leader              |
+| `./specs/deployment-guide.md`       | Deployment config, env vars, build commands           | @devops                                            | @leader              |
+| `./specs/seo-guide.md`              | Meta tags, structured data, sitemap changes           | @seo                                               | @frontend            |
+| `prisma/schema.prisma`              | Model definitions final                               | @database                                          | @node-developer      |
 
-**Aturan**:
-1. Designer: Simpan specs ke DESIGN.md + ./specs/, return ringkasan ke Leader
-2. Leader: Delegasi dengan referensi file, bukan kutip isi specs
-3. Frontend: Baca DESIGN.md + specs/ langsung dari file
-4. Semua agent: Jangan minta Leader forwarding data — baca langsung dari file
+**Aturan** (WAJIB dipatuhi semua agent):
+
+1. **Producer** (designer, backend, database, dll): Setelah selesai, **TULIS output ke file** (jangan cuma return di message)
+2. **Consumer** (frontend, reviewer, dll): Sebelum mulai, **BACA file** yang ditulis subagent sebelumnya
+3. **Leader**: Setiap subagent selesai → **BACA file** → **SERTAKAN ringkasan + file reference** di delegasi berikutnya
+4. Semua agent: **Jangan minta Leader forwarding data** — baca langsung dari file
 
 ### Prinsip: Deteksi Stuck, Bukan Batasi Iterasi
 
@@ -77,6 +84,7 @@ Task besar MEMBUTUHKAN banyak iterasi. Jangan batasi jumlah iterasi — batasi h
 ### Stuck Detection: Same-Result Rule
 
 Jika agent menerima **hasil/output yang SAMA PERSIS** dari subagent 2 kali berturut-turut:
+
 1. STOP re-delegating (subagent stuck, ngulang hasil sama)
 2. Dokumentasikan apa yang sama
 3. Eskalasi ke user
@@ -107,17 +115,17 @@ Before ANY agent marks work as `verified`, this checklist MUST pass:
 
 ### Verification Commands by Stack
 
-| Stack | Minimum Verification | Full Verification |
-|-------|-------------------|-------------------|
-| **Nuxt/Vue** | `npx nuxi typecheck` | `npx nuxi typecheck` + `npm run lint` + `npm run build` |
-| **React/Next.js** | `npx tsc --noEmit` | `npx tsc --noEmit` + `npm run lint` + `npm run build` |
-| **Flutter/Dart** | `flutter analyze` | `flutter analyze` + `flutter test` |
-| **Node.js** | `npx tsc --noEmit` | `npx tsc --noEmit` + `npm run test` |
-| **Angular** | `ng lint` | `ng lint` + `ng test --watch=false` + `ng build` |
-| **Python** | `ruff check .` or `pylint` | `ruff check .` + `mypy .` + `pytest` |
-| **Rust** | `cargo check` | `cargo check` + `cargo clippy` + `cargo test` |
-| **Go** | `go build ./...` | `go build ./...` + `go vet ./...` + `go test ./...` |
-| **Java/Spring** | `mvn compile` or `gradle build` | `mvn verify` or `gradle check` |
+| Stack             | Minimum Verification            | Full Verification                                       |
+| ----------------- | ------------------------------- | ------------------------------------------------------- |
+| **Nuxt/Vue**      | `npx nuxi typecheck`            | `npx nuxi typecheck` + `npm run lint` + `npm run build` |
+| **React/Next.js** | `npx tsc --noEmit`              | `npx tsc --noEmit` + `npm run lint` + `npm run build`   |
+| **Flutter/Dart**  | `flutter analyze`               | `flutter analyze` + `flutter test`                      |
+| **Node.js**       | `npx tsc --noEmit`              | `npx tsc --noEmit` + `npm run test`                     |
+| **Angular**       | `ng lint`                       | `ng lint` + `ng test --watch=false` + `ng build`        |
+| **Python**        | `ruff check .` or `pylint`      | `ruff check .` + `mypy .` + `pytest`                    |
+| **Rust**          | `cargo check`                   | `cargo check` + `cargo clippy` + `cargo test`           |
+| **Go**            | `go build ./...`                | `go build ./...` + `go vet ./...` + `go test ./...`     |
+| **Java/Spring**   | `mvn compile` or `gradle build` | `mvn verify` or `gradle check`                          |
 
 ### Quality Enforcement Rules
 
@@ -145,24 +153,28 @@ Before ANY agent marks work as `verified`, this checklist MUST pass:
 ### Framework-Specific Rules
 
 #### Nuxt/Vue
+
 - Use `<script setup lang="ts">` always
 - Use `useApi` composable for all API calls
 - Prefer Nuxt UI components over custom HTML
 - App directory structure (Nuxt 4)
 
 #### React/Next.js
+
 - Use TypeScript `interface` for props
 - Server Components by default, `'use client'` only when needed
 - Use shadcn/ui components over custom implementations
 - App Router structure
 
 #### Flutter/Dart
+
 - Use `final` by default, `var` only when type is obvious
 - Follow Clean Architecture (data/domain/presentation)
 - Prefer Riverpod or Bloc for state management
 - Use GoRouter for navigation
 
 #### Node.js/Express
+
 - `*.dto.ts`, `*.controller.ts`, `*.route.ts`, `*.middleware.ts` naming convention
 - Use Prisma for database access
 - JWT for authentication, stored in httpOnly cookies
