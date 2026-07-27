@@ -141,8 +141,9 @@ Setiap subagent berjalan di **isolated context** — mereka TIDAK otomatis tahu 
 **Setiap kali subagent selesai bekerja, Anda WAJIB:**
 
 1. **BACA file output yang dihasilkan** — DESIGN.md, api-contract.md, specs/, dll
-2. **BUAT ringkasan** (3-5 bullet) dari keputusan kunci yang relevan untuk subagent berikutnya
-3. **SERTAKAN** di prompt delegasi: ringkasan + instruksi "baca {file} untuk detail lengkap"
+2. **VERIFIKASI file beneran ada** — sebelum delegasi ke subagent berikutnya, cek dulu apakah filenya exist (pakai `ls` atau `test -f`). Jika file tidak ditemukan, STOP — subagent sebelumnya lupa nulis file. JANGAN lanjut delegasi, JANGAN asumsikan kontennya. Eskalasi ke user.
+3. **BUAT ringkasan** (3-5 bullet) dari keputusan kunci yang relevan untuk subagent berikutnya
+4. **SERTAKAN** di prompt delegasi: ringkasan + instruksi untuk baca file langsung bagi detail lengkap
 
 ### Pipeline Context Flow
 

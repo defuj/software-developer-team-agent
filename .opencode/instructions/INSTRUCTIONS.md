@@ -74,8 +74,9 @@ Tidak semua UI task perlu 3-phase pipeline. Gunakan tier yang tepat:
 
 1. **Producer** (designer, backend, database, dll): Setelah selesai, **TULIS output ke file** (jangan cuma return di message)
 2. **Consumer** (frontend, reviewer, dll): Sebelum mulai, **BACA file** yang ditulis subagent sebelumnya
-3. **Leader**: Setiap subagent selesai → **BACA file** → **SERTAKAN ringkasan + file reference** di delegasi berikutnya
-4. Semua agent: **Jangan minta Leader forwarding data** — baca langsung dari file
+3. **Leader**: Setiap subagent selesai → **BACA file** → **VERIFIKASI file exist** → **BUAT ringkasan** → **SERTAKAN ringkasan + file reference** di delegasi berikutnya
+4. **VERIFIKASI**: Jika file yang diharapkan tidak ditemukan, STOP & eskalasi — jangan lanjut delegasi dengan asumsi
+5. Semua agent: **Jangan minta Leader forwarding data** — baca langsung dari file
 
 ### Prinsip: Deteksi Stuck, Bukan Batasi Iterasi
 
